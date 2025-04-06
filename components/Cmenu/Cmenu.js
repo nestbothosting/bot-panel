@@ -23,7 +23,7 @@ export default function Cmenu() {
           <LuLayoutDashboard size={20} />
         </div>
         <div className={ style.link }>
-          <Link href=''>Dashboard</Link>
+          <Link href='/dashboard'>Dashboard</Link>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export default function Cmenu() {
           <IoSettingsOutline size={20} />
         </div>
         <div className={ style.link }>
-          <Link href=''>Settings</Link>
+          <Link href='/settings'>Settings</Link>
         </div>
       </div>
 

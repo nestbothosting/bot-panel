@@ -29,7 +29,7 @@ export default function Page() {
       <div className={ style.Cmenu }>
         <Cmenu />
       </div>
-      <div>
+      <div className={ style.main }>
         helo
       </div>
     </div>
