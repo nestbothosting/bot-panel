@@ -1,5 +1,45 @@
 .Cmenu{
-    height: 90vh;
-    width: 300px;
+    height: 85vh;
+    width: 250px;
     background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+    padding: 8px;
+    overflow: auto;
+}
+
+/* .Cmenu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+} */
+
+.span{
+    color: gray;
+    font-family: saira;
+}
+
+.items{
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.icon{
+    width: 20%;
+    height: 100%;
+    text-align: end;
+}
+
+.link{
+    width: 80%;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.link a{
+    font-weight: 700;
+    font-family: lato;
 }

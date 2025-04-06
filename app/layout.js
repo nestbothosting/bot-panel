@@ -1,11 +1,12 @@
-"use client"; // 👈 This makes it a client component
+"use client";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Lato, Saira } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import UserContext from "@/context/usercontext";
 import { useState } from 'react';
 
+// Font configs
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,11 +17,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
+const saira = Saira({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  display: 'swap',
+});
+
 export default function RootLayout({ children }) {
-  const [islogin, setLogin] = useState(false); // default false
+  const [islogin, setLogin] = useState(false);
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${saira.className} ${lato.className}`}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <UserContext.Provider value={{ islogin, setLogin }}>
           <Header />

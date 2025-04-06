@@ -29,6 +29,9 @@ export default function Page() {
       <div className={ style.Cmenu }>
         <Cmenu />
       </div>
+      <div>
+        helo
+      </div>
     </div>
   );
 }
