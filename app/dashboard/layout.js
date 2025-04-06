@@ -1,8 +1,15 @@
+// app/dashboard/layout.js
+import React, { Suspense } from 'react';
+
 export const metadata = {
-    title: 'Dashboard',
-    description: 'dashboard Page',
+  title: 'Dashboard',
+  description: 'dashboard Page',
 };
 
 export default function DashboardLayout({ children }) {
-    return <>{children}</>;
+  return (
+    <Suspense fallback={<div>Loading Dashboard...</div>}>
+      {children}
+    </Suspense>
+  );
 }

@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useEffect,useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useSearchParams } from "next/navigation";
 import UserContext from '@/context/usercontext';
+import Cmenu from '@/components/Cmenu/Cmenu';
+import style from './dashboard.module.css'
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -17,14 +19,16 @@ export default function Page() {
     if (username && uid && avatar && id) {
       const user = { username, uid, avatar, id };
       localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('login',true)
+      localStorage.setItem('login', true)
       setLogin(true)
     }
   }, [username, uid, avatar, id]);
 
   return (
-    <div>
-      Hello, {username || "Guest"}!
+    <div className={ style.dashboard }>
+      <div className={ style.Cmenu }>
+        <Cmenu />
+      </div>
     </div>
   );
 }
