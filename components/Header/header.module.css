@@ -1,0 +1,89 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #141313;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.navLinks li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.navLinks li a:hover {
+    color: #8b8585;
+}
+
+.login {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout{
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_icon {
+    display: none;
+}
+
+.nav_icon svg {
+    cursor: pointer;
+}
+
+.resnav {
+    display: none;
+    background-color: rgb(26, 27, 27);
+    text-align: center;
+    padding: 20px 0;
+    height: 80vh;
+}
+
+.show {
+    display: block;
+}
+
+/* 📱 Responsive styles */
+@media only screen and (max-width: 800px) {
+    .nav {
+        display: none;
+        /* Hide desktop nav on mobile */
+    }
+
+    .nav_icon {
+        display: block;
+    }
+
+    .navLinks{
+        flex-direction: column;
+    }
+
+    .navLinks li a, .navLinks li{
+        font-size: 21px;
+    }
+}
