@@ -1,14 +1,17 @@
-import React from 'react'
+"use client"
+
+import React, { useEffect } from 'react'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import style from './settings.module.css'
 import Button from '@/components/Button/Button';
-
-export const metadata = {
-    title: 'Settings',
-    description: 'Settings Page',
-};
+import { RQ_Login } from '@/utilise/index'
 
 export default function page() {
+
+    useEffect(() => {
+        RQ_Login(localStorage.getItem('login'))
+    },[])
+
     return (
         <div className={style.settings}>
             <div className={style.Cmenu}>

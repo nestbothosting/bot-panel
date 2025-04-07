@@ -46,3 +46,14 @@ export function showicon(e){
     const resnav = document.getElementById('nav-items')
     resnav.style.display = 'block'
 }
+
+export function RQ_Login(islogin){
+    if(!islogin){
+        DiscordAUth()
+    }
+}
+
+export function showcmenu(){
+    const Cmenu = document.getElementById('cmenu')
+    Cmenu.style.display = 'block'
+}

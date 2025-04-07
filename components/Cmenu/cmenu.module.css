@@ -43,3 +43,10 @@
     font-weight: 700;
     font-family: lato;
 }
+
+@media only screen and (max-width: 800px){
+    .Cmenu{
+        width: 100%;
+        display: none;
+    }
+}

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import UserContext from '@/context/usercontext';
 import Cmenu from '@/components/Cmenu/Cmenu';
 import style from './dashboard.module.css'
+import { RQ_Login } from '@/utilise/index'
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ export default function Page() {
       localStorage.setItem('login', true)
       setLogin(true)
     }
+    RQ_Login(localStorage.getItem('login'))
   }, [username, uid, avatar, id]);
 
   return (

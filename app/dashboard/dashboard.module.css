@@ -6,3 +6,12 @@
 .main{
     padding: 10px;
 }
+
+@media only screen and (max-width: 800px){
+    .dashboard{
+        flex-direction: column;
+    }
+    .main{
+        width: 100%;
+    }
+}
