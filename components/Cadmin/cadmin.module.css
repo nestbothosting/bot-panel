@@ -1,0 +1,47 @@
+.cadmin{
+    height: auto;
+    width: 250px;
+    background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+}
+
+.item{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.item .icon{
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.item .name{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.item .name a{
+    font-family: saira;
+    font-weight: 700;
+}
+
+.micon{
+    width: 100%;
+    display: none;
+}
+
+@media only screen and (max-width: 800px){
+    .cadmin{
+        display: none;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .micon{
+        display: block;
+    }
+}

@@ -8,5 +8,9 @@ export const config = {
 
     // mongodb
 
-    Mongo_URL:"mongodb://127.0.0.1:27017/dc_acs"
+    Mongo_URL:"mongodb://127.0.0.1:27017/dc_acs",
+
+    // Admin user uid
+
+    Admin: []
 }

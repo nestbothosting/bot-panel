@@ -1,9 +1,10 @@
 "use client";
 
-import Cadmin from '@/components/Cadmin/Cadmin'
-import React, { useEffect } from 'react'
-import style from './admin.module.css'
+
+import React,{ useEffect } from 'react'
 import { RQ_Login } from '@/utilise/index'
+import style from './addnode.module.css'
+import Cadmin from '@/components/Cadmin/Cadmin';
 
 export default function page() {
 
@@ -11,11 +12,11 @@ export default function page() {
     RQ_Login(localStorage.getItem('login'))
   },[])
   return (
-    <div className={style.admin} >
-      <div className={ style.menu } >
+    <div className={ style.addnode }>
+      <div className={ style.menu}>
         <Cadmin />
       </div>
-      <div className={ style.main } >
+      <div className={ style.main }>
         helo
       </div>
     </div>

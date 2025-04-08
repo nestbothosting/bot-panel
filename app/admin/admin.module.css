@@ -1,0 +1,16 @@
+.admin{
+    padding: 10px;
+    display: flex;
+}
+
+.main{
+    padding: 10px;
+    width: 75vw;
+    height: 85vh;
+}
+
+@media only screen and (max-width: 800px){
+    .admin{
+        flex-direction: column;
+    }
+}

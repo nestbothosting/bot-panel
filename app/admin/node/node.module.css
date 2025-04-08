@@ -1,0 +1,41 @@
+.node{
+    padding: 10px;
+    display: flex;
+}
+
+.main{
+    padding: 10px;
+    width: 75vw;
+    height: 85vh;
+}
+
+.addbtn{
+    position: absolute;
+    right: 20px;
+    top: 80px;
+}
+
+.btn{
+    border: 1px solid white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn:hover{
+    background-color: white;
+    color: black;
+}
+
+@media only screen and (max-width: 800px){
+    .node{
+        flex-direction: column;
+    }
+
+    .addbtn{
+        position: absolute;
+        right: 20px;
+        top: 120px;
+    }
+}
