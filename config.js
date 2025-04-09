@@ -12,5 +12,5 @@ export const config = {
 
     // Admin user uid
 
-    Admin: []
+    Admin: ["931912476906377247"]
 }

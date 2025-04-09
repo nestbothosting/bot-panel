@@ -1,5 +1,3 @@
-import { useContext } from 'react'
-import UserContext from '@/context/usercontext'
 import { config } from '@/config'
 import mongo from './mongoose'
 import UserModel from './usermd'
@@ -61,4 +59,18 @@ export function showcmenu(){
 export function showcadmin(){
     const cadmin = document.getElementById('cadmin')
     cadmin.style.display = 'block'
+}
+
+export function isAdmin(user,router){
+    let admin = false
+    const objuser = JSON.parse(user)
+    for(let x in config.Admin){
+        if(objuser.uid == config.Admin[x]){
+            admin = true
+        }
+    }
+
+    if(!admin){
+        router.push('/');
+    }
 }

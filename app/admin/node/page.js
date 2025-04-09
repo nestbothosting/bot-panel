@@ -3,14 +3,16 @@
 import React, { useEffect } from 'react'
 import style from './node.module.css'
 import Cadmin from '@/components/Cadmin/Cadmin'
-import Button from '@/components/Button/Button'
-import { RQ_Login } from '@/utilise/index'
+import { RQ_Login, isAdmin } from '@/utilise/index'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function page() {
+    const router = useRouter();
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
+        isAdmin(localStorage.getItem('user'),router)
     },[])
     return (
         <div className={style.node} >

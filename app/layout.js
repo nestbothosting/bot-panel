@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header/Header";
 import UserContext from "@/context/usercontext";
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 // Font configs
 const geistSans = Geist({
@@ -39,6 +40,10 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
         </UserContext.Provider>
+        <ToastContainer
+          position="top-right"
+          theme="dark"
+        />
       </body>
     </html>
   );

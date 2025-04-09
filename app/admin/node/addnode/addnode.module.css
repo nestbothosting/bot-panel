@@ -5,4 +5,30 @@
 
 .main{
     padding: 10px;
+    width: 75vw;
+}
+
+.form{
+    width: 100%;
+}
+
+.item{
+    background-color: rgb(36, 37, 37);
+    height: auto;
+    width: 100%;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-family: saira;
+}
+
+.item p{
+    font-size: 13px;
+    color: gray;
+}
+
+.item input{
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
 }
