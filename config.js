@@ -10,7 +10,8 @@ export const config = {
 
     Mongo_URL:"mongodb://127.0.0.1:27017/dc_acs",
 
-    // Admin user uid
+    // Admin user uid 
 
-    Admin: ["931912476906377247"]
+    Admin: ["931912476906377247"],
+
 }

@@ -62,7 +62,7 @@ export default function page() {
 
           <div className={style.item}>
             <span>Node URL</span>
-            <p>New Node URL (http://localhost:3000/)</p>
+            <p>New Node URL (http://localhost:3000)</p>
             <input type="text" placeholder='Node URL' onChange={(e) => setNodeurl(e.target.value)}  />
           </div>
 
