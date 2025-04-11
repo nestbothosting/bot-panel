@@ -13,15 +13,16 @@ import { VscThreeBars } from "react-icons/vsc";
 import { showcmenu } from '@/utilise/index'
 
 import Link from 'next/link';
+import Dropdown from '../Dropdown/Dropdown';
 
 export default function Cmenu() {
   return (
     <>
-      <div className='scmenu'>
+      <div className={ style.scmenu }>
         <VscThreeBars size={30} style={{ cursor:'pointer'}} onClick={showcmenu}/>
       </div>
       <div className={style.Cmenu} id='cmenu'>
-
+        <Dropdown />
         <span className={style.span}>Settings</span>
 
         <div className={style.items}>

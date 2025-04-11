@@ -44,9 +44,16 @@
     font-family: lato;
 }
 
+.scmenu{
+    display: none;
+}
+
 @media only screen and (max-width: 800px){
     .Cmenu{
         width: 100%;
         display: none;
+    }
+    .scmenu{
+        display: block;
     }
 }
