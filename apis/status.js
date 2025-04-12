@@ -6,6 +6,7 @@ import mongo from '@/utilise/mongoose'
 
 export async function NodeStatus() {
   try {
+    mongo()
     const Nodes = await NodeModel.find(); // Await the DB call
     const statusPromises = Nodes.map((node) =>
       axios.get(`${node.nodeurl}/node_status`, {
