@@ -24,6 +24,30 @@
     font-family: saira;
 }
 
+.save{
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    display: flex;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: saira;
+}
+
+.save section{
+    width: 50%;
+}
+
+.save div{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 85px;
+}
+
 .botname input{
     height: 40px;
     padding-left: 10px;
@@ -136,5 +160,9 @@
 
     .main{
         width: 100%;
+    }
+
+    .save div{
+        padding-right: 5px;
     }
 }

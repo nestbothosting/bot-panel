@@ -13,7 +13,7 @@ function Addnewbot(token, name, ownid, router) {
   if (!token || !name || !ownid) {
     return toast.error("Please provide both bot token and name.");
   }
-  const res = SaveBot(token, name, ownid)
+  SaveBot(token, name, ownid)
   .then(data => {
     if(data.status){
       toast.success(data.message)

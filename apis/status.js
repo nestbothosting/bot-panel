@@ -3,6 +3,7 @@
 import axios from "axios";
 import NodeModel from "@/utilise/nodemd";
 import mongo from '@/utilise/mongoose'
+import MyBotModel from '@/utilise/mybotmd'
 
 export async function NodeStatus() {
   try {
@@ -62,4 +63,25 @@ export async function CheckNodeCap() {
   }
 
   return isDone;
+}
+
+export async function BotStatus(bot) {
+  try {
+    mongo()
+    if(!bot.bot_id){
+      return { status:false, message:"properties of null (bot id)" }
+    }
+    
+    const botdata = await MyBotModel.findOne({ bot_id:bot.bot_id })
+    const response = await axios.get(`${botdata.node_url}/bot/status/${bot.bot_token}`,{
+      headers: {
+        "x-api-key": botdata.api_key,
+      },
+    })
+    
+    return response.data
+  } catch (error) {
+    console.log(error)
+
+  }
 }

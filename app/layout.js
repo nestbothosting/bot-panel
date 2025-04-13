@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Lato, Saira } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import UserContext from "@/context/usercontext";
+import BotMenuCotext from "@/context/botmenu";
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
@@ -32,13 +33,16 @@ const saira = Saira({
 
 export default function RootLayout({ children }) {
   const [islogin, setLogin] = useState(false);
+  const [inbot, setInbot] = useState()
 
   return (
     <html lang="en" className={`${saira.className} ${lato.className}`}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <UserContext.Provider value={{ islogin, setLogin }}>
+          <BotMenuCotext.Provider value={{inbot,setInbot}} >
           <Header />
           {children}
+          </BotMenuCotext.Provider>
         </UserContext.Provider>
         <ToastContainer
           position="top-right"
