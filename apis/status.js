@@ -65,9 +65,11 @@ export async function CheckNodeCap() {
   return isDone;
 }
 
-export async function BotStatus(bot) {
+export async function BotStatus(botsri) {
   try {
     mongo()
+    if(botsri == 'none') return;
+    const bot = JSON.parse(botsri)
     if(!bot.bot_id){
       return { status:false, message:"properties of null (bot id)" }
     }

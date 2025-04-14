@@ -46,7 +46,7 @@ async function handleDelete(bot_id,setDeletebot) {
     if (confirm("Press a button!")) {
         const response = await DeleteBot(bot_id)
         if(response.status){
-            localStorage.removeItem('bot')
+            localStorage.setItem('bot','none')
             setDeletebot(true)
             return toast.success(response.message)
         }
@@ -66,15 +66,17 @@ export default function page() {
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
 
-        BotStatus(JSON.parse(localStorage.getItem('bot')))
+        BotStatus(localStorage.getItem('bot'))
             .then(data => {
                 if (data.status) {
                     setStatus(true)
                 }
             })
             .catch(err => console.log(err))
-
-        const bot = JSON.parse(localStorage.getItem('bot'))
+            
+        const botsri = localStorage.getItem('bot')
+        if(botsri === 'none') return;
+        const bot = JSON.parse(botsri)
         if (!bot) {
             if(deletebot){
                 return;
