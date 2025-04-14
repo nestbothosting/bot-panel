@@ -8,7 +8,7 @@ import { RQ_Login } from '@/utilise/index'
 import { GetOneBot, SaveChange } from '@/utilise/api'
 import { toast } from 'react-toastify';
 import BotMenuCotext from '@/context/botmenu';
-import { StartBot, StopBot } from '@/apis/index'
+import { StartBot, StopBot, DeleteBot } from '@/apis/index'
 import { BotStatus } from '@/apis/status'
 
 async function handleonSave(bot_id, bot_name, bot_token, st_message) {
@@ -35,11 +35,23 @@ async function handleStart(bot_token, bot_id, setStatus) {
 
 async function handleStop(bot_token, bot_id, setStatus) {
     const response = await StopBot(bot_token, bot_id)
-    if(response.status){
+    if (response.status) {
         setStatus(false)
         return toast.success(response.message)
     }
     toast.warn(response.message)
+}
+
+async function handleDelete(bot_id,setDeletebot) {
+    if (confirm("Press a button!")) {
+        const response = await DeleteBot(bot_id)
+        if(response.status){
+            localStorage.removeItem('bot')
+            setDeletebot(true)
+            return toast.success(response.message)
+        }
+        toast.error(response.message)
+    }
 }
 
 export default function page() {
@@ -48,6 +60,7 @@ export default function page() {
     const [bot_token, setToken] = useState('')
     const [st_message, setStmessage] = useState('')
     const [botstatus, setStatus] = useState(false)
+    const [deletebot,setDeletebot] = useState()
     const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
@@ -63,6 +76,9 @@ export default function page() {
 
         const bot = JSON.parse(localStorage.getItem('bot'))
         if (!bot) {
+            if(deletebot){
+                return;
+            }
             toast.warn('Select a Bot')
         } else {
             GetOneBot(bot.bot_id)
@@ -79,7 +95,7 @@ export default function page() {
         }
 
 
-    }, [inbot])
+    }, [inbot,deletebot])
 
     return (
         <div className={style.settings}>
@@ -120,7 +136,7 @@ export default function page() {
                     <div className={style.status}>
                         <section>
                             <span>Bot Status</span>
-                            <p style={{color:"green"}}>Online</p>
+                            <p style={{ color: "green" }}>Online</p>
                         </section>
                         <div onClick={() => handleStop(bot_token, bot_id, setStatus)}>
                             <Button name='Stop' gbcolor='red' color='white' />
@@ -130,7 +146,7 @@ export default function page() {
                     <div className={style.status}>
                         <section>
                             <span>Bot Status</span>
-                            <p style={{color:"red"}}>Offline</p>
+                            <p style={{ color: "red" }}>Offline</p>
                         </section>
                         <div onClick={() => handleStart(bot_token, bot_id, setStatus)}>
                             <Button name='Start' gbcolor='#14A44D' color='black' />
@@ -143,7 +159,7 @@ export default function page() {
                         <span>Remove Bot</span>
                         <p>Permanently remove this bot from this site</p>
                     </section>
-                    <div>
+                    <div onClick={() => handleDelete(bot_id, setDeletebot)}>
                         <Button name='Delete' color='white' gbcolor="red" />
                     </div>
                 </div>

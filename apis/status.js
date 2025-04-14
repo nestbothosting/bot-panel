@@ -81,7 +81,7 @@ export async function BotStatus(bot) {
     
     return response.data
   } catch (error) {
-    console.log(error)
-
+    console.log('bot Status Error:' ,error.message)
+    return { status:false, message:error.message }
   }
 }

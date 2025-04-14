@@ -32,7 +32,7 @@ export async function GetOneBot(bot_id){
         })
         return response.data;
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
         return { status:false, message:"Oops Server Error!"}
     }
 }
