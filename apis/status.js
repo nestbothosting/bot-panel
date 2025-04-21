@@ -28,8 +28,12 @@ export async function NodeStatus() {
 }
 
 const RemoveHTTP = (url) => {
+  if (typeof url !== 'string') {
+    console.error("RemoveHTTP error: url is not a string", url);
+    return "";
+  }
   return url.replace(/^https?:\/\//, "");
-}
+};
 
 export async function CheckNodeCap() {
   let isDone = null;

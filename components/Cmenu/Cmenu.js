@@ -77,7 +77,7 @@ export default function Cmenu() {
             <IoTicketOutline size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''>Ticket System</Link>
+            <Link href='/dashboard/ticket'>Ticket System</Link>
           </div>
         </div>
 

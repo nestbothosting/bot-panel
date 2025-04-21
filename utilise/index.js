@@ -1,7 +1,7 @@
 import { config } from "@/config";
 import mongo from "./mongoose";
 import UserModel from "./usermd";
-import NodeModel from "./nodemd";
+import Nbot from "./mybotmd";
 import axios from "axios";
 
 export function DiscordAUth() {
