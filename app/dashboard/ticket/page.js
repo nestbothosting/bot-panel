@@ -5,7 +5,7 @@ import style from './ticket.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button';
 import Permissions from '@/utilise/permission';
-import { GetSettingsData, GetMyChannels, GetMyRoles } from '@/utilise/api'
+import { GetSettingsData, GetMyChannels, GetMyRoles, SendTicket } from '@/utilise/api'
 import { toast } from 'react-toastify';
 // import { IoClose } from "react-icons/io5";
 
@@ -94,6 +94,7 @@ async function handleDMenu(e, type, setValue, setType1, setType2) {
 
 function handlePermission(e, setPermission, role_id, setShowpower) {
     if (e.target.value === 'none') return;
+    if(role_id === 'none') return
 
     const selectedText = e.target.options[e.target.selectedIndex].text;
     const selectedValue = e.target.value;
@@ -136,12 +137,16 @@ function handlePermission(e, setPermission, role_id, setShowpower) {
 // Show permissions for a role
 function ShowPower(role_id, setShowpower, permission) {
     const Permissions = permission.find(r => r.role_id === role_id.id);
-    console.log(Permissions);
     setShowpower(Permissions?.permission || []);
 }
 
-function SendPanel(ticketdata, fieldvalue, permission) {
-    console.log(permission, ticketdata, fieldvalue)
+async function SendPanel(ticketdata, fieldvalue, permission) {
+    const response = await SendTicket(ticketdata, fieldvalue, permission, localStorage.getItem('bot'))
+    if(response?.status){
+        return toast.success(response?.message)
+    }
+
+    toast.error(response?.message)
 }
 
 export default function page() {

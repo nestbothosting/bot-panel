@@ -60,4 +60,8 @@
         right: 20px;
         top: 120px;
     }
+
+    .main{
+        width: 100%;
+    }
 }

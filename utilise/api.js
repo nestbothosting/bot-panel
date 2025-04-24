@@ -81,45 +81,48 @@ export async function SaveChange(bot_id, bot_name, bot_token, st_message) {
         )
         return response.data;
     } catch (error) {
-        console.log(error)
-        return { status: false, message: "Oops Server Error" }
+        console.log(error.message)
+        return { status: false, message: error.message }
     }
 }
 
 export async function GetSettingsData(strBot) {
     try {
-        const response = {}
         if (!strBot) {
-            return { status: false, message: 'Select a bot' }
+            return { status: false, message: 'Select a bot' };
         }
-        const Bot = JSON.parse(strBot)
 
-        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const Bot = JSON.parse(strBot);
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id });
 
-        if (!botdata) return { status: false, message: "Bot not found or unknown Bot id" }
+        if (!botdata) {
+            return { status: false, message: "Bot not found or unknown Bot id" };
+        }
 
         const servers = await axios.get(`${botdata.node_url}/bot/servers/${Bot.bot_token}`, {
             headers: {
                 "x-api-key": botdata.api_key,
             },
-        })
+        });
 
-        if (servers.data.status) {
-            let server = []
-            for (let x in servers.data.server) {
-                server.push({ name: servers.data.server[x].name, id: servers.data.server[x].id })
-            }
-            response.servers = server
-            response.status = true
+        if (servers.data?.status && Array.isArray(servers.data.server)) {
+            const server = servers.data.server.map(s => ({
+                name: s.name,
+                id: s.id
+            }));
+            return {
+                status: true,
+                servers: server
+            };
         } else {
-            response.status = false,
-                response.message = servers.data.message || "start the bot"
+            return {
+                status: false,
+                message: servers.data?.message || "Start the bot or check bot server endpoint"
+            };
         }
-
-        return response;
     } catch (error) {
-        console.log(error)
-        return { status: false, message: error.message }
+        console.log("GetSettingsData error:", error.message);
+        return { status: false, message: error.message };
     }
 }
 
@@ -178,17 +181,44 @@ export const GetMyRoles = async (server_id, strBot) => {
             }
         )
 
-        if(!response.data.status){
+        if (!response.data.status) {
             return response.data
         }
 
         for (const role of response.data.roles) {
-            Roles.push({ name:role.name, id:role.id })
+            Roles.push({ name: role.name, id: role.id })
         }
-        
-        return { status:true, roles:Roles }
+
+        return { status: true, roles: Roles }
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
+    }
+}
+
+export const SendTicket = async (ticketdata, fieldvalue, permission, strBot) => {
+    try {
+        if (!strBot || strBot === 'none') return { status: false, message: 'Select a Bot!' }
+        if (!ticketdata.title) return { status: false, message: "Ticket title is required." }
+        if (!ticketdata.server_id) return { status: false, message: "Select a Server" }
+        if (!ticketdata.channel_id) return { status: false, message: "Select a Channel" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/event/ticket`,
+            {
+                ticketdata, fieldvalue,
+                permission, bot_token: Bot.bot_token
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                    'Content-Type': 'application/json'
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
     }
 }

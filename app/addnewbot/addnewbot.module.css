@@ -44,4 +44,8 @@
   .addnewbot{
     flex-direction: column;
   }
+
+  .main{
+    width: 100%;
+  }
 }
