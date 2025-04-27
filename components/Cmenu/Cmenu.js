@@ -86,7 +86,7 @@ export default function Cmenu() {
             <ImEmbed size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''>Embed Message</Link>
+            <Link href='/dashboard/embed'>Embed Message</Link>
           </div>
         </div>
 

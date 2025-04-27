@@ -17,7 +17,7 @@ export async function GET(request) {
     );
   } catch (error) {
     console.log(error)
-    return new Response(JSON.stringify({ error: `Oops Server Error!` }), {
+    return new Response(JSON.stringify({ error: `Oops Server Error! ${error.message}` }), {
       status: 400,
     });
   }

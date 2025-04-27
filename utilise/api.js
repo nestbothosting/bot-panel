@@ -222,3 +222,33 @@ export const SendTicket = async (ticketdata, fieldvalue, permission, strBot) => 
         return { status: false, message: error.message }
     }
 }
+
+export const EmbedMessage = async (fields,embed, strBot) => {
+    try {
+        if (!strBot || strBot === 'none') return { status: false, message: 'Select a Bot!' }
+        if (!embed.title) return { status: false, message: "Ticket title is required." }
+        if (!embed.server_id) return { status: false, message: "Select a Server" }
+        if (!embed.channel_id) return { status: false, message: "Select a Channel" }
+
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        if(!botdata) return { status:false, message:'Missing Your Bot Data!' }
+        const response = await axios.post(`${botdata.node_url}/event/embed`,
+            {
+                bot_token:Bot.bot_token,
+                fields,
+                embed
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                    'Content-Type': 'application/json'
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message: error.message }
+    }
+}

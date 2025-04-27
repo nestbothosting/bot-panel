@@ -7,6 +7,7 @@ import Button from '@/components/Button/Button';
 import Permissions from '@/utilise/permission';
 import { GetSettingsData, GetMyChannels, GetMyRoles, SendTicket } from '@/utilise/api'
 import { toast } from 'react-toastify';
+import { RQ_Login } from '@/utilise';
 // import { IoClose } from "react-icons/io5";
 
 function handleAddFields(SetFields, setFieldvalue) {
@@ -161,7 +162,7 @@ export default function page() {
     const [role_id, setRoleid] = useState(null)
 
     useEffect(() => {
-
+        RQ_Login(localStorage.getItem('login'))
         async function AddDatas() {
             const response = await GetSettingsData(localStorage.getItem('bot'))
             if (!response.status) {
