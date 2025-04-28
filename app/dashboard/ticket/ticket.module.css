@@ -107,10 +107,44 @@
     display: flex;
 }
 
+.panel{
+    width: 100%;
+    min-height: 100px;
+    background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    font-family: saira;
+}
+
+.panel .head{
+    width: 50%;
+}
+
+.panel .head p{
+    margin-top: 10px;
+}
+
+.panel .info p{
+    margin-top: 10px;
+}
+
+.panel .info span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 800px){
     .ticket{
         flex-direction: column;
     }
 
     .main{width: 100%;}
+
+    .panel{
+        flex-direction: column;
+    }
 }

@@ -1,0 +1,10 @@
+.mcstatus{
+    width: 100vh;
+    height: auto;
+    display: flex;
+    padding: 10px;
+}
+
+.main{
+    padding: 10px;
+}

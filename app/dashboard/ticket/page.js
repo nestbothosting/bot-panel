@@ -5,9 +5,11 @@ import style from './ticket.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button';
 import Permissions from '@/utilise/permission';
-import { GetSettingsData, GetMyChannels, GetMyRoles, SendTicket } from '@/utilise/api'
+import { GetSettingsData, GetMyChannels, GetMyRoles, SendTicket, GetMyTicketPanel, DeletePanel } from '@/utilise/api'
 import { toast } from 'react-toastify';
 import { RQ_Login } from '@/utilise';
+import { AiOutlineDelete } from "react-icons/ai";
+import { CiCircleInfo } from "react-icons/ci";
 // import { IoClose } from "react-icons/io5";
 
 function handleAddFields(SetFields, setFieldvalue) {
@@ -63,7 +65,7 @@ function handleAddFields(SetFields, setFieldvalue) {
     });
 }
 
-async function handleDMenu(e, type, setValue, setType1, setType2) {
+async function handleDMenu(e, type, setValue, setType1, setType2, setType3) {
 
     if (e.target.value === "none") {
         return;
@@ -71,7 +73,12 @@ async function handleDMenu(e, type, setValue, setType1, setType2) {
 
     if (type === 'server') {
         setValue(prev => ({ ...prev, server_id: e.target.value }))
-        const response = await GetMyChannels(e.target.value, localStorage.getItem('bot'))
+
+        const Bot = localStorage.getItem('bot')
+        const panel = await GetMyTicketPanel(e.target.value, Bot)
+        setType3(panel)
+
+        const response = await GetMyChannels(e.target.value, Bot)
         if (!response.status) {
             return toast.error(response.message)
         }
@@ -81,7 +88,7 @@ async function handleDMenu(e, type, setValue, setType1, setType2) {
             channels.push({ value: response.channels[x].id, name: response.channels[x].name })
         }
         setType1(channels)
-        const roles = await GetMyRoles(e.target.value, localStorage.getItem('bot'))
+        const roles = await GetMyRoles(e.target.value, Bot)
         if (!roles.status) {
             return toast.error(roles.message)
         }
@@ -95,7 +102,7 @@ async function handleDMenu(e, type, setValue, setType1, setType2) {
 
 function handlePermission(e, setPermission, role_id, setShowpower) {
     if (e.target.value === 'none') return;
-    if(role_id === 'none') return
+    if (role_id === 'none') return
 
     const selectedText = e.target.options[e.target.selectedIndex].text;
     const selectedValue = e.target.value;
@@ -143,11 +150,20 @@ function ShowPower(role_id, setShowpower, permission) {
 
 async function SendPanel(ticketdata, fieldvalue, permission) {
     const response = await SendTicket(ticketdata, fieldvalue, permission, localStorage.getItem('bot'))
-    if(response?.status){
+    if (response?.status) {
         return toast.success(response?.message)
     }
 
     toast.error(response?.message)
+}
+
+async function DeleteTicket(server_id,setPanel) {
+    const response = await DeletePanel(server_id,localStorage.getItem('bot'))
+    if(!response.status){
+        return toast.error(response.message)
+    }
+    toast.success(response.message)
+    setPanel({ status:false })
 }
 
 export default function page() {
@@ -160,6 +176,7 @@ export default function page() {
     const [permission, setPermission] = useState([])
     const [showpower, setShowpower] = useState([])
     const [role_id, setRoleid] = useState(null)
+    const [panel, setPanel] = useState({ status: false })
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -173,7 +190,7 @@ export default function page() {
         }
 
         AddDatas()
-    }, [])
+    }, [panel])
 
     return (
         <div className={style.ticket}>
@@ -181,10 +198,30 @@ export default function page() {
                 <Cmenu />
             </div>
             <div className={style.main}>
+                {panel.status ?
+                    <div className={style.panel} >
+                        <div className={style.head} >
+                            <h3>Panel <span title='/ticket_panel run this cmd for the panel' style={{ cursor: "copy" }}> <CiCircleInfo /> </span></h3>
+                            <p>Server ID: {panel.ticketpanel.server_id}</p>
+                            <p>Channel ID: {panel.ticketpanel.channel_id}</p>
+                        </div>
+                        <div className={style.info} >
+                            <h4>Title: {panel.ticketpanel.embed.title}</h4>
+                            <p>Created Time: {panel.ticketpanel.createdAt}</p>
+                            <p>last updated Time: {panel.ticketpanel.updatedAt}</p>
+                            <span onClick={() => DeleteTicket(panel.ticketpanel.server_id,setPanel)}>
+                                Delete <AiOutlineDelete color='red' size={20} />
+                            </span>
+                        </div>
+                    </div>
+                    :
+                    ""
+                }
+
                 <h1>Ticket Panel</h1>
 
                 <div className={style.dropdown}>
-                    <select onChange={(e) => handleDMenu(e, 'server', setTicketdata, setChannellist, setRolelist)}>
+                    <select onChange={(e) => handleDMenu(e, 'server', setTicketdata, setChannellist, setRolelist, setPanel)}>
                         <option value="none">Select a Server!</option>
                         {Array.isArray(serverlist) && serverlist.map((server, index) => (
                             <option key={index} value={server.id}>{server.name}</option>
@@ -326,7 +363,7 @@ export default function page() {
                 <div className={style.permissions}>
                     <h3>{role_id ? role_id.name : 'Select a role!'}</h3>
                     {Array.isArray(permission) && permission.map((role, index) => (<li key={index}>{role.role_name}</li>))}
-                    <div className={ style.power }>
+                    <div className={style.power}>
                         {Array.isArray(showpower) && showpower.length > 0 ? (
                             showpower.map((perm, index) => (
                                 <p key={index}>{perm.name}</p> // or whatever field to display

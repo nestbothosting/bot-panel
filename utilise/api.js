@@ -252,3 +252,35 @@ export const EmbedMessage = async (fields,embed, strBot) => {
         return { status:false, message: error.message }
     }
 }
+
+export const GetMyTicketPanel = async (server_id,strBot) => {
+    try {
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/inticket/${server_id}`,{
+            headers: {
+                "x-api-key": botdata.api_key,
+            },
+        })
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message: error.message }
+    }
+}
+
+export const DeletePanel = async (server_id,strBot) => {
+    try {
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/delete_ticket_panel/${server_id}`,{
+            headers: {
+                "x-api-key": botdata.api_key,
+            },
+        })
+        return response.data
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message: error.message }
+    }
+}
