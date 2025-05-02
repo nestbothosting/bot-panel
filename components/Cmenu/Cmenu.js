@@ -95,7 +95,7 @@ export default function Cmenu() {
             <TbBrandMinecraft size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''> Mc Server Status</Link>
+            <Link href='/dashboard/mcstatus'> Mc Server Status</Link>
           </div>
         </div>
 
