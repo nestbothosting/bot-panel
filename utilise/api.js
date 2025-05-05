@@ -284,3 +284,29 @@ export const DeletePanel = async (server_id,strBot) => {
         return { status:false, message: error.message }
     }
 }
+
+export const SendStatusPanel = async (strBot,paneldata) => {
+    try {
+        if(!paneldata.server_id) return { status:false, message:''}
+        if(!strBot) return { status:false, message:'Select a Bot' }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+
+        const response = await axios.post(`${botdata.node_url}/event/mcstatus`,
+            {
+                bot_token:Bot.bot_token,
+                paneldata
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                    'Content-Type': 'application/json'
+                },
+            }
+        )
+        return response.data
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message: error.message }
+    }
+}
