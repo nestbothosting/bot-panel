@@ -104,7 +104,7 @@ export default function Cmenu() {
             <GrYoutube size={20} color='red' />
           </div>
           <div className={style.link}>
-            <Link href=''> YT Notification</Link>
+            <Link href='/dashboard/ytnotification'> YT Notification</Link>
           </div>
         </div>
 

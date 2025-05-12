@@ -86,6 +86,8 @@ export async function SaveChange(bot_id, bot_name, bot_token, st_message) {
     }
 }
 
+// get all bot Servers
+
 export async function GetSettingsData(strBot) {
     try {
         if (!strBot) {
@@ -223,7 +225,7 @@ export const SendTicket = async (ticketdata, fieldvalue, permission, strBot) => 
     }
 }
 
-export const EmbedMessage = async (fields,embed, strBot) => {
+export const EmbedMessage = async (fields, embed, strBot) => {
     try {
         if (!strBot || strBot === 'none') return { status: false, message: 'Select a Bot!' }
         if (!embed.title) return { status: false, message: "Ticket title is required." }
@@ -231,11 +233,11 @@ export const EmbedMessage = async (fields,embed, strBot) => {
         if (!embed.channel_id) return { status: false, message: "Select a Channel" }
 
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
-        if(!botdata) return { status:false, message:'Missing Your Bot Data!' }
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        if (!botdata) return { status: false, message: 'Missing Your Bot Data!' }
         const response = await axios.post(`${botdata.node_url}/event/embed`,
             {
-                bot_token:Bot.bot_token,
+                bot_token: Bot.bot_token,
                 fields,
                 embed
             },
@@ -249,15 +251,15 @@ export const EmbedMessage = async (fields,embed, strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message: error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const GetMyTicketPanel = async (server_id,strBot) => {
+export const GetMyTicketPanel = async (server_id, strBot) => {
     try {
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
-        const response = await axios.get(`${botdata.node_url}/inticket/${server_id}`,{
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/inticket/${server_id}`, {
             headers: {
                 "x-api-key": botdata.api_key,
             },
@@ -265,15 +267,15 @@ export const GetMyTicketPanel = async (server_id,strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message: error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const DeletePanel = async (server_id,strBot) => {
+export const DeletePanel = async (server_id, strBot) => {
     try {
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
-        const response = await axios.get(`${botdata.node_url}/delete_ticket_panel/${server_id}`,{
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/delete_ticket_panel/${server_id}`, {
             headers: {
                 "x-api-key": botdata.api_key,
             },
@@ -281,20 +283,20 @@ export const DeletePanel = async (server_id,strBot) => {
         return response.data
     } catch (error) {
         console.log(error.message)
-        return { status:false, message: error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const SendStatusPanel = async (strBot,paneldata) => {
+export const SendStatusPanel = async (strBot, paneldata) => {
     try {
-        if(!paneldata.server_id) return { status:false, message:''}
-        if(!strBot) return { status:false, message:'Select a Bot' }
+        if (!paneldata.server_id) return { status: false, message: 'Select a Server' }
+        if (!strBot) return { status: false, message: 'Select a Bot' }
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
 
         const response = await axios.post(`${botdata.node_url}/event/mcstatus`,
             {
-                bot_token:Bot.bot_token,
+                bot_token: Bot.bot_token,
                 paneldata
             },
             {
@@ -307,6 +309,35 @@ export const SendStatusPanel = async (strBot,paneldata) => {
         return response.data
     } catch (error) {
         console.log(error.message)
-        return { status:false, message: error.message }
+        return { status: false, message: error.message }
+    }
+}
+
+// Save Youtube Notification System
+
+export const SaveYNS = async (strBot, data) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot.!" }
+        if(!data.server_id) return { status:false, message:'Select a Server.!' }
+        if(!data.channel_id) return { status:false, message:'Select a Channel.!' }
+        if(!data.channel_url) return { status:false, message:'Enter Your Youtube Channel URL' }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/yns`,
+            {
+                data,
+                token: Bot.bot_token
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                    'Content-Type': 'application/json'
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
     }
 }
