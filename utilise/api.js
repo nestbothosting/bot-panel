@@ -318,9 +318,9 @@ export const SendStatusPanel = async (strBot, paneldata) => {
 export const SaveYNS = async (strBot, data) => {
     try {
         if (!strBot) return { status: false, message: "Select a Bot.!" }
-        if(!data.server_id) return { status:false, message:'Select a Server.!' }
-        if(!data.channel_id) return { status:false, message:'Select a Channel.!' }
-        if(!data.channel_url) return { status:false, message:'Enter Your Youtube Channel URL' }
+        if (!data.server_id) return { status: false, message: 'Select a Server.!' }
+        if (!data.channel_id) return { status: false, message: 'Select a Channel.!' }
+        if (!data.yt_channel_id) return { status: false, message: 'Enter Your Youtube Channel ID' }
         const Bot = JSON.parse(strBot)
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/yns`,
@@ -332,6 +332,93 @@ export const SaveYNS = async (strBot, data) => {
                 headers: {
                     "x-api-key": botdata.api_key,
                     'Content-Type': 'application/json'
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const YNS_Data_Get = async (server_id, strBot) => {
+    try {
+        if (!server_id) return { status: false, message: "server id is required" }
+        if (!strBot) return { status: false, message: "Select or Add a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/yns_data/${server_id}/${Bot.bot_token}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+        return response.data
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: "YNS_Data_Get Error Oops" }
+    }
+}
+
+export async function StartYNS(server_id, strbot) {
+    try {
+        if (!server_id && !strbot) return { status: false, message: "Select Bot and Server" }
+        const Bot = JSON.parse(strbot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/start_listen_yns`,
+            {
+                bot_token: Bot.bot_token,
+                server_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const StopYNS = async (server_id, strBot) => {
+    try {
+        if (!server_id && !strBot) return { status: false, message: "Select Bot and Server" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/stop_listen_yns`,
+            {
+                server_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
+    }
+}
+
+export const DeleteYNS = async (server_id,strBot) => {
+    try {
+        if (!server_id && !strBot) return { status: false, message: "Select Bot and Server" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/delete_yns`,
+            {
+                server_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
                 },
             }
         )
