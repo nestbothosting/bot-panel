@@ -1,0 +1,45 @@
+.timedmessage{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    padding: 10px;
+    font-family: saira;
+}
+
+.main{
+    padding: 10px;
+    height: 110px;
+    width: 80%;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+}
+
+.inputbox{
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.inputbox select{
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.inputbox input{
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.btn{
+    display: flex;
+    justify-content: flex-end;
+}

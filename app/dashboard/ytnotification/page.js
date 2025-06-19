@@ -69,6 +69,7 @@ export default function Page() {
                 {YNS.status ? <YNS_menu data={YNS} setY={setYNS} /> : ""}
 
                 <div className={style.drop}>
+                    <span>Server!</span>
                     <select onChange={(e) => Change(e, 'server', setData, setRolelist, setChannellist, setYNS)}>
                         <option value="none">Server..!</option>
                         {serverlist.map((server, index) => (

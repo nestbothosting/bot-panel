@@ -113,7 +113,7 @@ export default function Cmenu() {
             <TbTimeDuration5 size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''> Timed Message</Link>
+            <Link href='/dashboard/timedmessage'> Timed Message</Link>
           </div>
         </div>
 
