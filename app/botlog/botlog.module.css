@@ -1,0 +1,53 @@
+.botlog{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    padding: 10px;
+}
+
+.main{
+    padding: 10px;
+    width: 80%;
+    font-family: saira;
+}
+
+.logbox{
+    width: 100%;
+    background-color: rgb(12, 12, 12);
+    height: auto;
+    border: 1px solid rgb(36, 37, 37);
+    padding: 5px;
+    display: flex;
+}
+
+.Timestamp{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Action{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (max-width: 800px){
+    .main{
+        width: 100%;
+    }
+
+    .logbox{
+        flex-direction: column;
+        align-items: center;
+    }
+}

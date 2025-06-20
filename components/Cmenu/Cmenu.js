@@ -48,16 +48,16 @@ export default function Cmenu() {
             <MdOutlineErrorOutline size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''>Bot Log's</Link>
+            <Link href='/botlog'>Bot Log's</Link>
           </div>
         </div>
 
         <div className={style.items}>
           <div className={style.icon}>
-            <IoDiamondOutline size={20} color='green' />
+            <IoDiamondOutline size={20} color='rgb(157, 78, 221)' />
           </div>
           <div className={style.link}>
-            <Link href=''>Premium</Link>
+            <Link href='/premium'>Premium</Link>
           </div>
         </div>
 

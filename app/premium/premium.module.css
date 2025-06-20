@@ -1,0 +1,23 @@
+.premium{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    padding: 10px;
+}
+
+.main{
+    padding: 10px;
+    width: 80%;
+    font-family: saira;
+}
+
+
+@media only screen and (max-width: 800px){
+    .premium{
+        flex-direction: column;
+    }
+
+    .main{
+        width: 100%;
+    }
+}
