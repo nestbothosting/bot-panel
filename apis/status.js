@@ -72,22 +72,40 @@ export async function CheckNodeCap() {
 export async function BotStatus(botsri) {
   try {
     mongo()
-    if(botsri == 'none') return;
+    if (botsri == 'none') return;
     const bot = JSON.parse(botsri)
-    if(!bot.bot_id){
-      return { status:false, message:"properties of null (bot id)" }
+    if (!bot.bot_id) {
+      return { status: false, message: "properties of null (bot id)" }
     }
-    
-    const botdata = await MyBotModel.findOne({ bot_id:bot.bot_id })
-    const response = await axios.get(`${botdata.node_url}/bot/status/${bot.bot_token}`,{
+
+    const botdata = await MyBotModel.findOne({ bot_id: bot.bot_id })
+    const response = await axios.get(`${botdata.node_url}/bot/status/${bot.bot_token}`, {
       headers: {
         "x-api-key": botdata.api_key,
       },
     })
-    
+
     return response.data
   } catch (error) {
-    console.log('bot Status Error:' ,error.message)
+    console.log('bot Status Error:', error.message)
+    return { status: false, message: error.message }
+  }
+}
+
+export const GetBotStatus = async (strBot) => {
+  try {
+    if (!strBot) return { status: false, message: "Select a Bot" }
+    const Bot = JSON.parse(strBot)
+    const botdata = await MyBotModel.findOne({ bot_id: Bot.bot_id })
+    if (!botdata) return { status: false, message: "No Bot Data Oops" }
+    const response = await axios.get(`${botdata.node_url}/bot/info/${Bot.bot_id}`, {
+      headers: {
+        "x-api-key": botdata.api_key,
+      },
+    })
+    return response.data;
+  } catch (error) {
+    console.log(error.message)
     return { status:false, message:error.message }
   }
 }

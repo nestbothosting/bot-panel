@@ -66,7 +66,7 @@ export default function Cmenu() {
             <HiStatusOnline size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''>Bot Status</Link>
+            <Link href='/botstatus'>Bot Status</Link>
           </div>
         </div>
 
