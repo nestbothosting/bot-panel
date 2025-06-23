@@ -1,0 +1,29 @@
+.tms{
+    width: 100%;
+    height: auto;
+    background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.btn{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn span{
+    margin: 5px;
+}
+
+@media only screen and (max-width: 800px){
+    .tms{
+        flex-direction: column;
+    }
+
+    .btn{
+        flex-direction: row;
+    }
+}

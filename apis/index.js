@@ -137,11 +137,11 @@ export async function DeleteBot(bot_id) {
                 bot_id
             },
             {
-            headers: {
-                "x-api-key": botdata.api_key,
-            },
-            
-        });
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+
+            });
 
         if (!response.data.status) {
             return { status: false, message: response.data.message };
@@ -158,5 +158,109 @@ export async function DeleteBot(bot_id) {
         });
 
         return { status: false, message: "Failed to delete bot. Try again later." };
+    }
+}
+
+export const CreateNewTimedmessage = async (tday, thours, tminutes, server_id, channel_id, messages, strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot!" }
+        if (!server_id || !channel_id) return { status: false, message: "Select Channel or Server" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        if (!botdata) return { status: false, message: "No Bot Data!" }
+        const response = await axios.post(`${botdata.node_url}/event/timedmessage`,
+            {
+                tday, thours, tminutes, server_id, channel_id, messages, bot_id: Bot.bot_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const GetTMSData = async (server_id, strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        if (!server_id) return { status: false, message: "Select a Server" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/event/my_timedmessage/${server_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
+    }
+}
+
+export const Stop_TMS = async (c_id,strBot) => {
+    try {
+        if(!strBot) return { status:false, message:"Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/event/stop_timedmessage/${c_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
+    }
+}
+
+export const Start_TMS = async (c_id,strBot) => {
+    try {
+        if(!strBot) return { status:false, message:"Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/event/start_timedmessage/${c_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
+    }
+}
+
+export const Delete_TMS = async (c_id,strBot) => {
+    try {
+        if(!strBot) return { status:false, message:"Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/event/delete_timedmessage`,
+            {
+                c_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
     }
 }

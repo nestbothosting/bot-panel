@@ -43,3 +43,12 @@
     display: flex;
     justify-content: flex-end;
 }
+
+@media only screen and (max-width: 800px){
+    .timedmessage{
+        flex-direction: column;
+    }
+    .main{
+        width: 100%;
+    }
+}
