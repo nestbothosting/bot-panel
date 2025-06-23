@@ -7,7 +7,7 @@ import { HiStatusOnline } from "react-icons/hi";
 import { ImEmbed } from "react-icons/im";
 import { TbBrandMinecraft, TbTimeDuration5 } from "react-icons/tb";
 import { GrYoutube } from "react-icons/gr";
-import { FaUserCheck } from "react-icons/fa";
+import { FaUserCheck, FaUserMinus } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
 import { showcmenu } from '@/utilise/index'
@@ -122,16 +122,16 @@ export default function Cmenu() {
             <FaUserCheck size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''> Welcomer Message</Link>
+            <Link href='/dashboard/welcomemessage'> Welcome Message</Link>
           </div>
         </div>
 
         <div className={style.items}>
           <div className={style.icon}>
-            <TiWeatherPartlySunny size={20} color='aqua' />
+            <FaUserMinus size={20} />
           </div>
           <div className={style.link}>
-            <Link href=''> Weather Live Data</Link>
+            <Link href='/dashboard/leavemessage'> Leave Message</Link>
           </div>
         </div>
 
