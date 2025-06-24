@@ -32,11 +32,25 @@
     margin-top: 10px;
 }
 
+.isdata{
+    width: 100%;
+    min-height: 100px;
+    background-color: rgb(36, 37, 37);
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
 @media only screen and (max-width: 800px){
     .wms{
         flex-direction: column;
     }
     .main{
         width: 100%;
+    }
+    .isdata{
+        flex-direction: column;
     }
 }

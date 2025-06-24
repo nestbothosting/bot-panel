@@ -201,15 +201,15 @@ export const GetTMSData = async (server_id, strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const Stop_TMS = async (c_id,strBot) => {
+export const Stop_TMS = async (c_id, strBot) => {
     try {
-        if(!strBot) return { status:false, message:"Select a Bot" }
+        if (!strBot) return { status: false, message: "Select a Bot" }
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.get(`${botdata.node_url}/event/stop_timedmessage/${c_id}`,
             {
                 headers: {
@@ -220,15 +220,15 @@ export const Stop_TMS = async (c_id,strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const Start_TMS = async (c_id,strBot) => {
+export const Start_TMS = async (c_id, strBot) => {
     try {
-        if(!strBot) return { status:false, message:"Select a Bot" }
+        if (!strBot) return { status: false, message: "Select a Bot" }
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.get(`${botdata.node_url}/event/start_timedmessage/${c_id}`,
             {
                 headers: {
@@ -239,15 +239,15 @@ export const Start_TMS = async (c_id,strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
     }
 }
 
-export const Delete_TMS = async (c_id,strBot) => {
+export const Delete_TMS = async (c_id, strBot) => {
     try {
-        if(!strBot) return { status:false, message:"Select a Bot" }
+        if (!strBot) return { status: false, message: "Select a Bot" }
         const Bot = JSON.parse(strBot)
-        const botdata = await MyBotsModel.findOne({ bot_id:Bot.bot_id })
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/event/delete_timedmessage`,
             {
                 c_id
@@ -261,6 +261,95 @@ export const Delete_TMS = async (c_id,strBot) => {
         return response.data;
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
+    }
+}
+
+export const CreateWelcomeMessage = async (server_id, channel_id, message, strBot) => {
+    try {
+        if (!server_id || !channel_id || !message) return { status: false, message: "Missing required fields (Server ID, Channel ID, Message)" }
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/set_welcome_message`,
+            {
+                server_id, channel_id, message, bot_id: Bot.bot_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const CreateLeaveMessage = async (server_id, channel_id, message, strBot) => {
+    try {
+        if (!server_id || !channel_id || !message) return { status: false, message: "Missing required fields (Server ID, Channel ID, Message)" }
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/set_leave_message`,
+            {
+                server_id, channel_id, message, bot_id: Bot.bot_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const GetWelcomeLeaveSM = async (server_id, strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/get_wlms/${server_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message);
+        return { status: false, message: error.message }
+    }
+}
+
+export const DeleteWLMS = async (server_id, type, strBot) => {
+    try {
+        if (!server_id) return { status: false, message: "Server ID is required." };
+        if (!type) return { status: false, message: "Type is required." };
+        if (!strBot) return { status: false, message: "Bot information is missing." };
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/delete_wlms`,
+            {
+                server_id, type
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
     }
 }
