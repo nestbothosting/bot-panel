@@ -46,7 +46,7 @@ export default function Dropdown() {
             <select value={ selectedbot } onChange={handleChange}>
                 <option value="none">Bot's!</option>
                 {bots.map((bot,index) => (
-                    <option  key={index} value={JSON.stringify({ bot_id:bot._id, bot_token:bot.bot_token })}>{ bot.bot_name }</option>
+                    <option  key={index} value={JSON.stringify({ bot_id:bot._id, bot_token:bot.bot_token, bot_name:bot.bot_name })}>{ bot.bot_name }</option>
                 ))}
                 <option value="addnewbot">Add New Bot!</option>
             </select>

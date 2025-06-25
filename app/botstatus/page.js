@@ -10,12 +10,14 @@ import { RiRadioButtonLine } from "react-icons/ri";
 import { TbExternalLink } from "react-icons/tb";
 import { toast } from 'react-toastify';
 import { GetBotStatus } from '@/apis/status'
+import { RQ_Login } from '@/utilise/index'
 
 
 export default function page() {
     const [botdata, setBotdata] = useState({})
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('bot'))
         async function Get() {
             const response = await GetBotStatus(localStorage.getItem('bot'))
             if (!response.status) toast.error(response.message);

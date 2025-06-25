@@ -5,11 +5,13 @@ import style from './botlog.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import { GetBotLog } from '@/apis/status'
 import { toast } from 'react-toastify'
+import { RQ_Login } from '@/utilise/index'
 
 export default function page() {
     const [botlog, setBotLog] = useState([])
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('bot'))
         const GetData = async () => {
             const response = await GetBotLog(localStorage.getItem('bot'))
             if (!response.status) return toast.error(response.message)

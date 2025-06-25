@@ -1,12 +1,16 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './premium.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import PremiumMenu from '@/components/PremiumMenu/PremiumMenu'
 import { MonthlyPlan1 } from '../../PremiumPlans'
+import { RQ_Login } from '@/utilise/index'
 
 export default function page() {
+    useEffect(() => {
+        RQ_Login(localStorage.getItem('bot'))
+    },[])
     return (
         <div className={style.premium} >
             <div className={style.menu} >

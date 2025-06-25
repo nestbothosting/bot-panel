@@ -23,12 +23,12 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>Bothost</div>
+        <div className={styles.logo}>NextBot</div>
 
         {/* Desktop nav */}
         <nav className={styles.nav}>
           <ul className={styles.navLinks}>
-            <li><Link href="/">Home</Link></li>
+            {/* <li><Link href="/">Home</Link></li> */}
             <li><Link href="/dashboard">Dashboard</Link></li>
             {islogin ?
               <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut />Log Out</li>
