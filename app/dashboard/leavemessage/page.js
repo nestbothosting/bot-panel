@@ -7,6 +7,7 @@ import Button from '@/components/Button/Button'
 import { GetMyChannels, GetSettingsData } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { CreateLeaveMessage, DeleteWLMS, GetWelcomeLeaveSM } from '@/apis'
+import { RQ_Login } from '@/utilise/index'
 
 const SetChange = async (value, setItem, type, setItem2, setItem3) => {
     if (type === 'none') return;
@@ -52,6 +53,7 @@ export default function Page() {
     const [LMS, setLMS] = useState()
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('login'))
         const strBot = localStorage.getItem('bot')
         const GetData = async () => {
             const servers = await GetSettingsData(strBot)

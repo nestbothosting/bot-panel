@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { CreateNewTimedmessage, GetTMSData } from '@/apis/index'
 import BotMenuCotext from '@/context/botmenu';
 import TMS_Menu from '@/components/TMS_Menu/TMS_Menu';
+import { RQ_Login } from '@/utilise/index'
 
 const SetChange = async (value, setValue, type, setItem, setItem2) => {
     const strBot = localStorage.getItem('bot')
@@ -57,6 +58,7 @@ export default function page() {
     const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('login'))
         async function GetData() {
             const servers = await GetSettingsData(localStorage.getItem('bot'))
             if (!servers.status) toast.error(servers.message);

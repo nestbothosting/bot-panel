@@ -8,6 +8,7 @@ import Button from '@/components/Button/Button';
 import { GetMyChannels, GetMyRoles, GetSettingsData, SaveYNS, YNS_Data_Get } from '@/utilise/api';
 import { toast } from 'react-toastify';
 import YNS_menu from '@/components/YNS_menu/YNS_menu';
+import { RQ_Login } from '@/utilise/index'
 
 async function Change(e, type, setItem, setItem2, setItem3, setItem4) {
     if (e.target.value === 'none') return
@@ -50,6 +51,7 @@ export default function Page() {
 
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('login'))
         async function GetServers() {
             const response = await GetSettingsData(localStorage.getItem('bot'))
             if (!response.status) return toast.error(response.message)

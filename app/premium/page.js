@@ -9,7 +9,7 @@ import { RQ_Login } from '@/utilise/index'
 
 export default function page() {
     useEffect(() => {
-        RQ_Login(localStorage.getItem('bot'))
+        RQ_Login(localStorage.getItem('login'))
     },[])
     return (
         <div className={style.premium} >

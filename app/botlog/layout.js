@@ -1,0 +1,18 @@
+// app/dashboard/layout.js
+import React, { Suspense } from 'react';
+
+export const metadata = {
+  title: 'BotLog',
+  description: 'Track all bot activities, including commands, status changes, and server interactions in real time with BotLog.',
+};
+
+
+export default function DashboardLayout({ children }) {
+    return (
+        <>
+            <Suspense fallback={<div>Loading Dashboard...</div>}>
+                {children}
+            </Suspense>
+        </>
+    );
+}

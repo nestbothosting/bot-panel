@@ -17,7 +17,7 @@ export default function page() {
     const [botdata, setBotdata] = useState({})
 
     useEffect(() => {
-        RQ_Login(localStorage.getItem('bot'))
+        RQ_Login(localStorage.getItem('login'))
         async function Get() {
             const response = await GetBotStatus(localStorage.getItem('bot'))
             if (!response.status) toast.error(response.message);

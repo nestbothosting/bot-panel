@@ -7,6 +7,7 @@ import Button from '@/components/Button/Button'
 import { GetSettingsData, GetMyChannels } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { SendStatusPanel } from '@/utilise/api' 
+import { RQ_Login } from '@/utilise/index'
 
 
 async function HandleChange(e, setValue, type, setPaneldata) {
@@ -36,6 +37,7 @@ export default function page() {
   const [paneldata,setPaneldata] = useState({})
 
   useEffect(() => {
+    RQ_Login(localStorage.getItem('login'))
     async function GetServers() {
       const servers = await GetSettingsData(localStorage.getItem('bot'))
       if (!servers.status) {
