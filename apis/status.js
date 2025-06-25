@@ -106,6 +106,25 @@ export const GetBotStatus = async (strBot) => {
     return response.data;
   } catch (error) {
     console.log(error.message)
+    return { status: false, message: error.message }
+  }
+}
+
+export const GetBotLog = async (strBot) => {
+  try {
+    if (!strBot) return { status: false, message: "Select a Bot" }
+    const Bot = JSON.parse(strBot)
+    const botdata = await MyBotModel.findOne({ bot_id: Bot.bot_id })
+    const response = await axios.get(`${botdata.node_url}/bot/log/${Bot.bot_id}`,
+      {
+        headers: {
+          "x-api-key": botdata.api_key,
+        },
+      }
+    )
+    return response.data;
+  } catch (error) {
+    console.log(error.message)
     return { status:false, message:error.message }
   }
 }
