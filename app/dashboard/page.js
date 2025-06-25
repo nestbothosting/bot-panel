@@ -33,7 +33,7 @@ export default function Page() {
   const { islogin, setLogin } = useContext(UserContext)
 
   useEffect(() => {
-    RQ_Login(localStorage.getItem('bot'))
+    RQ_Login(localStorage.getItem('login'))
     if (username && uid && avatar && id) {
       const user = { username, uid, avatar, id };
       localStorage.setItem('user', JSON.stringify(user));

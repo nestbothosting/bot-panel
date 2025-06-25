@@ -26,12 +26,13 @@ export default function Footer() {
             <h4>Community</h4>
             <ul>
               <li>
-                <a href="https://discord.gg/yourserver" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.gg/J83zQvaV6U" target="_blank" rel="noopener noreferrer">
                   Discord
                 </a>
               </li>
               <li><Link href="/support">Support</Link></li>
               <li><Link href="/terms">Terms</Link></li>
+              <li><Link href="/privacy">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>

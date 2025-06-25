@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,  useContext } from 'react'
 import style from './welcomemessage.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button'
@@ -8,6 +8,8 @@ import { GetMyChannels, GetSettingsData } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { CreateWelcomeMessage, DeleteWLMS, GetWelcomeLeaveSM } from '@/apis'
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
+import BotMenuCotext from '@/context/botmenu';
 
 const setChange = async (value, setItem, type, setItem2, setItem3) => {
     const strBot = localStorage.getItem('bot')
@@ -50,6 +52,7 @@ export default function page() {
     const [message, setMessage] = useState('')
 
     const [WMS, setWMS] = useState()
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -63,7 +66,7 @@ export default function page() {
         if (server_id) {
             GetWelcomeData(server_id, setWMS)
         }
-    }, [])
+    }, [inbot])
 
     return (
         <div className={style.wms}>
@@ -72,7 +75,7 @@ export default function page() {
             </div>
             <div className={style.main}>
                 <h1>Welcome Message Settings</h1>
-
+                <MessageBox />
                 <div className={style.inputbox}>
                     <span>Choose a Server</span>
                     <br />

@@ -1,0 +1,40 @@
+/* app/support/support.module.css */
+
+.supportPage {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+  color: #ddd;
+}
+
+.supportPage h1 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.supportPage p {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.contactList {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.contactList li {
+  margin-bottom: 0.8rem;
+  font-size: 16px;
+}
+
+.contactList a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.contactList a:hover {
+  text-decoration: underline;
+}

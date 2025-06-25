@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './leavemessage.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button'
@@ -8,6 +8,8 @@ import { GetMyChannels, GetSettingsData } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { CreateLeaveMessage, DeleteWLMS, GetWelcomeLeaveSM } from '@/apis'
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
+import BotMenuCotext from '@/context/botmenu';
 
 const SetChange = async (value, setItem, type, setItem2, setItem3) => {
     if (type === 'none') return;
@@ -51,6 +53,7 @@ export default function Page() {
     const [message, setMessage] = useState('')
 
     const [LMS, setLMS] = useState()
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -61,7 +64,7 @@ export default function Page() {
             setServerList(servers.servers)
         }
         GetData()
-    }, [])
+    }, [inbot])
 
     return (
         <div className={style.wms}>
@@ -71,7 +74,7 @@ export default function Page() {
 
             <div className={style.main}>
                 <h1>Leave Message Settings</h1>
-
+                <MessageBox />
                 <div className={style.inputbox}>
                     <label htmlFor="serverSelect">Choose a Server</label>
                     <br />

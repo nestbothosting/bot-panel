@@ -1,0 +1,51 @@
+/* app/terms/terms.module.css */
+
+.termsPage {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  color: #ddd;
+  font-family: sans-serif;
+}
+
+.termsPage h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.termsPage h2 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.termsPage p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.termsPage ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.termsPage li {
+  margin-bottom: 0.5rem;
+}
+
+.termsPage a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.termsPage a:hover {
+  text-decoration: underline;
+}
+
+.updated {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}

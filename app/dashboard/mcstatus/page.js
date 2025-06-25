@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './mcstatus.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button'
@@ -8,6 +8,8 @@ import { GetSettingsData, GetMyChannels } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { SendStatusPanel } from '@/utilise/api' 
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
+import BotMenuCotext from '@/context/botmenu';
 
 
 async function HandleChange(e, setValue, type, setPaneldata) {
@@ -35,6 +37,7 @@ export default function page() {
   const [serverlist, setServerlist] = useState([])
   const [channelslist, setChannelslist] = useState([])
   const [paneldata,setPaneldata] = useState({})
+  const { inbot, setInbot } = useContext(BotMenuCotext)
 
   useEffect(() => {
     RQ_Login(localStorage.getItem('login'))
@@ -47,7 +50,8 @@ export default function page() {
     }
 
     GetServers()
-  }, [])
+  }, [inbot])
+  
   return (
     <div className={style.mcstatus}>
       <div className={style.menu}>
@@ -55,7 +59,7 @@ export default function page() {
       </div>
       <div className={style.main}>
         <h1>Minecraft Server Status</h1>
-
+        <MessageBox />
         <div className={style.select} >
           <select onChange={(e) => HandleChange(e, setChannelslist, "server",setPaneldata)}>
             <option value="none">Server...</option>

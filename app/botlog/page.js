@@ -1,24 +1,30 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './botlog.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import { GetBotLog } from '@/apis/status'
 import { toast } from 'react-toastify'
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
+import BotMenuCotext from '@/context/botmenu';
 
 export default function page() {
     const [botlog, setBotLog] = useState([])
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
         const GetData = async () => {
             const response = await GetBotLog(localStorage.getItem('bot'))
-            if (!response.status) return toast.error(response.message)
+            if (!response.status) {
+                setBotLog([])
+                return toast.error(response.message)
+            }
             setBotLog(response.log)
         }
         GetData();
-    }, [])
+    }, [inbot])
 
     return (
         <div className={style.botlog} >
@@ -27,7 +33,7 @@ export default function page() {
             </div>
             <div className={style.main}>
                 <h1>Bot Log's</h1>
-
+                <MessageBox />
                 {botlog?.length === 0 ? "No Log" :
                     botlog.map((log, key) => (
                         <div className={style.logbox} key={key}>

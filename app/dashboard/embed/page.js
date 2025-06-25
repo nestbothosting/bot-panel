@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, createElement, useState } from 'react'
+import React, { useEffect, createElement, useState, useContext } from 'react'
 import style from './embed.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import { RQ_Login } from '@/utilise'
@@ -8,6 +8,8 @@ import Button from '@/components/Button/Button'
 import { GetSettingsData, GetMyChannels } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { EmbedMessage } from '@/utilise/api'
+import MessageBox from '@/components/MessageBox/MessageBox'
+import BotMenuCotext from '@/context/botmenu';
 
 function handleAddFields(SetFields, setFieldvalue) {
     SetFields(prevFields => {
@@ -94,6 +96,8 @@ export default function page() {
     const [servers, setServers] = useState([])
     const [channels, setChannels] = useState([])
 
+    const { inbot, setInbot } = useContext(BotMenuCotext)
+
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
 
@@ -105,7 +109,7 @@ export default function page() {
             setServers(response.servers)
         }
         GetServers()
-    }, [])
+    }, [inbot])
     return (
         <div className={style.embed}>
             <div className={style.menu}>
@@ -113,7 +117,7 @@ export default function page() {
             </div>
             <div className={style.main}>
                 <h1>Embed Message</h1>
-
+                <MessageBox />
                 <div className={style.dropdown}>
                     <select onChange={(e) => HandleSelectMenu(e, "server", setEmbeddata, setChannels)}>
                         <option value="none">Select a Server!</option>

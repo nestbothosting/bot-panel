@@ -1,0 +1,51 @@
+/* app/privacy/privacy.module.css */
+
+.privacyPage {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  color: #ddd;
+  font-family: sans-serif;
+}
+
+.privacyPage h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.privacyPage h2 {
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.privacyPage p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.privacyPage ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.privacyPage li {
+  margin-bottom: 0.5rem;
+}
+
+.privacyPage a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.privacyPage a:hover {
+  text-decoration: underline;
+}
+
+.updated {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}

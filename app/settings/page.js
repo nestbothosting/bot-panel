@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import BotMenuCotext from '@/context/botmenu';
 import { StartBot, StopBot, DeleteBot } from '@/apis/index'
 import { BotStatus } from '@/apis/status'
+import MessageBox from '@/components/MessageBox/MessageBox';
 
 async function handleonSave(bot_id, bot_name, bot_token, st_message) {
     try {
@@ -43,7 +44,7 @@ async function handleStop(bot_token, bot_id, setStatus) {
 }
 
 async function handleDelete(bot_id,setDeletebot) {
-    if (confirm("Press a button!")) {
+    if (confirm("are you sure!")) {
         const response = await DeleteBot(bot_id)
         if(response.status){
             localStorage.setItem('bot','none')
@@ -105,6 +106,7 @@ export default function page() {
                 <Cmenu />
             </div>
             <div className={style.main}>
+                <MessageBox />
                 <h1>Bot Settings</h1>
                 <div className={style.botname}>
                     <span>Your bot's Name</span>

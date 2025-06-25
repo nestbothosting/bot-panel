@@ -6,6 +6,7 @@ import Cmenu from '@/components/Cmenu/Cmenu'
 import PremiumMenu from '@/components/PremiumMenu/PremiumMenu'
 import { MonthlyPlan1 } from '../../PremiumPlans'
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
 
 export default function page() {
     useEffect(() => {
@@ -18,6 +19,7 @@ export default function page() {
             </div>
             <div className={ style.main }>
                 <h1>Unlock Premium Features</h1>
+                <MessageBox />
                 <PremiumMenu items={MonthlyPlan1} />
             </div>
         </div>

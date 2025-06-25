@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './ytn.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import { FaYoutube } from "react-icons/fa6";
@@ -9,6 +9,8 @@ import { GetMyChannels, GetMyRoles, GetSettingsData, SaveYNS, YNS_Data_Get } fro
 import { toast } from 'react-toastify';
 import YNS_menu from '@/components/YNS_menu/YNS_menu';
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox';
+import BotMenuCotext from '@/context/botmenu';
 
 async function Change(e, type, setItem, setItem2, setItem3, setItem4) {
     if (e.target.value === 'none') return
@@ -48,6 +50,7 @@ export default function Page() {
     const [rolelist, setRolelist] = useState([])
     const [channellist, setChannellist] = useState([])
     const [YNS, setYNS] = useState({ status: false })
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
 
     useEffect(() => {
@@ -58,7 +61,7 @@ export default function Page() {
             setServerlist(response.servers)
         }
         GetServers()
-    }, [])
+    }, [inbot])
 
     return (
         <div className={style.ytn}>
@@ -67,7 +70,7 @@ export default function Page() {
             </div>
             <div className={style.main}>
                 <h1 className={style.title}>YT Notification <FaYoutube color='red' size={45} /></h1>
-
+                <MessageBox />
                 {YNS.status ? <YNS_menu data={YNS} setY={setYNS} /> : ""}
 
                 <div className={style.drop}>

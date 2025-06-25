@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createElement, useState, useEffect } from 'react'
+import React, { createElement, useState, useEffect, useContext } from 'react'
 import style from './ticket.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button';
@@ -10,7 +10,8 @@ import { toast } from 'react-toastify';
 import { RQ_Login } from '@/utilise';
 import { AiOutlineDelete } from "react-icons/ai";
 import { CiCircleInfo } from "react-icons/ci";
-// import { IoClose } from "react-icons/io5";
+import MessageBox from '@/components/MessageBox/MessageBox';
+import BotMenuCotext from '@/context/botmenu';
 
 function handleAddFields(SetFields, setFieldvalue) {
     SetFields(prevFields => {
@@ -177,6 +178,7 @@ export default function page() {
     const [showpower, setShowpower] = useState([])
     const [role_id, setRoleid] = useState(null)
     const [panel, setPanel] = useState({ status: false })
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -190,7 +192,7 @@ export default function page() {
         }
 
         AddDatas()
-    }, [panel])
+    }, [panel,inbot])
 
     return (
         <div className={style.ticket}>
@@ -219,7 +221,7 @@ export default function page() {
                 }
 
                 <h1>Ticket Panel</h1>
-
+                <MessageBox />
                 <div className={style.dropdown}>
                     <select onChange={(e) => handleDMenu(e, 'server', setTicketdata, setChannellist, setRolelist, setPanel)}>
                         <option value="none">Select a Server!</option>

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './botstatus.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Image from 'next/image';
@@ -11,10 +11,13 @@ import { TbExternalLink } from "react-icons/tb";
 import { toast } from 'react-toastify';
 import { GetBotStatus } from '@/apis/status'
 import { RQ_Login } from '@/utilise/index'
+import MessageBox from '@/components/MessageBox/MessageBox';
+import BotMenuCotext from '@/context/botmenu';
 
 
 export default function page() {
     const [botdata, setBotdata] = useState({})
+    const { inbot, setInbot } = useContext(BotMenuCotext)
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -24,7 +27,7 @@ export default function page() {
             setBotdata(response)
         }
         Get()
-    }, [])
+    }, [inbot])
 
     return (
         <div className={style.botstatus} >
@@ -33,6 +36,7 @@ export default function page() {
             </div>
             <div className={style.main}>
                 <h1>Bot Status</h1>
+                <MessageBox />
                 <div className={style.status}>
                     {botdata.bot_status ? <img src={botdata.bot_avatar} alt="logo" className={ style.logo } /> : <Image src={DiscordLogo} alt='logo' className={style.logo} />}
                     <div className={style.info}>

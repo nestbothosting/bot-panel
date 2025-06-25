@@ -9,8 +9,8 @@ const saira = Saira({ subsets: ['latin'], weight: ['400', '700'], display: 'swap
 
 export const metadata = {
   title: {
-    default: 'NextBot',
-    template: '%s | NextBot',
+    default: 'NextBot Panel',
+    template: '%s | NextBot Panel',
   },
   description: 'Welcome to NextBot',
   keywords: ['dcbot', 'discordbot', 'nocodebot', 'freebot', 'freehostbot', 'freehost'],

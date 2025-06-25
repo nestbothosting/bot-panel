@@ -1,11 +1,14 @@
 // import styles from "./page.module.css";
+"use client"
 
-export const metadata = {
-  title: 'Home',
-  description: 'Home Page',
-};
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/dashboard");
+  },[])
   return (
     <>
 
