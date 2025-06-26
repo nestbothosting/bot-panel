@@ -33,7 +33,6 @@ export default function Page() {
   const { islogin, setLogin } = useContext(UserContext)
 
   useEffect(() => {
-    RQ_Login(localStorage.getItem('login'))
     if (username && uid && avatar && id) {
       const user = { username, uid, avatar, id };
       localStorage.setItem('user', JSON.stringify(user));
@@ -41,12 +40,14 @@ export default function Page() {
       localStorage.setItem('login', true)
       setLogin(true)
     }
+    RQ_Login(localStorage.getItem('login'))
     const strUser = localStorage.getItem('user')
     const strBot = localStorage.getItem('bot')
     if (strUser) {
       setUser(JSON.parse(strUser))
     }
     if (strBot) {
+      if(strBot === "none") return;
       setBot(JSON.parse(strBot))
     }
     RQ_Login(localStorage.getItem('login'))
@@ -59,7 +60,7 @@ export default function Page() {
       </div>
       <div className={style.main}>
         <div className={style.title}>
-          <h1>Welcome to NextBot Panel</h1>
+          <h1>Welcome to NestBot Panel</h1>
 
           <div className={style.featureGrid}>
             {features.map((feature, index) => (

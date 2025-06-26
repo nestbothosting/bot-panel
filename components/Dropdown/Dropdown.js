@@ -31,6 +31,12 @@ export default function Dropdown() {
         async function GetBots(){
             try {
                 const response = await Mybots(localStorage.getItem('user'))
+                if(response.length === 0){
+                    setTimeout(async() => {
+                        const recall = await Mybots(localStorage.getItem('user'))
+                        setBots(recall)
+                    }, 2000);
+                }
                 setBots(response)
             } catch (error) {
                 setBots([])

@@ -90,7 +90,7 @@ export default function Page() {
 
                     <div className={style.isdata}>
                         <div>
-                            <h2>Available</h2>
+                            <h2>Active </h2>
                             <p>Message: <span>{LMS?.leave_message}</span></p>
                             <h4>Channel ID: {LMS?.lv_channel_id}</h4>
                         </div>

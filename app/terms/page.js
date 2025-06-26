@@ -2,7 +2,7 @@ import styles from './terms.module.css';
 
 export const metadata = {
   title: 'Terms & Conditions',
-  description: 'Review the terms and conditions for using the NextBot service.',
+  description: 'Review the terms and conditions for using the NestBot service.',
 };
 
 export default function TermsPage() {
@@ -13,14 +13,14 @@ export default function TermsPage() {
       <section>
         <h2>1. Introduction</h2>
         <p>
-          Welcome to NextBot. By accessing or using our service, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use the service.
+          Welcome to NestBot. By accessing or using our service, you agree to be bound by these Terms and Conditions. If you do not agree, please do not use the service.
         </p>
       </section>
 
       <section>
         <h2>2. Use of Service</h2>
         <p>
-          You agree to use NextBot only for lawful purposes and in a way that does not infringe on the rights of others or restrict their use and enjoyment of the service.
+          You agree to use NestBot only for lawful purposes and in a way that does not infringe on the rights of others or restrict their use and enjoyment of the service.
         </p>
         <ul>
           <li>No spam or automated abuse.</li>
@@ -60,7 +60,7 @@ export default function TermsPage() {
       <section>
         <h2>7. Contact</h2>
         <p>
-          For questions or concerns, please contact us at <a href="mailto:support@nextbot.xyz">support@nextbot.xyz</a>.
+          For questions or concerns, please contact us at <a href="mailto:support@nestbot.xyz">support@nestbot.xyz</a>.
         </p>
       </section>
 

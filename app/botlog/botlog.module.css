@@ -46,6 +46,10 @@
         width: 100%;
     }
 
+    .botlog{
+        flex-direction: column;
+    }
+
     .logbox{
         flex-direction: column;
         align-items: center;

@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>NextBot</div>
+        <div className={styles.logo}>NestBot</div>
 
         {/* Desktop nav */}
         <nav className={styles.nav}>

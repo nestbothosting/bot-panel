@@ -46,7 +46,7 @@ export async function Mybots(userstring) {
     try {
         mongo()
         let MyBots = []
-
+        if(!userstring) return[]
         const user = JSON.parse(userstring)
         const mybotsdata = await MyBotsModel.find({ owner_id: user.id })
 

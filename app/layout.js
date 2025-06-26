@@ -9,11 +9,11 @@ const saira = Saira({ subsets: ['latin'], weight: ['400', '700'], display: 'swap
 
 export const metadata = {
   title: {
-    default: 'NextBot Panel',
-    template: '%s | NextBot Panel',
+    default: 'NestBot Panel',
+    template: '%s | NestBot Panel',
   },
   description: 'Welcome to NextBot',
-  keywords: ['dcbot', 'discordbot', 'nocodebot', 'freebot', 'freehostbot', 'freehost'],
+  keywords: ['dcbot', 'discordbot', 'nocodebot', 'freebot', 'freehostbot', 'freehost','nestbot','nextbot','freebot'],
 }
 
 export default function RootLayout({ children }) {

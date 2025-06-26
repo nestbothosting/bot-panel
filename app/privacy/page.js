@@ -3,7 +3,7 @@ import styles from './privacy.module.css';
 
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'Learn how we collect, use, and protect your data on NextBot.',
+  description: 'Learn how we collect, use, and protect your data on NestBot.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
       <section>
         <h2>1. Introduction</h2>
         <p>
-          At NextBot, we take your privacy seriously. This Privacy Policy outlines how we collect, use, and protect your personal information.
+          At NestBot, we take your privacy seriously. This Privacy Policy outlines how we collect, use, and protect your personal information.
         </p>
       </section>
 
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
       <section>
         <h2>7. Your Rights</h2>
         <p>
-          You have the right to request access to, correction of, or deletion of your personal data. Contact us anytime at <a href="mailto:support@nextbot.xyz">support@nextbot.xyz</a>.
+          You have the right to request access to, correction of, or deletion of your personal data. Contact us anytime at <a href="mailto:support@nestbot.xyz">support@nestbot.xyz</a>.
         </p>
       </section>
 

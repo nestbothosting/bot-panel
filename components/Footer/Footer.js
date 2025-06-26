@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerBrand}>
-          <h1>NextBot</h1>
+          <h1>NestBot</h1>
           <p>Powerful no-code Discord bot tools for everyone.</p>
         </div>
 
@@ -39,7 +39,7 @@ export default function Footer() {
       </div>
 
       <div className={styles.footerBottom}>
-        <p>&copy; {new Date().getFullYear()} NextBot. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} NestBot. All rights reserved.</p>
       </div>
     </footer>
   );

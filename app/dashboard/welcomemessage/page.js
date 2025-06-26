@@ -91,7 +91,7 @@ export default function page() {
                     
                     <div className={ style.isdata }>
                         <div>
-                            <h2>Available</h2>
+                            <h2>Active </h2>
                             <p>Message: <span>{WMS?.welcome_message}</span></p>
                             <h4>Channel ID: {WMS?.wl_channel_id}</h4>
                         </div>
