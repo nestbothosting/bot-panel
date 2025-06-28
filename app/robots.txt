@@ -1,0 +1,10 @@
+User-agent: *
+
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /admins
+
+Allow: /
+
+Sitemap: https://nestbot.xyz/sitemap.xml
