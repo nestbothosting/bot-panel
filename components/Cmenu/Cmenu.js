@@ -40,7 +40,7 @@ export default function Cmenu() {
             <FaDiscord  size={20} />
           </div>
           <div className={style.link}>
-            <Link href='/dashboard'>Add Bot</Link>
+            <Link href='/addnewbot'>Add Bot</Link>
           </div>
         </div>
 

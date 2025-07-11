@@ -3,12 +3,13 @@ module.exports = {
   siteUrl: 'https://nestbot.xyz',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/admins'],
+  exclude: ['/admin', '/admin/*', '/admins', '/admins/*'],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        disallow: ['/admin', '/admin/', '/admin/*', '/admins', '/admins/'],
+        disallow: ['/admin/', '/admins/'],
+        allow: '/', 
       },
     ],
     sitemap: 'https://nestbot.xyz/sitemap.xml',

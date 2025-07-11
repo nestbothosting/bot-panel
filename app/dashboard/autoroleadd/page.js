@@ -75,6 +75,15 @@ export default function page() {
                         <Button name="Set Role" gbcolor="#14A44D" />
                     </span>
                 </div>
+
+                <span style={{ color: 'red', fontSize: '14px' }}>
+                    ⚠️ To allow the bot to assign roles automatically, make sure of the following:
+                    <br />1. The bot has the <strong>Manage Roles</strong> permission in your server.
+                    <br />2. The role you want to auto-assign is <strong>below</strong> the bot’s highest role in the role hierarchy.
+                    <br />3. You are not trying to assign the <strong>@everyone</strong> role.
+                    <br />4. If you’ve already set an auto-role, you can remove it by using the command <code>/remautorole</code>.
+                </span>
+
             </div>
         </div>
     )

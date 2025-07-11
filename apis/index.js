@@ -363,7 +363,32 @@ export const SetAutoRole = async (strBot, server_id, role_id) => {
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/event/autoroleadd`,
             {
-                server_id, role_id
+                server_id, role_id, bot_id: Bot.bot_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const sendSayMessage = async (server_id, channel_id, message, strBot) => {
+    try {
+        if (!server_id) return { status: false, message: "Server ID is required." };
+        if (!channel_id) return { status: false, message: "Channel ID is required." };
+        if (!message) return { status: false, message: "Messageis required." };
+        if (!strBot) return { status: false, message: "Bot information is missing." };
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/event/say`,
+            {
+                server_id, channel_id, message, token:Bot.bot_token
             },
             {
                 headers: {
