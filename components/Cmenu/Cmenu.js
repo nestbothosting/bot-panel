@@ -7,10 +7,11 @@ import { HiStatusOnline } from "react-icons/hi";
 import { ImEmbed } from "react-icons/im";
 import { TbBrandMinecraft, TbTimeDuration5 } from "react-icons/tb";
 import { GrYoutube } from "react-icons/gr";
-import { FaUserCheck, FaUserMinus } from "react-icons/fa";
+import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
 import { showcmenu } from '@/utilise/index'
+import { RiUserSettingsLine } from "react-icons/ri";
 
 import Link from 'next/link';
 import Dropdown from '../Dropdown/Dropdown';
@@ -31,6 +32,15 @@ export default function Cmenu() {
           </div>
           <div className={style.link}>
             <Link href='/dashboard'>Dashboard</Link>
+          </div>
+        </div>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <FaDiscord  size={20} />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard'>Add Bot</Link>
           </div>
         </div>
 
@@ -132,6 +142,15 @@ export default function Cmenu() {
           </div>
           <div className={style.link}>
             <Link href='/dashboard/leavemessage'> Leave Message</Link>
+          </div>
+        </div>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <RiUserSettingsLine size={20} />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/autoroleadd'> Auto Role</Link>
           </div>
         </div>
 

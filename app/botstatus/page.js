@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import style from './botstatus.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Image from 'next/image';
-import DiscordLogo from '../../public/discord.png'
+import DiscordLogo from '../../public/image/discord.png'
 import Link from 'next/link';
 import { RiRadioButtonLine } from "react-icons/ri";
 import { TbExternalLink } from "react-icons/tb";

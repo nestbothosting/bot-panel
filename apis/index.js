@@ -353,3 +353,27 @@ export const DeleteWLMS = async (server_id, type, strBot) => {
         return { status: false, message: error.message }
     }
 }
+
+export const SetAutoRole = async (strBot, server_id, role_id) => {
+    try {
+        if (!server_id) return { status: false, message: "Server ID is required." };
+        if (!role_id) return { status: false, message: "Role ID is required." };
+        if (!strBot) return { status: false, message: "Bot information is missing." };
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/event/autoroleadd`,
+            {
+                server_id, role_id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                }
+            }
+        )
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}

@@ -8,8 +8,7 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/admin', '/admin/*', '/admins'],
+        disallow: ['/admin', '/admin/', '/admin/*', '/admins', '/admins/'],
       },
     ],
     sitemap: 'https://nestbot.xyz/sitemap.xml',

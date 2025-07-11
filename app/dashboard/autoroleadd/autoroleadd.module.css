@@ -1,0 +1,43 @@
+.autoroleadd{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    padding: 10px;
+    font-family: saira;
+}
+
+.main{
+    width: 80%;
+    padding: 10px;
+}
+
+.selectm{
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.selectm select{
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+@media only screen and (max-width: 800px){
+    .autoroleadd{
+        flex-direction: column;
+    }
+    .main{
+        width: 100%;
+    }
+}
