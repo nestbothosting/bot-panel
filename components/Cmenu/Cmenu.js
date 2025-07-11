@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './cmenu.module.css'
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard, LuMessageSquareMore } from "react-icons/lu";
 import { IoSettingsOutline, IoDiamondOutline, IoTicketOutline } from "react-icons/io5";
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { HiStatusOnline } from "react-icons/hi";
@@ -151,6 +151,15 @@ export default function Cmenu() {
           </div>
           <div className={style.link}>
             <Link href='/dashboard/autoroleadd'> Auto Role</Link>
+          </div>
+        </div>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <LuMessageSquareMore size={20} />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/say'> Text Message</Link>
           </div>
         </div>
 
