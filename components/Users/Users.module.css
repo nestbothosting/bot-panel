@@ -1,0 +1,23 @@
+.userscontainer{
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    font-family: saira;
+}
+
+.avatar{
+    width: 25%;
+}
+
+.avatar img{
+    border-radius: 50%;
+}
+
+@media only screen and (max-width: 800px){
+    .userscontainer{
+        flex-direction: column;
+    }
+}

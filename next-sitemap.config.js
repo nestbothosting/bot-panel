@@ -3,7 +3,7 @@ module.exports = {
   siteUrl: 'https://nestbot.xyz',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/admins', '/admins/*'],
+  exclude: ['/admin', '/admin/*', '/admins', '/admins/*','/api','/api/*'],
   robotsTxtOptions: {
     policies: [
       {

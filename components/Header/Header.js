@@ -9,6 +9,7 @@ import { FaDiscord } from "react-icons/fa";
 import UserContext from '@/context/usercontext';
 import { LuLogOut } from "react-icons/lu";
 
+
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
   const toggleNav = () => setShowNav(prev => !prev);
@@ -35,6 +36,7 @@ const Header = () => {
               :
               <li className={styles.login} onClick={() => { DiscordAUth(); setShowNav(false); }}><FaDiscord /> Log in</li>
             }
+            <li className={ styles.discord }><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
           </ul>
         </nav>
 

@@ -8,6 +8,7 @@ import BotMenuCotext from '@/context/botmenu'
 import { GetMyChannels, GetSettingsData } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import { sendSayMessage } from '@/apis/index'
+import MessageBox from '@/components/MessageBox/MessageBox'
 
 const SendData = async (server_id, channel_id, message) => {
     const response = await sendSayMessage(server_id, channel_id, message, localStorage.getItem('bot'))
@@ -48,6 +49,7 @@ export default function page() {
                 <Cmenu />
             </div>
             <div className={style.main}>
+                <MessageBox />
                 <h1>Say Text Message</h1>
                 <p>This lets the bot send a custom message to a selected channel in your server.</p>
 
