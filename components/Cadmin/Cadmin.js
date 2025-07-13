@@ -31,7 +31,7 @@ export default function Cadmin() {
                         <FaUsers size={20} />
                     </div>
                     <div className={style.name}>
-                        <Link href="">User's</Link>
+                        <Link href="/admin/users">User's</Link>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@ export default function Cadmin() {
                         <LuBotMessageSquare size={20} />
                     </div>
                     <div className={style.name}>
-                        <Link href="">Bot's</Link>
+                        <Link href="/admin/bots">Bot's</Link>
                     </div>
                 </div>
 

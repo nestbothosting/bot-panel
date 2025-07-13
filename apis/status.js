@@ -7,22 +7,38 @@ import MyBotModel from '@/utilise/mybotmd'
 
 export async function NodeStatus() {
   try {
-    mongo()
-    const Nodes = await NodeModel.find(); // Await the DB call
+    await mongo(); // ensure you're awaiting connection if needed
+
+    const Nodes = await NodeModel.find(); // get all nodes
+
     const statusPromises = Nodes.map((node) =>
       axios.get(`${node.nodeurl}/node_status`, {
         headers: {
-          "x-api-key": node.apikey,
+          'x-api-key': node.apikey,
         },
+        timeout: 5000 // optional: prevents hanging forever
       })
-        .then((res) => ({ status: true, url: RemoveHTTP(node.nodeurl), node_id: res.data.node_id }))
-        .catch(() => ({ status: false, url: RemoveHTTP(node.nodeurl), node_id: 'none' }))
+        .then((res) => ({
+          status: true,
+          url: RemoveHTTP(node.nodeurl),
+          node_id: res.data.node_id,
+          node_cid: node._id.toString(), // safer than JSON.stringify
+        }))
+        .catch((err) => {
+          console.warn(`Node ${node.nodeurl} offline or errored: ${err.message}`);
+          return {
+            status: false,
+            url: RemoveHTTP(node.nodeurl),
+            node_id: 'none',
+            node_cid: node._id.toString()
+          };
+        })
     );
 
-    const nodes = await Promise.all(statusPromises); // Wait for all requests
+    const nodes = await Promise.all(statusPromises); // run all requests
     return nodes;
   } catch (error) {
-    console.error("Error getting node statuses:", error);
+    console.error("Error getting node statuses:", error.message);
     return [];
   }
 }

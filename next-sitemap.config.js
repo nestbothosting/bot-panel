@@ -2,16 +2,14 @@
 module.exports = {
   siteUrl: 'https://nestbot.xyz',
   generateRobotsTxt: true,
-  generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/admins', '/admins/*','/api','/api/*'],
+  exclude: ['/admin/*', '/admins', '/api/*'],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        disallow: ['/admin/', '/admins/'],
-        allow: '/', 
+        allow: '/',
+        disallow: ['/admin', '/admins', '/api'],
       },
     ],
-    sitemap: 'https://nestbot.xyz/sitemap.xml',
   },
-};
+}

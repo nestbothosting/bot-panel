@@ -5,8 +5,9 @@ import { GetUserData } from '@/utilise/apis';
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get('id');
+  const page = searchParams.get('page');
 
-  const response = await GetUserData(userId);
+  const response = await GetUserData(userId, page);
 
   if (!response) {
     return NextResponse.json(
