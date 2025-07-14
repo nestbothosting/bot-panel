@@ -9,6 +9,7 @@ import { RQ_Login } from '@/utilise/index'
 import { FaClock, FaUser, FaRobot, FaYoutube } from "react-icons/fa"
 import { TbBrandMinecraft } from "react-icons/tb";
 import Link from "next/link"
+import AddBotMessage from '@/components/AddBotMessage/AddBotMessage'
 
 
 
@@ -47,7 +48,7 @@ export default function Page() {
       setUser(JSON.parse(strUser))
     }
     if (strBot) {
-      if(strBot === "none") return;
+      if (strBot === "none") return;
       setBot(JSON.parse(strBot))
     }
     RQ_Login(localStorage.getItem('login'))
@@ -61,6 +62,8 @@ export default function Page() {
       <div className={style.main}>
         <div className={style.title}>
           <h1>Welcome to NestBot Panel</h1>
+
+          <AddBotMessage />
 
           <div className={style.featureGrid}>
             {features.map((feature, index) => (

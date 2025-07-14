@@ -7,7 +7,7 @@ import { HiStatusOnline } from "react-icons/hi";
 import { ImEmbed } from "react-icons/im";
 import { TbBrandMinecraft, TbTimeDuration5 } from "react-icons/tb";
 import { GrYoutube } from "react-icons/gr";
-import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers } from "react-icons/fa";
+import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
 import { showcmenu } from '@/utilise/index'
@@ -19,8 +19,8 @@ import Dropdown from '../Dropdown/Dropdown';
 export default function Cmenu() {
   return (
     <>
-      <div className={ style.scmenu }>
-        <VscThreeBars size={30} style={{ cursor:'pointer'}} onClick={showcmenu}/>
+      <div className={style.scmenu}>
+        <VscThreeBars size={30} style={{ cursor: 'pointer' }} onClick={showcmenu} />
       </div>
       <div className={style.Cmenu} id='cmenu'>
         <Dropdown />
@@ -37,7 +37,7 @@ export default function Cmenu() {
 
         <div className={style.items}>
           <div className={style.icon}>
-            <FaDiscord  size={20} />
+            <FaDiscord size={20} />
           </div>
           <div className={style.link}>
             <Link href='/addnewbot'>Add Bot</Link>
@@ -111,15 +111,6 @@ export default function Cmenu() {
 
         <div className={style.items}>
           <div className={style.icon}>
-            <GrYoutube size={20} color='red' />
-          </div>
-          <div className={style.link}>
-            <Link href='/dashboard/ytnotification'> YT Notification</Link>
-          </div>
-        </div>
-
-        <div className={style.items}>
-          <div className={style.icon}>
             <TbTimeDuration5 size={20} />
           </div>
           <div className={style.link}>
@@ -160,6 +151,26 @@ export default function Cmenu() {
           </div>
           <div className={style.link}>
             <Link href='/dashboard/say'> Text Message</Link>
+          </div>
+        </div>
+
+        <span className={style.span}>Feeds-S</span>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <GrYoutube size={20} color='red' />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/ytnotification'> YT Notification</Link>
+          </div>
+        </div>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <FaInstagram size={20} color='#FD03BA' />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/instagram'> Instagram</Link>
           </div>
         </div>
 

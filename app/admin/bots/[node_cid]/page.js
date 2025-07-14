@@ -8,19 +8,20 @@ import Image from 'next/image'
 import { GetBotsData } from '@/utilise/apis'
 import { toast } from 'react-toastify'
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { useRouter } from 'next/navigation';
+import { isAdmin, RQ_Login } from '@/utilise'
 
 export default function page() {
     const params = useParams()
     const [bots, setBots] = useState([])
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
-
-    const bot = {
-        name: "bot name",
-        id: "00000000000000000000"
-    }
+    const router = useRouter();
 
     useEffect(() => {
+        RQ_Login(localStorage.getItem('login'))
+        isAdmin(localStorage.getItem('user'), router);
+        
         const GetData = async () => {
             setLoading(true)
             const response = await GetBotsData(params.node_cid, page)

@@ -1,0 +1,63 @@
+.addbotbox {
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.205);
+    position: fixed; /* recommended */
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box{
+    height: 70%;
+    width: 70%;
+    background-color: rgb(36, 37, 37);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.logo h1{
+    font-size: 80px;
+    text-align: center;
+    color: red;
+}
+
+.cont{
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.cont h1{
+    font-size: 30px;
+}
+
+.btn{
+    height: 40px;
+    width: 120px;
+    margin-top: 10px;
+    background-color: rgb(15, 192, 15);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: red;
+}

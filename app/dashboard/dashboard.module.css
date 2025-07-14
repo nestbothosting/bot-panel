@@ -1,21 +1,21 @@
-.dashboard{
-    padding: 10px;
-    display: flex;
+.dashboard {
+  padding: 10px;
+  display: flex;
 }
 
-.main{
-    padding: 10px;
-    width: 80%;
+.main {
+  padding: 10px;
+  width: 80%;
 }
 
-.title{
-    width: 100%;
-    text-align: center;
-    font-family: saira;
+.title {
+  width: 100%;
+  text-align: center;
+  font-family: saira;
 }
 
-.title h1{
-    font-size: 45px;
+.title h1 {
+  font-size: 45px;
 }
 
 .pageTitle {
@@ -72,11 +72,12 @@
   color: #00bcd4;
 }
 
-@media only screen and (max-width: 800px){
-    .dashboard{
-        flex-direction: column;
-    }
-    .main{
-        width: 100%;
-    }
+@media only screen and (max-width: 800px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .main {
+    width: 100%;
+  }
 }
