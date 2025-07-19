@@ -101,13 +101,13 @@ export default function page() {
         </div>
 
         <div className={style.text}>
-          <span>Offline Icon ID</span>
-          <input type="text" placeholder='Offline icon' onChange={(e) => setPaneldata(prop => ({...prop,of_icon_id: e.target.value}))} />
+          <span>Offline Icon ID and Name (icon_name:icon_id)</span>
+          <input type="text" placeholder='Offline icon (icon_name:icon_id)' onChange={(e) => setPaneldata(prop => ({...prop,of_icon_id: e.target.value}))} />
         </div>
 
         <div className={style.text}>
-          <span>Online Icon ID</span>
-          <input type="text" placeholder='Onlie icon' onChange={(e) => setPaneldata(prop => ({...prop,on_icon_id: e.target.value}))} />
+          <span>Online Icon ID and Name (icon_name:icon_id)</span>
+          <input type="text" placeholder='Onlie icon (icon_name:icon_id)' onChange={(e) => setPaneldata(prop => ({...prop,on_icon_id: e.target.value}))} />
         </div>
 
         <div className={style.text}>

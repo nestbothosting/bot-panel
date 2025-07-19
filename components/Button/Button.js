@@ -3,7 +3,7 @@
 import React from 'react'
 import style from './Button.module.css'
 
-export default function Button({ name, color, gbcolor, border }) {
+export default function Button({ name='click', color, gbcolor, border }) {
     if(!border){
         border = 'none'
     }

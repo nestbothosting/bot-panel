@@ -1,4 +1,4 @@
-.Cmenu{
+.Cmenu {
     min-height: 90vh;
     width: 250px;
     background-color: rgb(36, 37, 37);
@@ -13,12 +13,12 @@
     display: none;
 } */
 
-.span{
+.span {
     color: gray;
     font-family: saira;
 }
 
-.items{
+.items {
     width: 100%;
     height: auto;
     display: flex;
@@ -26,34 +26,35 @@
     border-bottom: 1px solid rgb(43, 42, 42);
 }
 
-.icon{
+.icon {
     width: 20%;
     height: 100%;
     text-align: end;
 }
 
-.link{
+.link {
     width: 80%;
     padding-left: 8px;
     display: flex;
     align-items: center;
 }
 
-.link a{
+.link a {
     font-weight: 700;
     font-family: lato;
 }
 
-.scmenu{
+.scmenu {
     display: none;
 }
 
-@media only screen and (max-width: 800px){
-    .Cmenu{
+@media only screen and (max-width: 800px) {
+    .Cmenu {
         width: 100%;
         display: none;
     }
-    .scmenu{
+
+    .scmenu {
         display: block;
     }
 }

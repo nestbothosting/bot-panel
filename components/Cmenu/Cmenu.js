@@ -5,7 +5,7 @@ import { IoSettingsOutline, IoDiamondOutline, IoTicketOutline } from "react-icon
 import { MdOutlineErrorOutline } from "react-icons/md";
 import { HiStatusOnline } from "react-icons/hi";
 import { ImEmbed } from "react-icons/im";
-import { TbBrandMinecraft, TbTimeDuration5 } from "react-icons/tb";
+import { TbBrandMinecraft, TbTimeDuration5, TbMessage2Cog } from "react-icons/tb";
 import { GrYoutube } from "react-icons/gr";
 import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
@@ -154,7 +154,16 @@ export default function Cmenu() {
           </div>
         </div>
 
-        <span className={style.span}>Feeds-S</span>
+        <div className={style.items}>
+          <div className={style.icon}>
+            <TbMessage2Cog size={20} />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/autoreplay'> Auto Replay</Link>
+          </div>
+        </div>
+
+        <span className={style.span}>Feeds</span>
 
         <div className={style.items}>
           <div className={style.icon}>
@@ -165,14 +174,14 @@ export default function Cmenu() {
           </div>
         </div>
 
-        <div className={style.items}>
+        {/* <div className={style.items}>
           <div className={style.icon}>
             <FaInstagram size={20} color='#FD03BA' />
           </div>
           <div className={style.link}>
             <Link href='/dashboard/instagram'> Instagram</Link>
           </div>
-        </div>
+        </div> */}
 
       </div>
     </>

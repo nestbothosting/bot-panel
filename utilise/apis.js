@@ -57,3 +57,37 @@ export async function checkAddBotinWeb(user_cid) {
         return { status: false, message: error.message || "An error occurred." };
     }
 }
+
+export const SendAutoReplaySTM = async (serverdata, messagekey, messageReplay, strBot) => {
+    try {
+        const Roles = []
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        if(!serverdata || !serverdata.server_id || !messagekey || !messageReplay) return { status:false, message:"Please fill in all fields." }
+        const Bot = JSON.parse(strBot)
+        const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(`${botdata.node_url}/event/autoreplay`,
+            {
+                serverdata, messagekey, messageReplay, bot_cid:Bot.id
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                    'Content-Type': 'application/json'
+                },
+            }
+        )
+
+        if (!response.data.status) {
+            return response.data
+        }
+
+        for (const role of response.data.roles) {
+            Roles.push({ name: role.name, id: role.id })
+        }
+
+        return { status: true, roles: Roles }
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
