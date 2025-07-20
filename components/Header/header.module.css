@@ -22,6 +22,7 @@
     margin: 0;
     font-weight: 700;
     font-family: lato;
+    align-items: center;
 }
 
 .navLinks li a {

@@ -60,14 +60,13 @@ export async function checkAddBotinWeb(user_cid) {
 
 export const SendAutoReplaySTM = async (serverdata, messagekey, messageReplay, strBot) => {
     try {
-        const Roles = []
         if (!strBot) return { status: false, message: "Select a Bot" }
         if(!serverdata || !serverdata.server_id || !messagekey || !messageReplay) return { status:false, message:"Please fill in all fields." }
         const Bot = JSON.parse(strBot)
         const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/event/autoreplay`,
             {
-                serverdata, messagekey, messageReplay, bot_cid:Bot.id
+                serverdata, messagekey, messageReplay, bot_token:Bot.bot_token
             },
             {
                 headers: {
@@ -77,15 +76,49 @@ export const SendAutoReplaySTM = async (serverdata, messagekey, messageReplay, s
             }
         )
 
-        if (!response.data.status) {
-            return response.data
-        }
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
 
-        for (const role of response.data.roles) {
-            Roles.push({ name: role.name, id: role.id })
-        }
+export const fechAutoRoleData = async (server_id, strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        if(!server_id) return { status:false, message:"Server id is required" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/event/autoreplay/${server_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
 
-        return { status: true, roles: Roles }
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}
+
+export const DeleteARMS = async (cid, strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select a Bot" }
+        if(!cid) return { status:false, message:"cid is required" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(`${botdata.node_url}/event/delete_autoreplay/${cid}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+
+        return response.data;
     } catch (error) {
         console.log(error.message)
         return { status: false, message: error.message }

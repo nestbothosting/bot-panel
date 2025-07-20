@@ -1,0 +1,26 @@
+.messageBox {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(36, 37, 37);
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.server {
+  padding: 0;
+  height: 10px;
+  color: #5865F2;
+}
+
+@media only screen and (max-width: 800px) {
+  .messageBox {
+    flex-direction: column;
+  }
+
+  .top {
+    margin-top: 8px;
+  }
+}
