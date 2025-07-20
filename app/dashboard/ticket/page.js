@@ -4,7 +4,6 @@ import React, { createElement, useState, useEffect, useContext } from 'react'
 import style from './ticket.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button';
-import Permissions from '@/utilise/permission';
 import { GetSettingsData, GetMyChannels, GetMyRoles, SendTicket, GetMyTicketPanel, DeletePanel } from '@/utilise/api'
 import { toast } from 'react-toastify';
 import { RQ_Login } from '@/utilise';
@@ -12,6 +11,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { CiCircleInfo } from "react-icons/ci";
 import MessageBox from '@/components/MessageBox/MessageBox';
 import BotMenuCotext from '@/context/botmenu';
+import { IoClose } from "react-icons/io5";
 
 function handleAddFields(SetFields, setFieldvalue) {
     SetFields(prevFields => {
@@ -101,52 +101,12 @@ async function handleDMenu(e, type, setValue, setType1, setType2, setType3) {
     }
 }
 
-function handlePermission(e, setPermission, role_id, setShowpower) {
-    if (e.target.value === 'none') return;
-    if (role_id === 'none') return
-
-    const selectedText = e.target.options[e.target.selectedIndex].text;
-    const selectedValue = e.target.value;
-
-    setPermission(prevPermissions => {
-        ShowPower(role_id, setShowpower, prevPermissions);
-
-        const existingRole = prevPermissions.find(r => r.role_id === role_id.id);
-
-        if (existingRole) {
-            const alreadyExists = existingRole.permission.some(p => p.code === selectedValue);
-            if (alreadyExists) return prevPermissions;
-
-            const updatedPermissions = prevPermissions.map(role =>
-                role.role_id === role_id.id
-                    ? {
-                        ...role,
-                        permission: [...role.permission, { name: selectedText, code: selectedValue }]
-                    }
-                    : role
-            );
-
-            ShowPower(role_id, setShowpower, updatedPermissions);
-            return updatedPermissions;
-        } else {
-            const newPermissions = [
-                ...prevPermissions,
-                {
-                    role_id: role_id.id,
-                    role_name: role_id.name,
-                    permission: [{ name: selectedText, code: selectedValue }]
-                }
-            ];
-            ShowPower(role_id, setShowpower, newPermissions);
-            return newPermissions;
-        }
-    });
-}
-
-// Show permissions for a role
-function ShowPower(role_id, setShowpower, permission) {
-    const Permissions = permission.find(r => r.role_id === role_id.id);
-    setShowpower(Permissions?.permission || []);
+async function AddPower(rolename, roleid, setShowpower, showpower) {
+    if(roleid === 'none') return;
+    for(let x of showpower){
+        if(x.id === roleid) return;
+    }
+    setShowpower(prop =>  ([...prop, {name:rolename, id:roleid }]))
 }
 
 async function SendPanel(ticketdata, fieldvalue, permission) {
@@ -171,14 +131,17 @@ export default function page() {
     const [fields, SetFields] = useState([])
     const [serverlist, setServerlist] = useState([])
     const [channellist, setChannellist] = useState([])
-    const [rolekist, setRolelist] = useState([])
+    const [rolelist, setRolelist] = useState([])
     const [fieldvalue, setFieldvalue] = useState([])
     const [ticketdata, setTicketdata] = useState({})
     const [permission, setPermission] = useState([])
     const [showpower, setShowpower] = useState([])
-    const [role_id, setRoleid] = useState(null)
     const [panel, setPanel] = useState({ status: false })
     const { inbot, setInbot } = useContext(BotMenuCotext)
+
+    async function removeRole(indexToRemove,setShowpower) {
+    setShowpower(showpower.filter((_, index) => index !== indexToRemove));
+}
 
     useEffect(() => {
         RQ_Login(localStorage.getItem('login'))
@@ -339,46 +302,33 @@ export default function page() {
                     <input type="text" placeholder='Icon URL' onChange={(e) => setTicketdata(prop => ({ ...prop, footer_icon: e.target.value }))} />
                 </div>
 
-                <h2>Role and Permission</h2>
+                <h2>Role's (Optional)</h2>
 
                 <div className={style.dropdown} >
-                    <select onClick={(e) => setRoleid({ name: e.target.options[e.target.selectedIndex].text, id: e.target.value })} >
+                    <select onClick={(e) => AddPower(e.target.options[e.target.selectedIndex].text, e.target.value, setShowpower, showpower )} >
                         <option value="none">Role..</option>
-                        {rolekist.map((role, index) => (
+                        {rolelist.map((role, index) => (
                             <option value={role.id} key={index}>{role.name}</option>
                         ))}
                     </select>
                 </div>
 
-                <div className={style.dropdown}>
-                    <select onChange={(e) => handlePermission(e, setPermission, role_id, setShowpower)}>
-                        <option value="none">Permissions..</option>
-                        {Permissions.map((item, index) => (
-                            <option value={item.permission_number} key={index}>{item.name}</option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* remove icon code 
-                <span>< IoClose color='red' /></span> */}
-
                 <div className={style.permissions}>
-                    <h3>{role_id ? role_id.name : 'Select a role!'}</h3>
-                    {Array.isArray(permission) && permission.map((role, index) => (<li key={index}>{role.role_name}</li>))}
+                    <h3>Role's</h3>
                     <div className={style.power}>
                         {Array.isArray(showpower) && showpower.length > 0 ? (
                             showpower.map((perm, index) => (
-                                <p key={index}>{perm.name}</p> // or whatever field to display
+                                <p key={index}>{perm.name} <span onClick={() => removeRole(index, setShowpower)}>< IoClose color='red' /></span></p> // or whatever field to display
                             ))
                         ) : (
-                            <p>No permissions available for this role.</p>
+                            <p>No role.</p>
                         )}
                     </div>
                 </div>
 
 
 
-                <div className={style.btn} onClick={() => SendPanel(ticketdata, fieldvalue, permission)}>
+                <div className={style.btn} onClick={() => SendPanel(ticketdata, fieldvalue, showpower)}>
                     <Button name="Send" color='white' gbcolor="#14A44D" />
                 </div>
             </div>
