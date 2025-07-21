@@ -46,11 +46,11 @@ export default function page() {
   }, [])
 
   return (
-    <div className={style.addnode}>
+    <section className={style.addnode}>
       <div className={style.menu}>
         <Cadmin />
       </div>
-      <div className={style.main}>
+      <main className={style.main}>
         <h1>Add New Node!</h1>
         <div className={style.form}>
 
@@ -71,7 +71,7 @@ export default function page() {
           </div>
 
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   )
 }

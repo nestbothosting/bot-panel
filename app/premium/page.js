@@ -13,15 +13,15 @@ export default function page() {
         RQ_Login(localStorage.getItem('login'))
     },[])
     return (
-        <div className={style.premium} >
+        <section className={style.premium} >
             <div className={style.menu} >
                 <Cmenu />
             </div>
-            <div className={ style.main }>
+            <main className={ style.main }>
                 <h1>Unlock Premium Features</h1>
                 <MessageBox />
                 <PremiumMenu items={MonthlyPlan1} />
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

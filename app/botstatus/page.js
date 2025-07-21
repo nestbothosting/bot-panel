@@ -30,11 +30,11 @@ export default function page() {
     }, [inbot])
 
     return (
-        <div className={style.botstatus} >
+        <section className={style.botstatus} >
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Bot Status</h1>
                 <MessageBox />
                 <div className={style.status}>
@@ -50,7 +50,7 @@ export default function page() {
                         <Link href='/settings'>Settings <TbExternalLink color='white' /></Link>
                     </div>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

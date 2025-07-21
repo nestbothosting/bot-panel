@@ -56,11 +56,11 @@ export default function page() {
     };
 
     return (
-        <div className={style.bots}>
+        <section className={style.bots}>
             <div className={style.manu}>
                 <Cadmin />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Bot's</h1>
                 <span>Node Collection ID: {params.node_cid}</span>
                 <br />
@@ -84,7 +84,7 @@ export default function page() {
                     <button onClick={Plus} ><MdArrowForwardIos size={19} /></button>
                 </div>
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

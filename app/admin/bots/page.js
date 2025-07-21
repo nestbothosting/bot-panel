@@ -25,16 +25,16 @@ export default function page() {
     },[])
 
     return (
-        <div className={style.bots}>
+        <section className={style.bots}>
             <div className={style.manu}>
                 <Cadmin />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Select Node</h1>
                 {nodes.map((node,key) => (
                     <Nodes key={key} node_id={node.node_id} status={node.status} node_url={node.url} node_cid={node.node_cid} />
                 ))}
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

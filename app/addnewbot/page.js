@@ -40,11 +40,11 @@ export default function page() {
   }, [])
 
   return (
-    <div className={style.addnewbot} >
+    <section className={style.addnewbot} >
       <div className={style.menu}>
         <Cmenu />
       </div>
-      <div className={style.main}>
+      <main className={style.main}>
         <h1>Add A Bot!</h1>
 
         <div className={style.item}>
@@ -63,7 +63,7 @@ export default function page() {
           <Button name="Save" gbcolor="#14A44D" />
         </div>
 
-      </div>
-    </div>
+      </main>
+    </section>
   )
 }

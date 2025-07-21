@@ -101,11 +101,11 @@ export default function page() {
     }, [inbot,deletebot])
 
     return (
-        <div className={style.settings}>
+        <section className={style.settings}>
             <div className={style.Cmenu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <MessageBox />
                 <h1>Bot Settings</h1>
                 <div className={style.botname}>
@@ -167,7 +167,7 @@ export default function page() {
                         <Button name='Delete' color='white' gbcolor="red" />
                     </div>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

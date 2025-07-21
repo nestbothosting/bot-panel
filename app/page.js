@@ -13,14 +13,14 @@ export default function Home() {
 
   return (
     <>
-      <div className={styles.home}>
-        <div className={ styles.cont }>
+      <section className={styles.home}>
+        <main className={ styles.cont }>
           <h1>Welcome to NestBot</h1>
           <br />
           <p>Automate, Manage, and Grow Your Discord Server with Ease.</p>
-        </div>
+        </main>
         <button onClick={Dashboard} className={ styles.btn }>Get Started</button>
-      </div>
+      </section>
     </>
   );
 }

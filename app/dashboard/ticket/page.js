@@ -158,11 +158,11 @@ export default function page() {
     }, [panel,inbot])
 
     return (
-        <div className={style.ticket}>
+        <section className={style.ticket}>
             <div className={style.menu} >
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 {panel.status ?
                     <div className={style.panel} >
                         <div className={style.head} >
@@ -331,7 +331,7 @@ export default function page() {
                 <div className={style.btn} onClick={() => SendPanel(ticketdata, fieldvalue, showpower)}>
                     <Button name="Send" color='white' gbcolor="#14A44D" />
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

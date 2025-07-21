@@ -74,13 +74,13 @@ export default function page() {
     }, [inbot, server_id, ref])
 
     return (
-        <div className={style.timedmessage}>
+        <section className={style.timedmessage}>
 
             <div className={style.menu} >
                 <Cmenu />
             </div>
 
-            <div className={style.main} >
+            <main className={style.main} >
                 <h1 className={style.title}>Timed Message  <IoMdTime size={35} color='aqua' /></h1>
                 <MessageBox />
                 {TMS?.isTMS ?
@@ -159,7 +159,7 @@ export default function page() {
                     </span>
                 </div>
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

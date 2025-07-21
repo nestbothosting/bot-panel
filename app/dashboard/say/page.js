@@ -44,11 +44,11 @@ export default function page() {
     } 
 
     return (
-        <div className={style.say}>
+        <section className={style.say}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <MessageBox />
                 <h1>Say Text Message</h1>
                 <p>This lets the bot send a custom message to a selected channel in your server.</p>
@@ -83,7 +83,7 @@ export default function page() {
                         <Button name='Send' gbcolor='#14A44D' />
                     </span>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

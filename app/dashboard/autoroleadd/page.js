@@ -41,11 +41,11 @@ export default function page() {
     }
 
     return (
-        <div className={style.autoroleadd}>
+        <section className={style.autoroleadd}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <MessageBox />
                 <h1>Auto Role Dashboard</h1>
                 <span>Set a default role once—our system takes care of the rest. Perfect for welcomes, ranks, and smooth server management</span>
@@ -84,7 +84,7 @@ export default function page() {
                     <br />4. If you’ve already set an auto-role, you can remove it by using the command <code>/remautorole</code>.
                 </span>
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

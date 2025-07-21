@@ -63,11 +63,11 @@ export default function page() {
   };
 
   return (
-    <div className={style.users}>
+    <section className={style.users}>
       <div className={style.menu}>
         <Cadmin />
       </div>
-      <div className={style.main}>
+      <main className={style.main}>
         <h1>Users</h1>
 
         {users.map((user, key) => (
@@ -81,7 +81,7 @@ export default function page() {
           <button onClick={Plus} ><MdArrowForwardIos size={19} /></button>
         </div>
 
-      </div>
-    </div>
+      </main>
+    </section>
   )
 }

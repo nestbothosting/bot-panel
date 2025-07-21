@@ -54,11 +54,11 @@ export default function page() {
     }, [inbot,r])
 
     return (
-        <div className={style.autoreplay}>
+        <section className={style.autoreplay}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <MessageBox />
                 <h1>Auto Replay</h1>
                 {autoRPList.length > 0 ? <h2>4/{autoRPList.length}</h2> : ""}
@@ -92,7 +92,7 @@ export default function page() {
                         <Button name='Set' gbcolor="#14A44D" />
                     </span>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

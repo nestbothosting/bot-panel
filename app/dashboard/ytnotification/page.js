@@ -64,11 +64,11 @@ export default function Page() {
     }, [inbot])
 
     return (
-        <div className={style.ytn}>
+        <section className={style.ytn}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1 className={style.title}>YT Notification <FaYoutube color='red' size={45} /></h1>
                 <MessageBox />
                 {YNS.status ? <YNS_menu data={YNS} setY={setYNS} /> : ""}
@@ -139,7 +139,7 @@ export default function Page() {
                         <Button name="Save" color="blacg" gbcolor="#14A44D" />
                     </span>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

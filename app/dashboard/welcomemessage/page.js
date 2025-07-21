@@ -69,11 +69,11 @@ export default function page() {
     }, [inbot])
 
     return (
-        <div className={style.wms}>
+        <section className={style.wms}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Welcome Message Settings</h1>
                 <MessageBox />
                 <div className={style.inputbox}>
@@ -136,7 +136,7 @@ export default function page() {
 
 
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

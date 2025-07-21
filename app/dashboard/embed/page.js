@@ -111,11 +111,11 @@ export default function page() {
         GetServers()
     }, [inbot])
     return (
-        <div className={style.embed}>
+        <section className={style.embed}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Embed Message</h1>
                 <MessageBox />
                 <div className={style.dropdown}>
@@ -240,7 +240,7 @@ export default function page() {
                         <Button name='Send' color="blacg" gbcolor="#14A44D" />
                     </span>
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

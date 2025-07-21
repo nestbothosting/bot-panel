@@ -15,13 +15,13 @@ export default function page() {
   },[])
 
   return (
-    <div className={style.admin} >
+    <section className={style.admin} >
       <div className={ style.menu } >
         <Cadmin />
       </div>
-      <div className={ style.main } >
+      <main className={ style.main } >
         helo
-      </div>
-    </div>
+      </main>
+    </section>
   )
 }

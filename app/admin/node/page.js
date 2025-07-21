@@ -28,11 +28,11 @@ export default function page() {
     }, [router])
 
     return (
-        <div className={style.node} >
+        <section className={style.node} >
             <div className={style.menu} >
                 <Cadmin />
             </div>
-            <div className={style.main} >
+            <main className={style.main} >
                 <h1>All Node's</h1>
                 <div className={style.addbtn} >
                     <Link href='/admin/node/addnode' className={style.btn}>Add Node</Link>
@@ -55,7 +55,7 @@ export default function page() {
                     </div>
                 ))}
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

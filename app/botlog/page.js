@@ -27,11 +27,11 @@ export default function page() {
     }, [inbot])
 
     return (
-        <div className={style.botlog} >
+        <section className={style.botlog} >
             <div className={style.menu} >
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Bot Log's</h1>
                 <MessageBox />
                 {botlog?.length === 0 ? "No Log" :
@@ -54,7 +54,7 @@ export default function page() {
                 }
 
 
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }

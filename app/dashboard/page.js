@@ -55,11 +55,11 @@ export default function Page() {
   }, [username, uid, avatar, id]);
 
   return (
-    <div className={style.dashboard}>
+    <section className={style.dashboard}>
       <div className={style.Cmenu}>
         <Cmenu />
       </div>
-      <div className={style.main}>
+      <main className={style.main}>
         <div className={style.title}>
           <h1>Welcome to NestBot Panel</h1>
 
@@ -80,7 +80,7 @@ export default function Page() {
           </div>
 
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }

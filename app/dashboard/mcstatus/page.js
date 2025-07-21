@@ -53,11 +53,11 @@ export default function page() {
   }, [inbot])
   
   return (
-    <div className={style.mcstatus}>
+    <section className={style.mcstatus}>
       <div className={style.menu}>
         <Cmenu />
       </div>
-      <div className={style.main}>
+      <main className={style.main}>
         <h1>Minecraft Server Status</h1>
         <MessageBox />
         <div className={style.select} >
@@ -120,7 +120,7 @@ export default function page() {
             <Button name='Send' color="blacg" gbcolor="#14A44D" />
           </span>
         </div>
-      </div>
-    </div>
+      </main>
+    </section>
   )
 }

@@ -15,18 +15,30 @@ export const metadata = {
   description:
     'NestBot is a no-code Discord bot platform that lets you create, manage, and host your bots for free. Build powerful bots effortlessly using our simple control panel.',
   keywords: [
-    'discord bot',
-    'free discord bot',
-    'bot hosting',
-    'discord bot panel',
-    'no-code discord bot',
     'NestBot',
-    'NextBot',
-    'free bot hosting',
-    'discord automation',
+    'nest bot',
+    'nest bot hosting',
+    'Nest Bot Discord',
+    'no-code discord bot',
+    'discord bot hosting',
+    'free discord bot hosting',
+    'discord bot builder',
+    'discord bot panel',
+    'discord bot dashboard',
+    'no-code bot builder',
+    'visual discord bot editor',
     'discord bot creator',
+    'drag and drop discord bot',
+    'NextBot',
+    'discord bot automation',
+    'bot deployment platform',
+    'build discord bot without coding',
+    'discord bot maker for beginners',
+    '24/7 discord bot hosting',
+    'cloud discord bot runner',
+    'free bot hosting with dashboard',
   ],
-  metadataBase: new URL('https://nestbot.xyz'), 
+  metadataBase: new URL('https://nestbot.xyz'),
   openGraph: {
     title: 'NestBot Panel - Free Discord Bot Hosting & Automation',
     description:
@@ -44,7 +56,7 @@ export const metadata = {
     ],
   },
   authors: [{ name: 'NestBot Team', url: 'https://nestbot.xyz' }],
-  themeColor: 'rgba(0, 0, 0, 0)', 
+  themeColor: 'rgba(0, 0, 0, 0)',
   creator: 'NestBot Team',
   robots: {
     index: true,
@@ -53,6 +65,9 @@ export const metadata = {
   },
   alternates: {
     canonical: 'https://nestbot.xyz',
+  },
+  icons: {
+    icon: '/favicon.ico',
   },
 };
 

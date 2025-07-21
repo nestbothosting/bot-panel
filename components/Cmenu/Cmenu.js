@@ -22,7 +22,7 @@ export default function Cmenu() {
       <div className={style.scmenu}>
         <VscThreeBars size={30} style={{ cursor: 'pointer' }} onClick={showcmenu} />
       </div>
-      <div className={style.Cmenu} id='cmenu'>
+      <nav className={style.Cmenu} id='cmenu'>
         <Dropdown />
         <span className={style.span}>Settings</span>
 
@@ -183,7 +183,7 @@ export default function Cmenu() {
           </div>
         </div> */}
 
-      </div>
+      </nav>
     </>
   )
 }

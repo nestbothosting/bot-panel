@@ -14,11 +14,11 @@ export default function page() {
     },[inbot])
 
     return (
-        <div className={style.insta}>
+        <section className={style.insta}>
             <div className={style.menu}>
                 <Cmenu />
             </div>
-            <div className={style.main}>
+            <main className={style.main}>
                 <h1>Instagram</h1>
                 <MessageBox />
 
@@ -57,7 +57,7 @@ export default function page() {
                     </ul>
                     <input type="text" placeholder='Message' />
                 </div>
-            </div>
-        </div>
+            </main>
+        </section>
     )
 }
