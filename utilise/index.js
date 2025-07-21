@@ -48,7 +48,7 @@ export function showicon(e) {
 
 export function RQ_Login(islogin) {
   if (!islogin) {
-    DiscordAUth();
+    // DiscordAUth();
   }
 }
 

@@ -36,7 +36,8 @@ export default function page() {
   useEffect(() => {
     RQ_Login(localStorage.getItem('login'))
     const user = JSON.parse(localStorage.getItem('user'))
-    setOwnid(user.id)
+    if(!user) toast.error('Login to continue')
+    setOwnid(user?.id)
   }, [])
 
   return (

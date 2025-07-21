@@ -1,58 +1,60 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import style from './AddBotMessage.module.css'
 import { checkAddBotinWeb } from '@/utilise/apis'
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function AddBotMessage() {
-    const [data, setData] = useState(null);
-    const [intervalId, setIntervalId] = useState(null);
-    const [visible, setVisible] = useState(true);
-    const router = useRouter();
+    const [data, setData] = useState(null)
+    const [visible, setVisible] = useState(true)
+    const intervalRef = useRef(null) // Use ref instead of state for intervals
+    const router = useRouter()
 
     useEffect(() => {
-        const GetData = async () => {
-            let user = localStorage.getItem('user');
-
-            if (!user) {
-                const inter = setInterval(() => {
-                    const storedUser = localStorage.getItem('user');
-                    if (storedUser) {
-                        clearInterval(inter);
-                        setIntervalId(null);
-                        proceed(JSON.parse(storedUser));
-                    }
-                }, 2000);
-                setIntervalId(inter);
-            } else {
-                proceed(JSON.parse(user));
-            }
-        };
-
         const proceed = async (objuser) => {
-            const response = await checkAddBotinWeb(objuser.id);
-            setData(response);
-        };
+            try {
+                const response = await checkAddBotinWeb(objuser.id)
+                setData(response)
+            } catch (error) {
+                console.error("Error checking bot:", error)
+            }
+        }
 
-        GetData();
+        const checkUserAndProceed = () => {
+            const user = localStorage.getItem('user')
+            if (user) {
+                proceed(JSON.parse(user))
+                return true
+            }
+            return false
+        }
 
+        // Initial check
+        if (!checkUserAndProceed()) {
+            intervalRef.current = setInterval(() => {
+                if (checkUserAndProceed()) {
+                    clearInterval(intervalRef.current)
+                    intervalRef.current = null
+                }
+            }, 5000) // Reduced interval to 5s for faster UX
+        }
+
+        // Cleanup
         return () => {
-            if (intervalId) clearInterval(intervalId);
-        };
-    }, [intervalId]);
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current)
+            }
+        }
+    }, [])
 
-    const handleClose = () => {
-        setVisible(false);
-    };
+    const handleClose = () => setVisible(false)
 
-    const goToBotpage = () => {
-        router.push("/addnewbot");
-    }
+    const goToBotpage = () => router.push("/addnewbot")
 
     return (
         <>
-            {data?.alert && visible ? (
+            {data?.alert && visible && (
                 <div className={style.addbotbox}>
                     <div className={style.box}>
                         <button className={style.closeBtn} onClick={handleClose}>×</button>
@@ -65,15 +67,13 @@ export default function AddBotMessage() {
                                 Welcome to the NestBot Dashboard! Here you can easily add and manage your own Discord bot.
                                 Once added, you'll gain full access to powerful features like bot logs, premium tools,
                                 server and bot status monitoring, ticket system management, embed messages, YouTube
-                                notifications, and more. NestBot makes it easy to control every aspect of your bot in one
-                                place—designed for both beginners and advanced users. Start by registering your bot and
-                                unlock the full potential of your Discord experience.
+                                notifications, and more.
                             </p>
                             <button onClick={goToBotpage} className={style.btn}>Add New Bot</button>
                         </div>
                     </div>
                 </div>
-            ) : ""}
+            )}
         </>
-    );
+    )
 }
