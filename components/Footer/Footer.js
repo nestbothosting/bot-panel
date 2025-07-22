@@ -35,6 +35,26 @@ export default function Footer() {
               <li><Link href="/privacy">Privacy Policy</Link></li>
             </ul>
           </div>
+          <div>
+            <h4>Social Media</h4>
+            <ul>
+              <li>
+                <a href="https://discord.gg/J83zQvaV6U" target="_blank" rel="noopener noreferrer">
+                  Discord
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/nestbot.xyz/" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://www.youtube.com/channel/UCmETSZ51MSLmWtWB-GfoAMw" target="_blank" rel="noopener noreferrer">
+                  Youtube
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
