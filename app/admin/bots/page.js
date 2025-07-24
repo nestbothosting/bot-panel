@@ -18,7 +18,6 @@ export default function page() {
 
         const GetNodes = async () => {
             const response = await NodeStatus()
-            console.log(response)
             setNodes(response)
         } 
         GetNodes()
@@ -32,7 +31,7 @@ export default function page() {
             <main className={style.main}>
                 <h1>Select Node</h1>
                 {nodes.map((node,key) => (
-                    <Nodes key={key} node_id={node.node_id} status={node.status} node_url={node.url} node_cid={node.node_cid} />
+                    <Nodes key={key} node_id={node.node_id} status={node.status} node_url={node.url} node_cid={node.node_cid} path='bots' />
                 ))}
             </main>
         </section>

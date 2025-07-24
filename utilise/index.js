@@ -65,8 +65,9 @@ export function showcadmin() {
 export function isAdmin(user, router) {
   let admin = false;
   const objuser = JSON.parse(user);
+  if(!objuser) admin = false
   for (let x in config.Admin) {
-    if (objuser.uid == config.Admin[x]) {
+    if (objuser?.uid == config.Admin[x]) {
       admin = true;
     }
   }

@@ -1,13 +1,28 @@
-.bots{
+.onlinebots{
     padding: 10px;
     display: flex;
-    font-family: saira;
+}
+
+.loading {
+    text-align: center;
 }
 
 .main{
     padding: 10px;
     width: 75vw;
     min-height: 85vh;
+}
+
+.morebtns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.morebtns button{
+    cursor: pointer;
 }
 
 .bot{
@@ -34,20 +49,14 @@
     width: 50%;
 }
 
-.morebtns{
-    width: 100%;
+.btns{
+    width: 25%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-
-.morebtns button{
-    cursor: pointer;
 }
 
 @media only screen and (max-width: 800px){
-    .bots{
+    .onlinebots{
         flex-direction: column;
     }
 

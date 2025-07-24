@@ -4,11 +4,11 @@ import { FcAcceptDatabase, FcDeleteDatabase } from "react-icons/fc";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 
-export default function Nodes({ status = false, node_id = '0000000000', node_url = 'http://localhost:3001', node_cid = '' }) {
+export default function Nodes({ status = false, node_id = '0000000000', node_url = 'http://localhost:3001', node_cid = '', path='' }) {
     const router = useRouter();
 
     const BotsPage = (node_cid) => {
-        router.push(`/admin/bots/${node_cid}`);
+        router.push(`/admin/${path}/${node_cid}`);
     };
 
     return (

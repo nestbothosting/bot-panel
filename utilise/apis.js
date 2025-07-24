@@ -124,3 +124,22 @@ export const DeleteARMS = async (cid, strBot) => {
         return { status: false, message: error.message }
     }
 }
+
+export const GetOnlineBots = async (page = 1, node_cid) => {
+    try {
+        if (!node_cid) return { status: false, message: `No Node's For the id: ${node_cid}`  }
+        const botdata = await NodeModel.findById(node_cid)
+        const response = await axios.get(`${botdata.nodeurl}/admin/onlinebots/${page}`,
+            {
+                headers: {
+                    "x-api-key": botdata.apikey,
+                },
+            }
+        )
+
+        return response.data;
+    } catch (error) {
+        console.log(error.message)
+        return { status: false, message: error.message }
+    }
+}

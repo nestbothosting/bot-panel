@@ -49,7 +49,7 @@ export default function Cadmin() {
                         <RiBaseStationLine size={20} />
                     </div>
                     <div className={style.name}>
-                        <Link href="">Online Bot's</Link>
+                        <Link href="/admin/onlinebots">Online Bot's</Link>
                     </div>
                 </div>
             </div>
