@@ -42,6 +42,7 @@ export default function page() {
                     <div className={style.info}>
                         <p>Bot Name: {botdata.bot_name ? botdata.bot_name : "Bot Name"}</p>
                         <p>Bot ID: {botdata.bot_id ? botdata.bot_id : "0000000000000"}</p>
+                        {botdata.bot_status ? <p>{botdata?.uptime}</p> : ""}
                         <p>Status: {botdata.bot_status ? "Online" : "Offline"} <RiRadioButtonLine color={botdata.bot_status ? 'green' : 'red'} /></p>
                     </div>
                     <div className={style.node}>
