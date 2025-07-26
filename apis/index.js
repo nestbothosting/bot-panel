@@ -46,7 +46,7 @@ export async function Mybots(userstring) {
     try {
         mongo()
         let MyBots = []
-        if(!userstring) return[]
+        if (!userstring) return []
         const user = JSON.parse(userstring)
         const mybotsdata = await MyBotsModel.find({ owner_id: user.id })
 
@@ -265,22 +265,38 @@ export const Delete_TMS = async (c_id, strBot) => {
     }
 }
 
-export const CreateWelcomeMessage = async (server_id, channel_id, message, strBot) => {
+export const CreateWelcomeMessage = async (server_id, channel_id, message, strBot, isEmbed, Embed) => {
     try {
-        if (!server_id || !channel_id || !message) return { status: false, message: "Missing required fields (Server ID, Channel ID, Message)" }
+        let response
+        if (!server_id || !channel_id) return { status: false, message: "Missing required fields (Server ID, Channel ID)" }
         if (!strBot) return { status: false, message: "Select a Bot" }
         const Bot = JSON.parse(strBot)
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
-        const response = await axios.post(`${botdata.node_url}/set_welcome_message`,
-            {
-                server_id, channel_id, message, bot_id: Bot.bot_id
-            },
-            {
-                headers: {
-                    "x-api-key": botdata.api_key,
+        if (!isEmbed) {
+            response = await axios.post(`${botdata.node_url}/set_welcome_message`,
+                {
+                    Embed, bot_id: Bot.bot_id
+                },
+                {
+                    headers: {
+                        "x-api-key": botdata.api_key,
+                    }
                 }
-            }
-        )
+            )
+        } else {
+            if(!message) return { status:false, message:"Enter Message" }
+            response = await axios.post(`${botdata.node_url}/set_welcome_message`,
+                {
+                    server_id, channel_id, message, bot_id: Bot.bot_id
+                },
+                {
+                    headers: {
+                        "x-api-key": botdata.api_key,
+                    }
+                }
+            )
+        }
+
         return response.data;
     } catch (error) {
         console.log(error.message)
@@ -388,7 +404,7 @@ export const sendSayMessage = async (server_id, channel_id, message, strBot) => 
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/event/say`,
             {
-                server_id, channel_id, message, token:Bot.bot_token
+                server_id, channel_id, message, token: Bot.bot_token
             },
             {
                 headers: {

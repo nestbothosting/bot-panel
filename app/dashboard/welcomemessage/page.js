@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect,  useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './welcomemessage.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import Button from '@/components/Button/Button'
@@ -10,6 +10,7 @@ import { CreateWelcomeMessage, DeleteWLMS, GetWelcomeLeaveSM } from '@/apis'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import InputBox from '@/components/InputBox/InputBox'
 
 const setChange = async (value, setItem, type, setItem2, setItem3) => {
     const strBot = localStorage.getItem('bot')
@@ -29,18 +30,19 @@ const GetWelcomeData = async (server_id, setItem) => {
     if (response.status) setItem(response.data)
 }
 
-const Senddata = async (server_id, channel_id, message, setItem) => {
-    const response = await CreateWelcomeMessage(server_id, channel_id, message, localStorage.getItem('bot'))
+const Senddata = async (server_id, channel_id, message, setItem, embed, EmbedBTN) => {
+    console.log(embed)
+    const response = await CreateWelcomeMessage(server_id, channel_id, message, localStorage.getItem('bot'), EmbedBTN, embed)
     if (!response.status) return toast.error(response.message)
     toast.success(response.message)
     GetWelcomeData(server_id, setItem)
 }
 
 const DeleteWMS = async (server_id, setItem) => {
-    const response = await DeleteWLMS(server_id,'welcome',localStorage.getItem('bot'))
-    if(!response.status) return toast.error(response.message)
+    const response = await DeleteWLMS(server_id, 'welcome', localStorage.getItem('bot'))
+    if (!response.status) return toast.error(response.message)
     toast.success(response.message)
-    GetWelcomeData(server_id,setItem)
+    GetWelcomeData(server_id, setItem)
 }
 
 export default function page() {
@@ -50,6 +52,8 @@ export default function page() {
     const [server_id, setServerID] = useState()
     const [channel_id, setChannelID] = useState()
     const [message, setMessage] = useState('')
+    const [EmbedBTN, setEmbedBTN] = useState(true)
+    const [embed, setEmbed] = useState({ title: `Hello {user}`, thumbnail: `{user-avatar}` })
 
     const [WMS, setWMS] = useState()
     const { inbot, setInbot } = useContext(BotMenuCotext)
@@ -67,6 +71,10 @@ export default function page() {
             GetWelcomeData(server_id, setWMS)
         }
     }, [inbot])
+
+    const handleSlider = (e) => {
+        setEmbedBTN(!e.target.checked);
+    };
 
     return (
         <section className={style.wms}>
@@ -88,8 +96,8 @@ export default function page() {
                 </div>
 
                 {WMS?.Iswelcome ?
-                    
-                    <div className={ style.isdata }>
+
+                    <div className={style.isdata}>
                         <div>
                             <h2>Active </h2>
                             <p>Message: <span>{WMS?.welcome_message}</span></p>
@@ -97,7 +105,7 @@ export default function page() {
                         </div>
                         <div>
                             <span onClick={() => DeleteWMS(server_id, setWMS)}>
-                                <Button name="Delete" gbcolor="red"/>
+                                <Button name="Delete" gbcolor="red" />
                             </span>
                         </div>
                     </div>
@@ -123,15 +131,32 @@ export default function page() {
                             <input type="text" placeholder="Type your welcome message here..." value={message} onChange={(e) => setMessage(e.target.value)} />
                         </div>
 
-                        <span>Embed Message Coming Soon.!</span>
+                        <h2>Advanced</h2>
+                        <span>Embed Message</span>
+                        <br />
+                        <label className={style.toggleswitch} onClick={(e) => handleSlider(e)}>
+                            <input type="checkbox" id="myToggle" />
+                            <span className={style.slider}></span>
+                        </label>
+
+                        <div style={{ opacity: EmbedBTN ? 0.5 : 1 }}>
+                            <InputBox disabledin={EmbedBTN} title='Embed Title' placeholder='Enter Embed Title' setValue={setEmbed} objType={true} objkey='title' value={embed.title} description='{user} - Mentions the new user' />
+                            <InputBox disabledin={EmbedBTN} title='Embed Description' placeholder='Enter Embed Description' setValue={setEmbed} objType={true} objkey='description' />
+                            <InputBox disabledin={EmbedBTN} title='Embed Thumbnail' description='{user-avatar} - user profile image' placeholder='Enter Embed Thumbnail' setValue={setEmbed} objType={true} objkey='thumbnail' value={embed.thumbnail} />
+                            <InputBox disabledin={EmbedBTN} title='Embed Thumbnail' description='{user-avatar} - user profile image' placeholder='Enter Embed Thumbnail' setValue={setEmbed} objType={true} objkey='thumbnail' value={embed.thumbnail} />
+                            <InputBox disabledin={EmbedBTN} title='Embed Image URL' placeholder='Enter Embed Image URL' setValue={setEmbed} objType={true} objkey='image' />
+
+                            <h3>Footer</h3>
+                            <InputBox disabledin={EmbedBTN} title='Footer Title' placeholder='Enter Footer title' setValue={setEmbed} objType={true} objkey='footer_title' />
+                            <InputBox disabledin={EmbedBTN} title='Footer Icon URL' placeholder='Enter Footer Icon URL' setValue={setEmbed} objType={true} objkey='footer_icon' />
+                        </div>
 
                         <div className={style.btn}>
-                            <span onClick={() => Senddata(server_id, channel_id, message, setWMS)}>
+                            <span onClick={() => Senddata(server_id, channel_id, message, setWMS, embed, EmbedBTN)}>
                                 <Button name="Create" gbcolor='#14A44D' color='white' />
                             </span>
                         </div>
                     </div>
-
                 }
 
 

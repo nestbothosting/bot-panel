@@ -1,0 +1,14 @@
+.box{
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.box input{
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+}
