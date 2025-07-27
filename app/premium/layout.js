@@ -2,8 +2,9 @@
 import React, { Suspense } from 'react';
 
 export const metadata = {
-    title: 'Premium',
-    description: 'Unlock advanced features with NextBot Premium, including 24/7 uptime, priority support.',
+  title: 'Premium Features',
+  description: 'Upgrade to NestBot Premium to unlock exclusive features, faster performance, and enhanced bot capabilities.',
+  keywords: ['nestbot premium', 'premium features', 'upgrade bot', 'exclusive features', 'premium discord bot']
 };
 
 

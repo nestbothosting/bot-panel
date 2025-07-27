@@ -1,8 +1,9 @@
 import styles from './terms.module.css';
 
 export const metadata = {
-  title: 'Terms & Conditions',
-  description: 'Review the terms and conditions for using the NestBot service.',
+  title: 'Terms and Conditions',
+  description: 'Read the full terms and conditions for using NestBot, including usage policies, rights, and restrictions.',
+  keywords: ['nestbot terms', 'terms of service', 'bot usage terms', 'discord bot rules', 'nestbot agreement']
 };
 
 export default function TermsPage() {

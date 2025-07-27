@@ -3,7 +3,8 @@ import React, { Suspense } from 'react';
 
 export const metadata = {
   title: 'Bot Status',
-  description: 'Monitor the real-time status of your Discord bots, and server connectivity with Bot Status.',
+  description: 'Check the current status and uptime of your Discord bot powered by NestBot. Real-time monitoring included.',
+  keywords: ['bot status', 'uptime monitor', 'nestbot bot status', 'discord bot online', 'monitoring']
 };
 
 

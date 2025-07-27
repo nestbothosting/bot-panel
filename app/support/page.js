@@ -2,8 +2,9 @@
 import styles from './support.module.css'
 
 export const metadata = {
-  title: 'Support',
-  description: 'Get help with using NestBot or contact our support team.',
+  title: 'NestBot Support',
+  description: 'Need help with NestBot? Visit our support page for help articles, troubleshooting guides, and contact information.',
+  keywords: ['nestbot support', 'help with discord bot', 'discord bot issue', 'nestbot help', 'nestbot contact']
 };
 
 export default function Page() {

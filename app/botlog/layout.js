@@ -2,8 +2,9 @@
 import React, { Suspense } from 'react';
 
 export const metadata = {
-  title: 'BotLog',
-  description: 'Track all bot activities, including commands, status changes, and server interactions in real time with BotLog.',
+  title: 'Bot Logs',
+  description: 'View all activity logs related to your Discord bot including commands used, events triggered, and actions taken.',
+  keywords: ['bot logs', 'discord activity log', 'nestbot history', 'command logs', 'bot monitoring']
 };
 
 

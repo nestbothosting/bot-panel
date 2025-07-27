@@ -147,7 +147,6 @@ export default function page() {
                             <InputBox disabledin={EmbedBTN} title='Embed Title' placeholder='Enter Embed Title' setValue={setEmbed} objType={true} objkey='title' value={embed.title} description='{user} - Mentions the new user' />
                             <InputBox disabledin={EmbedBTN} title='Embed Description' placeholder='Enter Embed Description' setValue={setEmbed} objType={true} objkey='description' description='{user} - {server}' />
                             <InputBox disabledin={EmbedBTN} title='Embed Thumbnail' description='{user-avatar} - user profile image' placeholder='Enter Embed Thumbnail' setValue={setEmbed} objType={true} objkey='thumbnail' value={embed.thumbnail} />
-                            <InputBox disabledin={EmbedBTN} title='Embed Thumbnail' description='{user-avatar} - user profile image' placeholder='Enter Embed Thumbnail' setValue={setEmbed} objType={true} objkey='thumbnail' value={embed.thumbnail} />
                             <InputBox disabledin={EmbedBTN} title='Embed Image URL' placeholder='Enter Embed Image URL' setValue={setEmbed} objType={true} objkey='image' />
                             <div className={style.inputbox}>
                                 <input type="color" style={{ width: "80px" }} onChange={(e) => setEmbed(prop => ({ ...prop, color: e.target.value }))} />

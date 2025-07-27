@@ -3,7 +3,8 @@ import styles from './privacy.module.css';
 
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'Learn how we collect, use, and protect your data on NestBot.',
+  description: 'Understand how NestBot collects, uses, and protects your data when using our Discord bot services and dashboard.',
+  keywords: ['nestbot privacy', 'data usage', 'privacy policy', 'discord bot privacy', 'user data protection']
 };
 
 export default function PrivacyPolicyPage() {
