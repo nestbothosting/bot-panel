@@ -275,7 +275,7 @@ export const CreateWelcomeMessage = async (server_id, channel_id, message, strBo
         if (!isEmbed) {
             response = await axios.post(`${botdata.node_url}/set_welcome_message`,
                 {
-                    Embed, bot_id: Bot.bot_id
+                    Embed, bot_id: Bot.bot_id, server_id, channel_id,
                 },
                 {
                     headers: {
