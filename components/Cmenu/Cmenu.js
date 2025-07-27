@@ -163,7 +163,7 @@ export default function Cmenu() {
           </div>
         </div>
 
-        <span className={style.span}>Feeds</span>
+        {/* <span className={style.span}>Feeds</span>
 
         <div className={style.items}>
           <div className={style.icon}>
@@ -172,7 +172,7 @@ export default function Cmenu() {
           <div className={style.link}>
             <Link href='/dashboard/ytnotification'> YT Notification</Link>
           </div>
-        </div>
+        </div> */}
 
         {/* <div className={style.items}>
           <div className={style.icon}>
