@@ -6,6 +6,7 @@ import Header from '@/components/Header/Header'
 import UserContext from '@/context/usercontext'
 import BotMenuContext from '@/context/botmenu'
 import Footer from './Footer/Footer'
+import AnnouncementBar from './AnnouncementBar/AnnouncementBar'
 
 export default function ClientLayout({ children }) {
   const [islogin, setLogin] = useState(false)
@@ -14,6 +15,7 @@ export default function ClientLayout({ children }) {
   return (
     <UserContext.Provider value={{ islogin, setLogin }}>
       <BotMenuContext.Provider value={{ inbot, setInbot }}>
+        <AnnouncementBar />
         <Header />
         {children}
         <Footer />

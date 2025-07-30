@@ -8,13 +8,14 @@ import { RiBaseStationLine } from "react-icons/ri";
 import { IoReorderThree } from "react-icons/io5";
 import Link from "next/link";
 import { showcadmin } from '@/utilise/index'
+import { FaBullhorn } from "react-icons/fa6";
 
 
 export default function Cadmin() {
     return (
         <>
             <div className={style.micon}>
-                <IoReorderThree size='35' style={{ cursor:"pointer"}}  onClick={showcadmin} />
+                <IoReorderThree size='35' style={{ cursor: "pointer" }} onClick={showcadmin} />
             </div>
             <div className={style.cadmin} id="cadmin">
                 <div className={style.item}>
@@ -50,6 +51,15 @@ export default function Cadmin() {
                     </div>
                     <div className={style.name}>
                         <Link href="/admin/onlinebots">Online Bot's</Link>
+                    </div>
+                </div>
+
+                <div className={style.item}>
+                    <div className={style.icon}>
+                        <FaBullhorn size={20} />
+                    </div>
+                    <div className={style.name}>
+                        <Link href="/admin/announcement">Announcement</Link>
                     </div>
                 </div>
             </div>

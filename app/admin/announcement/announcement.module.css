@@ -1,0 +1,46 @@
+.announcement{
+    padding: 10px;
+    display: flex;
+}
+
+.main{
+    padding: 10px;
+    width: 75vw;
+    height: 85vh;
+}
+
+.message{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.close {
+    cursor: pointer;
+    color: red;
+}
+
+.addbtn{
+    margin-top: 20px;
+    color: aqua;
+    border: 1px solid white;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 800px){
+    .announcement{
+        flex-direction: column;
+    }
+
+    .main{
+        width: 100%;
+    }
+}

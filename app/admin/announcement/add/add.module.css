@@ -1,0 +1,32 @@
+.add {
+    padding: 10px;
+    display: flex;
+}
+
+.main {
+    padding: 10px;
+    width: 75vw;
+    height: 85vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    font-family: saira;
+}
+
+.form input{
+    height: 40px;
+    padding-left: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .add {
+        flex-direction: column;
+    }
+
+    .main {
+        width: 100%;
+    }
+}

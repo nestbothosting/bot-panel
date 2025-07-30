@@ -1,0 +1,33 @@
+.announcementbar {
+    height: auto;
+    max-height: 40px;
+    width: 100%;
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-family: saira;
+}
+
+.message{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close{
+    width: 5%;
+    color: red;
+    cursor: pointer;
+}
+
+.close:hover{
+    color: rgb(216, 19, 19);
+}
+
+@media only screen and (max-width: 800px){
+    .announcementbar{
+        max-height: 110px;
+    }
+}
