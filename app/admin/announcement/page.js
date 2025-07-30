@@ -4,15 +4,20 @@ import React, { useState, useEffect } from 'react'
 import style from './announcement.module.css'
 import Cadmin from '@/components/Cadmin/Cadmin'
 import Link from 'next/link'
+import { isAdmin } from '@/utilise'
 import { DeleteAnnouncement, GetAnnouncement } from '@/utilise/apis'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation';
 
 export default function page() {
     const [messages, setMessages] = useState([])
     const [r,setR] = useState(0)
+    const router = useRouter();
+
 
     useEffect(() => {
         (async () => {
+            isAdmin(localStorage.getItem('user'),router)
             const response = await GetAnnouncement()
             if (!response.status) return toast.error(response.message)
             setMessages(response.messages)

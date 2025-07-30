@@ -151,7 +151,7 @@ export const SaveAnnouncement = async (message) => {
         if(!message) return { status:false, message:"Message is Null!, Enter Message" }
         const messages = await AnnoncModel.findOne()
 
-        if(messages.length === 0){
+        if(!messages){
             const NewMessage = new AnnoncModel({
                 message:[message]
             })
@@ -172,6 +172,7 @@ export const GetAnnouncement = async () => {
     mongo()
     try {
         const messages = await AnnoncModel.findOne()
+        if(!messages) return { status:true, messages:[] }
         return { status:true, messages:messages.message }
     } catch (error) {
         console.log(error.message)

@@ -1,14 +1,22 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import style from './add.module.css'
 import Cadmin from '@/components/Cadmin/Cadmin'
 import Button from '@/components/Button/Button'
 import { SaveAnnouncement } from '@/utilise/apis'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation';
+import { isAdmin } from '@/utilise'
+
 
 export default function page() {
     const [message,setMessage] = useState('')
+    const router = useRouter();
+
+    useEffect(() => {
+        isAdmin(localStorage.getItem('user'),router)
+    },[])
 
     const Save = async () => {
         const response = await SaveAnnouncement(message);
