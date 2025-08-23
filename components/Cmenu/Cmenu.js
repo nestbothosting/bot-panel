@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import style from './cmenu.module.css'
 import { LuLayoutDashboard, LuMessageSquareMore } from "react-icons/lu";
 import { IoSettingsOutline, IoDiamondOutline, IoTicketOutline } from "react-icons/io5";
@@ -11,12 +11,29 @@ import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram } from "react
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
 import { showcmenu } from '@/utilise/index'
-import { RiUserSettingsLine } from "react-icons/ri";
+import { RiUserSettingsLine, RiRobot2Line } from "react-icons/ri";
 
 import Link from 'next/link';
 import Dropdown from '../Dropdown/Dropdown';
+import { GetBotStatus } from '@/apis/status';
+import BotMenuCotext from '@/context/botmenu';
 
 export default function Cmenu() {
+  const [botid, setBotid] = useState('')
+  const [botstatus, setStatus] = useState(false)
+  const { inbot, setInbot } = useContext(BotMenuCotext)
+
+  useEffect(() => {
+    (async () => {
+      const strBot = localStorage.getItem('bot')
+      const response = await GetBotStatus(strBot)
+      if (response.bot_status) {
+        setBotid(response.bot_id)
+        setStatus(true)
+      }
+    })();
+  }, [inbot])
+
   return (
     <>
       <div className={style.scmenu}>
@@ -61,6 +78,18 @@ export default function Cmenu() {
             <Link href='/botlog'>Bot Log's</Link>
           </div>
         </div>
+
+        {botstatus ?
+          <div className={style.items}>
+            <div className={style.icon}>
+              <RiRobot2Line size={20} />
+            </div>
+            <div className={style.link}>
+              <a href={`https://discord.com/oauth2/authorize?client_id=${botid}&permissions=8&integration_type=0&scope=bot`}>Bot Invite</a>
+            </div>
+          </div>
+          : ""}
+
 
         <div className={style.items}>
           <div className={style.icon}>
