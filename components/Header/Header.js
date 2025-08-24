@@ -14,12 +14,15 @@ const Header = () => {
   const [showNav, setShowNav] = useState(false);
   const toggleNav = () => setShowNav(prev => !prev);
   const { islogin, setLogin } = useContext(UserContext)
+  const [userProfile, setUserProfile] = useState({})
 
   useEffect(() => {
     if (localStorage.getItem('login')) {
+      let userdata = JSON.parse(localStorage.getItem('user'));
+      setUserProfile({ id: userdata.uid, avatar: userdata.avatar })
       setLogin(true)
     }
-  }, [UserContext])
+  }, [UserContext, islogin])
 
   return (
     <>
@@ -39,7 +42,7 @@ const Header = () => {
             <li className={styles.discord}><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
             {islogin ?
               <div className={styles.userimg}>
-                <img src={`https://cdn.discordapp.com/avatars/931912476906377247/4b0c77ea6ed1a659671215cecbf3bf1c.png`} alt="avater" />
+                <img src={`https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`} alt="avater" />
               </div> : ""
             }
           </ul>
@@ -63,7 +66,7 @@ const Header = () => {
           }
           {islogin ?
             <div className={styles.userimg}>
-              <img src={`https://cdn.discordapp.com/avatars/931912476906377247/4b0c77ea6ed1a659671215cecbf3bf1c.png`} alt="avater" />
+              <img src={`https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`} alt="avater" />
             </div> : ""
           }
         </ul>

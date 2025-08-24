@@ -20,6 +20,10 @@ export async function SaveUser(userdata) {
     const { id, username, avatar, email } = userdata;
     const user = await UserModel.findOne({ uid: id });
     if (user) {
+      const updateData = { avatar, username };
+      if (email) updateData.email = email;
+      const newone = await UserModel.findOneAndUpdate({ uid: id },updateData, { new:true })
+      console.log(newone)
       return { status: true, message: "successfully logged in", user };
     }
     const data = {
@@ -65,7 +69,7 @@ export function showcadmin() {
 export function isAdmin(user, router) {
   let admin = false;
   const objuser = JSON.parse(user);
-  if(!objuser) admin = false
+  if (!objuser) admin = false
   for (let x in config.Admin) {
     if (objuser?.uid == config.Admin[x]) {
       admin = true;
