@@ -36,7 +36,12 @@ const Header = () => {
               :
               <li className={styles.login} onClick={() => { DiscordAUth(); setShowNav(false); }}><FaDiscord /> Log in</li>
             }
-            <li className={ styles.discord }><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
+            <li className={styles.discord}><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
+            {islogin ?
+              <div className={styles.userimg}>
+                <img src={`https://cdn.discordapp.com/avatars/931912476906377247/4b0c77ea6ed1a659671215cecbf3bf1c.png`} alt="avater" />
+              </div> : ""
+            }
           </ul>
         </nav>
 
@@ -55,6 +60,11 @@ const Header = () => {
             <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut /> Log Out</li>
             :
             <li className={styles.login} onClick={() => { DiscordAUth(); setShowNav(false); }}><FaDiscord /> Log in</li>
+          }
+          {islogin ?
+            <div className={styles.userimg}>
+              <img src={`https://cdn.discordapp.com/avatars/931912476906377247/4b0c77ea6ed1a659671215cecbf3bf1c.png`} alt="avater" />
+            </div> : ""
           }
         </ul>
       </div>

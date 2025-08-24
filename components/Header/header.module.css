@@ -82,6 +82,13 @@
     align-items: center;
 }
 
+.userimg img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid rgb(12, 226, 12);
+}
+
 /* 📱 Responsive styles */
 @media only screen and (max-width: 800px) {
     .nav {
