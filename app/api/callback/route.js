@@ -10,7 +10,7 @@ export async function GET(request) {
     const savedUser = await SaveUser(user);
     return Response.redirect(
       new URL(
-        `/dashboard?username=${encodeURIComponent(savedUser.user.username)}&id=${encodeURIComponent(savedUser.user._id)}&uid=${encodeURIComponent(savedUser.user.uid)}&avatar=${encodeURIComponent(savedUser.user.avatar)}`,
+        `${process.env.PROURL ? process.env.PROURL : `localhost:${process.env.PORT ? process.env.PORT : 3000}`}/dashboard?username=${encodeURIComponent(savedUser.user.username)}&id=${encodeURIComponent(savedUser.user._id)}&uid=${encodeURIComponent(savedUser.user.uid)}&avatar=${encodeURIComponent(savedUser.user.avatar)}`,
         request.url
       ),
       302

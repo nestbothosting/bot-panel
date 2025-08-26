@@ -20,7 +20,40 @@ export default function page() {
         <Cadmin />
       </div>
       <main className={ style.main } >
-        helo
+        <h1 style={{ textAlign:"center" }}>Admin Panel</h1>
+        <div className={ style.container }>
+
+          <div className={ style.box }>
+            <b><p>Bots</p></b>
+            <span>103</span>
+          </div>
+
+          <div className={ style.box }>
+            <b><p>OnlineBots</p></b>
+            <span>19</span>
+          </div>
+
+          <div className={ style.box }>
+            <b><p>Auto Replay</p></b>
+            <span>19</span>
+          </div>
+
+          <div className={ style.box }>
+            <b><p>Auto RD</p></b>
+            <span>19</span>
+          </div>
+
+          <div className={ style.box }>
+            <b><p>Tickets</p></b>
+            <span>19</span>
+          </div>
+
+          <div className={ style.box }>
+            <b><p>Youtube NS</p></b>
+            <span>19</span>
+          </div>
+
+        </div>
       </main>
     </section>
   )

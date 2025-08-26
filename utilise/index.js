@@ -23,7 +23,7 @@ export async function SaveUser(userdata) {
       const updateData = { avatar, username };
       if (email) updateData.email = email;
       const newone = await UserModel.findOneAndUpdate({ uid: id },updateData, { new:true })
-      console.log(newone)
+      console.log(`LOGIN ${newone.username}`)
       return { status: true, message: "successfully logged in", user };
     }
     const data = {
