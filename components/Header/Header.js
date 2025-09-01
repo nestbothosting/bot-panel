@@ -8,7 +8,9 @@ import { VscThreeBars } from "react-icons/vsc";
 import { FaDiscord } from "react-icons/fa";
 import UserContext from '@/context/usercontext';
 import { LuLogOut } from "react-icons/lu";
+import { Luckiest_Guy } from 'next/font/google'
 
+const luckyguy = Luckiest_Guy({ subsets: ['latin'], weight: ['400'], display: 'swap' })
 
 const Header = () => {
   const [showNav, setShowNav] = useState(false);
@@ -27,7 +29,7 @@ const Header = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>NestBot</div>
+        <div className={`${styles.logo} ${luckyguy.className}`}>NestBot</div>
 
         {/* Desktop nav */}
         <nav className={styles.nav}>

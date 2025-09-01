@@ -4,6 +4,7 @@ import axios from "axios";
 import NodeModel from "@/utilise/nodemd";
 import mongo from '@/utilise/mongoose'
 import MyBotModel from '@/utilise/mybotmd'
+import usermd from '@/utilise/usermd'
 
 export async function NodeStatus() {
   try {
@@ -141,6 +142,33 @@ export const GetBotLog = async (strBot) => {
     return response.data;
   } catch (error) {
     console.log(error.message)
-    return { status:false, message:error.message }
+    return { status: false, message: error.message }
+  }
+}
+
+export const AdminPanelData = async () => {
+  try {
+    const nodes = await NodeModel.find()
+    const users = await usermd.find()
+    const results = { users:users.length ,bots: 0, onlinebots: 0, autoreplay: 0, autoroleadd: 0, tickets: 0, timedmsg: 0, yns: 0 }
+
+    for(let node of nodes){
+      const response = await axios.get(`${node.nodeurl}/admin/panel-data`,{
+        headers: {
+          "x-api-key": node.apikey
+        }
+      })
+      results.bots += response.data.bots;
+      results.autoreplay += response.data.autoreplay;
+      results.autoroleadd += response.data.autoroleadd;
+      results.onlinebots += response.data.onlinebots;
+      results.tickets += response.data.tickets;
+      results.timedmsg += response.data.timedmsg;
+      results.yns += response.data.yns;
+    }
+    return { status: true, results }
+  } catch (error) {
+    console.log(error.message)
+    return { status: false, message: error.message }
   }
 }

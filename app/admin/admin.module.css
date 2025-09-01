@@ -5,8 +5,8 @@
 
 .main{
     padding: 10px;
-    width: 75vw;
-    height: 85vh;
+    width: 100vw;
+    min-height: 70vh;
 }
 
 .container{
@@ -34,5 +34,9 @@
 @media only screen and (max-width: 800px){
     .admin{
         flex-direction: column;
+    }
+    
+    .box{
+        width: 100%;
     }
 }
