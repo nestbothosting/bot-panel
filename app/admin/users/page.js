@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import { isAdmin, RQ_Login } from '@/utilise'
+import { GetUsersInfo } from '@/utilise/apis'
 
 export default function page() {
   const [users, setUsers] = useState([])
@@ -23,12 +24,11 @@ export default function page() {
     isAdmin(user, router)
 
     const GetData = async () => {
-      const url = window.location.origin
-      const UserData = JSON.parse(user)
-      const response = await axios.get(`${url}/api/users?id=${UserData.id}&page=${page}`)
-      if (!response.data.status) return toast.error(response.data.message);
+      const response = await GetUsersInfo(page)
+      console.log(response)
+      if (!response.status) return toast.error(response.message);
       setLoading(false)
-      setUsers(response.data.users)
+      setUsers(response.users)
     }
 
     GetData()
@@ -38,13 +38,10 @@ export default function page() {
     setLoading(true)
     const nextPage = page + 1;
     setPage(nextPage);
-    const user = localStorage.getItem('user');
-    const UserData = JSON.parse(user);
-    const url = window.location.origin;
-    const response = await axios.get(`${url}/api/users?id=${UserData.id}&page=${nextPage}`);
-    if (!response.data.status) return toast.error(response.data.message);
+    const response = await GetUsersInfo(page)
+    if (!response.status) return toast.error(response.data.message);
     setLoading(false)
-    setUsers(response.data.users);
+    setUsers(response.users);
   };
 
 
@@ -53,13 +50,10 @@ export default function page() {
     setLoading(true)
     const prevPage = page - 1;
     setPage(prevPage);
-    const user = localStorage.getItem('user');
-    const UserData = JSON.parse(user);
-    const url = window.location.origin;
-    const response = await axios.get(`${url}/api/users?id=${UserData.id}&page=${prevPage}`);
-    if (!response.data.status) return toast.error(response.data.message);
+    const response = await GetUsersInfo(page)
+    if (!response.status) return toast.error(response.message);
     setLoading(false)
-    setUsers(response.data.users);
+    setUsers(response.users);
   };
 
   return (
@@ -71,7 +65,7 @@ export default function page() {
         <h1>Users</h1>
 
         {users.map((user, key) => (
-          <Users adminstatus={user.admin} avatar={user.avatar} email={user?.email} uid={user.uid} username={user.username} key={key} />
+          <Users adminstatus={user.admin} avatar={user.avatar} email={user?.email} uid={user.dcuid} username={user.username} key={key} />
         ))}
 
         <p style={{ textAlign: "center" }}>{loading ? "Loading..." : ""}</p>

@@ -1,10 +1,5 @@
 
 # create .env file
-
-NEXT_PUBLIC_CLIENT_ID=000000000000000000
-NEXT_PUBLIC_CLIENT_SECRET=xxxxxxxxxxxxxxxx
-NEXT_PUBLIC_REDIRECT_URL=http://localhost:3000/api/callback/
-NEXT_PUBLIC_AUTH_URL=https://discord.dev.auth/url
 NEXT_PUBLIC_MONGO_URL=mongodb.url/access
 ADSENSE_CLIENT_ID=ca-pub-00000000000000  # google adsense client id
-PROURL=https://nestbot.xzy # production url
+ACAPIKEY=xxxxxxxxxxxxxxxx # access.nestbot.xyz api key

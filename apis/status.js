@@ -4,7 +4,7 @@ import axios from "axios";
 import NodeModel from "@/utilise/nodemd";
 import mongo from '@/utilise/mongoose'
 import MyBotModel from '@/utilise/mybotmd'
-import usermd from '@/utilise/usermd'
+// import usermd from '@/utilise/usermd'
 
 export async function NodeStatus() {
   try {
@@ -149,8 +149,12 @@ export const GetBotLog = async (strBot) => {
 export const AdminPanelData = async () => {
   try {
     const nodes = await NodeModel.find()
-    const users = await usermd.find()
-    const results = { users:users.length ,bots: 0, onlinebots: 0, autoreplay: 0, autoroleadd: 0, tickets: 0, timedmsg: 0, yns: 0 }
+    const users = await axios.get(`https://account.nestbot.xyz/totalusers`,{
+      headers:{
+        "x-api-key": process.env.ACAPIKEY
+      }
+    })
+    const results = { users:users.data.totusers ,bots: 0, onlinebots: 0, autoreplay: 0, autoroleadd: 0, tickets: 0, timedmsg: 0, yns: 0 }
 
     for(let node of nodes){
       const response = await axios.get(`${node.nodeurl}/admin/panel-data`,{

@@ -1,7 +1,6 @@
 'use server'
 
 import mongo from './mongoose'
-import usermd from './usermd'
 import NodeModel from './nodemd'
 import axios from 'axios'
 import myBotsModel from './mybotmd'
@@ -10,19 +9,38 @@ import AnnoncModel from './announ_md'
 export const GetUserData = async (id, page = 1) => {
     try {
         await mongo()
-        const limit = 4
 
-        const admin = await usermd.findById(id)
-        if (!admin || !admin.admin) return { status: false, message: "Admins Only!" }
+        const admin = await axios.get(`https://account.nestbot.xyz/user/${id}`, {
+            headers: {
+                'x-api-key': process.env.ACAPIKEY
+            }
+        })
+        if (!admin.data.user || !admin.data.user.admin) return { status: false, message: "Admins Only!" }
 
-        const users = await usermd.find()
-            .skip((page - 1) * limit)
-            .limit(limit);
+        const users = await axios.get(`https://account.nestbot.xyz/users?page=${page}`, {
+            headers: {
+                'x-api-key': process.env.ACAPIKEY
+            }
+        })
 
         return { status: true, users }
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
         return { status: false, message: error.message }
+    }
+}
+
+export const GetUsersInfo = async (page) => {
+    try {
+        const response = await axios.get(`https://account.nestbot.xyz/users?page=${page}`, {
+            headers: {
+                'x-api-key': process.env.ACAPIKEY
+            }
+        })
+        return response.data
+    } catch (error) {
+        console.log(error.message)
+        return { status:false, message:error.message }
     }
 }
 
@@ -45,11 +63,11 @@ export const GetBotsData = async (node_cid, page) => {
 
 export async function checkAddBotinWeb(user_cid) {
     try {
-        await mongo(); 
+        await mongo();
         const bots = await myBotsModel.find({ owner_id: user_cid });
 
         if (!bots || bots.length === 0) {
-            return { status: false, message: "No bots found for this user.", alert:true };
+            return { status: false, message: "No bots found for this user.", alert: true };
         }
 
         return { status: true };
@@ -62,12 +80,12 @@ export async function checkAddBotinWeb(user_cid) {
 export const SendAutoReplaySTM = async (serverdata, messagekey, messageReplay, strBot) => {
     try {
         if (!strBot) return { status: false, message: "Select a Bot" }
-        if(!serverdata || !serverdata.server_id || !messagekey || !messageReplay) return { status:false, message:"Please fill in all fields." }
+        if (!serverdata || !serverdata.server_id || !messagekey || !messageReplay) return { status: false, message: "Please fill in all fields." }
         const Bot = JSON.parse(strBot)
         const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(`${botdata.node_url}/event/autoreplay`,
             {
-                serverdata, messagekey, messageReplay, bot_token:Bot.bot_token
+                serverdata, messagekey, messageReplay, bot_token: Bot.bot_token
             },
             {
                 headers: {
@@ -87,7 +105,7 @@ export const SendAutoReplaySTM = async (serverdata, messagekey, messageReplay, s
 export const fechAutoRoleData = async (server_id, strBot) => {
     try {
         if (!strBot) return { status: false, message: "Select a Bot" }
-        if(!server_id) return { status:false, message:"Server id is required" }
+        if (!server_id) return { status: false, message: "Server id is required" }
         const Bot = JSON.parse(strBot)
         const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.get(`${botdata.node_url}/event/autoreplay/${server_id}`,
@@ -108,7 +126,7 @@ export const fechAutoRoleData = async (server_id, strBot) => {
 export const DeleteARMS = async (cid, strBot) => {
     try {
         if (!strBot) return { status: false, message: "Select a Bot" }
-        if(!cid) return { status:false, message:"cid is required" }
+        if (!cid) return { status: false, message: "cid is required" }
         const Bot = JSON.parse(strBot)
         const botdata = await myBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.get(`${botdata.node_url}/event/delete_autoreplay/${cid}`,
@@ -128,7 +146,7 @@ export const DeleteARMS = async (cid, strBot) => {
 
 export const GetOnlineBots = async (page = 1, node_cid) => {
     try {
-        if (!node_cid) return { status: false, message: `No Node's For the id: ${node_cid}`  }
+        if (!node_cid) return { status: false, message: `No Node's For the id: ${node_cid}` }
         const botdata = await NodeModel.findById(node_cid)
         const response = await axios.get(`${botdata.nodeurl}/admin/onlinebots/${page}`,
             {
@@ -148,12 +166,12 @@ export const GetOnlineBots = async (page = 1, node_cid) => {
 export const SaveAnnouncement = async (message) => {
     mongo()
     try {
-        if(!message) return { status:false, message:"Message is Null!, Enter Message" }
+        if (!message) return { status: false, message: "Message is Null!, Enter Message" }
         const messages = await AnnoncModel.findOne()
 
-        if(!messages){
+        if (!messages) {
             const NewMessage = new AnnoncModel({
-                message:[message]
+                message: [message]
             })
             await NewMessage.save();
             return { status: true, message: "Successfully created new message!" };
@@ -161,10 +179,10 @@ export const SaveAnnouncement = async (message) => {
 
         messages.message.push(message)
         await messages.save()
-        return { status:true, message:"Successfully Create Message!" }
+        return { status: true, message: "Successfully Create Message!" }
     } catch (error) {
         console.log(error.message)
-        return { status:true, message:error.message }
+        return { status: true, message: error.message }
     }
 }
 
@@ -172,11 +190,11 @@ export const GetAnnouncement = async () => {
     mongo()
     try {
         const messages = await AnnoncModel.findOne()
-        if(!messages) return { status:true, messages:[] }
-        return { status:true, messages:messages.message }
+        if (!messages) return { status: true, messages: [] }
+        return { status: true, messages: messages.message }
     } catch (error) {
         console.log(error.message)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
     }
 }
 
@@ -184,11 +202,11 @@ export const DeleteAnnouncement = async (index) => {
     mongo()
     try {
         const messages = await AnnoncModel.findOne();
-        messages.message.splice(index,1)
+        messages.message.splice(index, 1)
         await messages.save()
-        return { status:true, message:`Delete Message, Index: ${index}`}
+        return { status: true, message: `Delete Message, Index: ${index}` }
     } catch (error) {
         console.log(error)
-        return { status:false, message:error.message }
+        return { status: false, message: error.message }
     }
 }
