@@ -3,7 +3,7 @@
 import { useState, useEffect, useContext } from 'react';
 import styles from './header.module.css';
 import Link from 'next/link';
-import { DiscordAUth, LogOut } from '@/utilise/index';
+import { LogOut } from '@/utilise/index';
 import { VscThreeBars } from "react-icons/vsc";
 import { FaDiscord } from "react-icons/fa";
 import UserContext from '@/context/usercontext';
@@ -17,6 +17,7 @@ const Header = () => {
   const toggleNav = () => setShowNav(prev => !prev);
   const { islogin, setLogin } = useContext(UserContext)
   const [userProfile, setUserProfile] = useState({})
+  const [ip, setIP] = useState()
 
   useEffect(() => {
     if (localStorage.getItem('login')) {
@@ -24,7 +25,20 @@ const Header = () => {
       setUserProfile({ id: userdata.uid, avatar: userdata.avatar })
       setLogin(true)
     }
+    (async function GetIP() {
+      fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(ip => {
+          setIP(ip.ip)
+        })
+        .catch(err => setIP(null))
+    })()
   }, [UserContext, islogin])
+
+  const DiscordAUth = (ip) => {
+    const url = `https://account.nestbot.xyz/auth/login?ip=${ip}&redirect=nocodedcpanel`
+    window.location.href = url
+  }
 
   return (
     <>
@@ -39,7 +53,7 @@ const Header = () => {
             {islogin ?
               <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut />Log Out</li>
               :
-              <li className={styles.login} onClick={() => { DiscordAUth(); setShowNav(false); }}><FaDiscord /> Log in</li>
+              <li className={styles.login} onClick={() => { DiscordAUth(ip); setShowNav(false); }}><FaDiscord /> Log in</li>
             }
             <li className={styles.discord}><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
             {islogin ?
@@ -64,7 +78,7 @@ const Header = () => {
           {islogin ?
             <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut /> Log Out</li>
             :
-            <li className={styles.login} onClick={() => { DiscordAUth(); setShowNav(false); }}><FaDiscord /> Log in</li>
+            <li className={styles.login} onClick={() => { DiscordAUth(ip); setShowNav(false); }}><FaDiscord /> Log in</li>
           }
           {islogin ?
             <div className={styles.userimg}>
