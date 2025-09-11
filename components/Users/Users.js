@@ -8,7 +8,7 @@ export default function Users({ uid='000000000000', username='username', avatar=
   return (
     <div className={ style.userscontainer }>
       <div className={ style.avatar }>
-        <Image  src={`https://cdn.discordapp.com/avatars/${uid}/${avatar}.png`} alt='Avatar!' width={70} height={70} style={ adminstatus? {border:"1px solid red"} : {border:"1px solid white"} }/>
+        <Image  src={avatar ? `https://cdn.discordapp.com/avatars/${uid}/${avatar}.png`: "https://cdn.discordapp.com/embed/avatars/0.png"} alt='Avatar!' width={70} height={70} style={ adminstatus? {border:"1px solid red"} : {border:"1px solid white"} }/>
       </div>
       <div className={ style.data }>
         <p>{username}</p>

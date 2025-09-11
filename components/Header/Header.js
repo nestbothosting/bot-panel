@@ -22,6 +22,7 @@ const Header = () => {
   useEffect(() => {
     if (localStorage.getItem('login')) {
       let userdata = JSON.parse(localStorage.getItem('user'));
+      if(userdata.avatar === 'null' || !userdata.avatar) userdata.avatar = null
       setUserProfile({ id: userdata.uid, avatar: userdata.avatar })
       setLogin(true)
     }
@@ -58,7 +59,7 @@ const Header = () => {
             <li className={styles.discord}><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
             {islogin ?
               <div className={styles.userimg}>
-                <img src={`https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`} alt="avater" />
+                <img src={userProfile.avatar ? `https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`: 'https://cdn.discordapp.com/embed/avatars/0.png'} alt="avater" />
               </div> : ""
             }
           </ul>
@@ -82,7 +83,7 @@ const Header = () => {
           }
           {islogin ?
             <div className={styles.userimg}>
-              <img src={`https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`} alt="avater" />
+              <img src={userProfile.avatar ? `https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png` : 'https://cdn.discordapp.com/embed/avatars/0.png'} alt="avater" />
             </div> : ""
           }
         </ul>
