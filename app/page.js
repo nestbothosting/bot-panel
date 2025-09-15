@@ -9,13 +9,13 @@ import { AdminPanelData } from "@/apis/status";
 export default function Home() {
   const router = useRouter();
   const [ip, setIP] = useState()
-  const [panel, setPanel] = useState({ bots:999, onlineboys:999, users:999 })
+  const [panel, setPanel] = useState({ bots: 999, onlineboys: 999, users: 999 })
 
   useEffect(() => {
     (async () => {
       const response = await AdminPanelData()
-      if(!response.status) return;
-      setPanel({ bots: response.results.bots, onlineboys:response.results.onlinebots, users:response.results.users })
+      if (!response.status) return;
+      setPanel({ bots: response.results.bots, onlineboys: response.results.onlinebots, users: response.results.users })
     })();
     (async function GetIP() {
       fetch('https://api.ipify.org?format=json')
@@ -44,8 +44,8 @@ export default function Home() {
           <h1>Create your own Discord bot – no <span style={{ color: "#11e909" }}>coding</span> required</h1>
           <br />
           <p>Create your own Discord bot with Nestbot’s drag-and-drop builder. Automate your server, manage your community, and launch multiple bots in minutes – all with low ping and zero coding required.</p>
+          <button style={{marginTop:"20px" }} onClick={Dashboard} className={styles.btn}>Get Started</button>
         </main>
-        <button onClick={Dashboard} className={styles.btn}>Get Started</button>
       </div>
       <div className={styles.statuscontainer}>
         <div className={styles.status}>
@@ -78,7 +78,7 @@ export default function Home() {
         </div>
 
         <div className={styles.features}>
-          <div className={styles.img}>
+          <div className={styles.img} >
             <Image src={'/image/pingpng.png'} width={160} alt="img" height={150} className={styles.image} />
           </div>
           <div className={styles.text}>

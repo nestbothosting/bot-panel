@@ -1,13 +1,13 @@
 .home {
-  padding: 100px 0;
-  height: 85vh;
+  /* padding: 100px 0; */
+  min-height: 70vh;
   text-align: center;
+  justify-content: center;
   background: url('/image/homegb.png') no-repeat center center;
   background-size: cover;
   position: relative;
   overflow: hidden;
   color: #fff;
-  padding: 10%;
 }
 
 .cont {
@@ -17,6 +17,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 5%;
 }
 
 /* Overlay */
@@ -122,5 +123,27 @@
 @media only screen and (max-width: 800px) {
   .home {
     height: 75vh;
+  }
+
+  .home h1 {
+    font-size: 2.5rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+    color: #ccc;
+    font-family: saira;
+  }
+
+  .features{
+    flex-direction: column;
+  }
+
+  .features .img{
+    width: 100%;
+  }
+
+  .features .text{
+    width: 100%;
   }
 }
