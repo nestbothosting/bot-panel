@@ -4,12 +4,19 @@ import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { AdminPanelData } from "@/apis/status";
 
 export default function Home() {
   const router = useRouter();
   const [ip, setIP] = useState()
+  const [panel, setPanel] = useState({ bots:999, onlineboys:999, users:999 })
 
   useEffect(() => {
+    (async () => {
+      const response = await AdminPanelData()
+      if(!response.status) return;
+      setPanel({ bots: response.results.bots, onlineboys:response.results.onlinebots, users:response.results.users })
+    })();
     (async function GetIP() {
       fetch('https://api.ipify.org?format=json')
         .then(res => res.json())
@@ -42,15 +49,15 @@ export default function Home() {
       </div>
       <div className={styles.statuscontainer}>
         <div className={styles.status}>
-          <h3>122+</h3>
+          <h3>{panel.users}+</h3>
           <span>Users</span>
         </div>
         <div className={styles.status}>
-          <h3>100+</h3>
+          <h3>{panel.bots}+</h3>
           <span>Bots Created</span>
         </div>
         <div className={styles.status}>
-          <h3>10+</h3>
+          <h3>{panel.onlineboys}+</h3>
           <span>Online Now</span>
         </div>
       </div>
