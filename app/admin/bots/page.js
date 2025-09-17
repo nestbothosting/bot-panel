@@ -7,14 +7,16 @@ import Nodes from '@/components/Nodes/Nodes'
 import { NodeStatus } from '@/apis/status'
 import { isAdmin, RQ_Login } from '@/utilise'
 import { useRouter } from 'next/navigation';
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function page() {
     const [nodes,setNodes] = useState([])
     const router = useRouter();
 
     useEffect(() => {
+        const user = GetUserCookies()
         RQ_Login(localStorage.getItem('login'))
-        isAdmin(localStorage.getItem('user'), router);
+        isAdmin(user, router);
 
         const GetNodes = async () => {
             const response = await NodeStatus()

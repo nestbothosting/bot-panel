@@ -9,6 +9,8 @@ import { FaDiscord } from "react-icons/fa";
 import UserContext from '@/context/usercontext';
 import { LuLogOut } from "react-icons/lu";
 import { Luckiest_Guy } from 'next/font/google'
+import { GetUserCookies } from '@/utilise/cookies';
+import { useRouter } from 'next/navigation';
 
 const luckyguy = Luckiest_Guy({ subsets: ['latin'], weight: ['400'], display: 'swap' })
 
@@ -18,11 +20,13 @@ const Header = () => {
   const { islogin, setLogin } = useContext(UserContext)
   const [userProfile, setUserProfile] = useState({})
   const [ip, setIP] = useState()
+  const router = useRouter();
 
   useEffect(() => {
     if (localStorage.getItem('login')) {
-      let userdata = JSON.parse(localStorage.getItem('user'));
-      if(userdata.avatar === 'null' || !userdata.avatar) userdata.avatar = null
+      let userdata = GetUserCookies()
+      if (!userdata) return;
+      if (userdata?.avatar === 'null' || !userdata?.avatar) userdata.avatar = null
       setUserProfile({ id: userdata.uid, avatar: userdata.avatar })
       setLogin(true)
     }
@@ -52,14 +56,14 @@ const Header = () => {
             {/* <li><Link href="/">Home</Link></li> */}
             <li><Link href="/dashboard">Dashboard</Link></li>
             {islogin ?
-              <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut />Log Out</li>
+              <li className={styles.logout} onClick={() => LogOut(setLogin, router)}><LuLogOut />Log Out</li>
               :
               <li className={styles.login} onClick={() => { DiscordAUth(ip); setShowNav(false); }}><FaDiscord /> Log in</li>
             }
             <li className={styles.discord}><a href="https://discord.gg/J83zQvaV6U"><FaDiscord />Discord</a></li>
             {islogin ?
               <div className={styles.userimg}>
-                <img src={userProfile.avatar ? `https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png`: 'https://cdn.discordapp.com/embed/avatars/0.png'} alt="avater" />
+                <img src={userProfile.avatar ? `https://cdn.discordapp.com/avatars/${userProfile?.id}/${userProfile?.avatar}.png` : 'https://cdn.discordapp.com/embed/avatars/0.png'} alt="avater" />
               </div> : ""
             }
           </ul>
@@ -77,7 +81,7 @@ const Header = () => {
           <li><Link href="/" onClick={() => setShowNav(false)}>Home</Link></li>
           <li><Link href="/dashboard" onClick={() => setShowNav(false)}>Dashboard</Link></li>
           {islogin ?
-            <li className={styles.logout} onClick={() => LogOut(setLogin)}><LuLogOut /> Log Out</li>
+            <li className={styles.logout} onClick={() => LogOut(setLogin, router)}><LuLogOut /> Log Out</li>
             :
             <li className={styles.login} onClick={() => { DiscordAUth(ip); setShowNav(false); }}><FaDiscord /> Log in</li>
           }

@@ -7,6 +7,7 @@ import Cadmin from '@/components/Cadmin/Cadmin';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/Button/Button';
 import { toast } from 'react-toastify';
+import { GetUserCookies } from '@/utilise/cookies';
 
 function SaveNode(apiKey,nodeurl,router){
   if(!apiKey && !nodeurl){
@@ -41,8 +42,9 @@ export default function page() {
   const [nodeurl,setNodeurl] = useState()
 
   useEffect(() => {
+    const user = GetUserCookies()
     RQ_Login(localStorage.getItem('login'))
-    isAdmin(localStorage.getItem('user'), router)
+    isAdmin(user, router)
   }, [])
 
   return (

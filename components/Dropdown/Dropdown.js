@@ -5,6 +5,7 @@ import style from "./dropdown.module.css";
 import { useRouter } from "next/navigation";
 import { Mybots } from '@/apis/index'
 import BotMenuCotext from "@/context/botmenu";
+import { GetUserCookies } from "@/utilise/cookies";
 
 export default function Dropdown() {
     const router = useRouter();
@@ -30,10 +31,11 @@ export default function Dropdown() {
         }
         async function GetBots(){
             try {
-                const response = await Mybots(localStorage.getItem('user'))
+                const user = GetUserCookies()
+                const response = await Mybots(user)
                 if(response.length === 0){
                     setTimeout(async() => {
-                        const recall = await Mybots(localStorage.getItem('user'))
+                        const recall = await Mybots(user)
                         setBots(recall)
                     }, 2000);
                 }

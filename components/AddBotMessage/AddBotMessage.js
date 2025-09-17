@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import style from './AddBotMessage.module.css'
 import { checkAddBotinWeb } from '@/utilise/apis'
 import { useRouter } from 'next/navigation'
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function AddBotMessage() {
     const [data, setData] = useState(null)
@@ -22,9 +23,9 @@ export default function AddBotMessage() {
         }
 
         const checkUserAndProceed = () => {
-            const user = localStorage.getItem('user')
+            const user = GetUserCookies()
             if (user) {
-                proceed(JSON.parse(user))
+                proceed(user)
                 return true
             }
             return false

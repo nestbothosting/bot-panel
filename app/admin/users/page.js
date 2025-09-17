@@ -10,6 +10,7 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import { isAdmin, RQ_Login } from '@/utilise'
 import { GetUsersInfo } from '@/utilise/apis'
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function page() {
   const [users, setUsers] = useState([])
@@ -19,7 +20,7 @@ export default function page() {
   const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem('user')
+    const user = GetUserCookies()
     RQ_Login(localStorage.getItem('login'))
     isAdmin(user, router)
 

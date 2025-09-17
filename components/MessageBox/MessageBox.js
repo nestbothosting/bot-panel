@@ -3,6 +3,7 @@ import style from './MessageBox.module.css'
 import BotMenuCotext from '@/context/botmenu';
 import { LuExternalLink } from "react-icons/lu";
 import { config } from '@/config'
+import { GetUserCookies } from '@/utilise/cookies';
 
 export default function MessageBox() {
     const [isbot, setIsbot] = useState(true)
@@ -12,7 +13,7 @@ export default function MessageBox() {
 
     useEffect(() => {
         const bot = localStorage.getItem('bot')
-        const user = localStorage.getItem('user')
+        const user = GetUserCookies()
         if (user) setChuser(true)
         if (!bot || bot === 'none') {
             setIsbot(false)

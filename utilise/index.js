@@ -1,8 +1,13 @@
 import { config } from "@/config";
 
-export function LogOut(setLogin) {
+export function LogOut(setLogin, router) {
   localStorage.clear();
+  fetch('/api/logout')
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(er => console.log(er))
   setLogin(false);
+  router.push('/')
 }
 
 export function showicon(e) {
@@ -26,9 +31,8 @@ export function showcadmin() {
   cadmin.style.display = "block";
 }
 
-export function isAdmin(user, router) {
+export function isAdmin(objuser, router) {
   let admin = false;
-  const objuser = JSON.parse(user);
   if (!objuser) admin = false
   for (let x in config.Admin) {
     if (objuser?.uid == config.Admin[x]) {

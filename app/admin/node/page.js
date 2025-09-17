@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { FcAcceptDatabase, FcDeleteDatabase } from "react-icons/fc";
 import Button from '@/components/Button/Button';
 import { NodeStatus } from '@/apis/status'
+import { GetUserCookies } from '@/utilise/cookies';
 
 export default function page() {
     const [nodes, setNodes] = useState([])
@@ -17,9 +18,10 @@ export default function page() {
         const init = async () => {
             try {
                 const node = await NodeStatus()
+                const user = GetUserCookies()
                 setNodes(node)
                 RQ_Login(localStorage.getItem('login'))
-                isAdmin(localStorage.getItem('user'), router)
+                isAdmin(user, router)
             } catch (error) {
                 console.log(error)
             }

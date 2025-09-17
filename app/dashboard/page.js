@@ -10,6 +10,7 @@ import { FaClock, FaUser, FaRobot, FaYoutube } from "react-icons/fa"
 import { TbBrandMinecraft } from "react-icons/tb";
 import Link from "next/link"
 import AddBotMessage from '@/components/AddBotMessage/AddBotMessage'
+import { GetUserCookies, SetUserCookies } from '@/utilise/cookies';
 
 
 
@@ -35,17 +36,17 @@ export default function Page() {
 
   useEffect(() => {
     if (username && uid && avatar && id) {
-      const user = { username, uid, avatar, id };
-      localStorage.setItem('user', JSON.stringify(user));
-      setUser(user)
+      const userreq = { username, uid, avatar, id };
+      SetUserCookies(userreq)
+      setUser(userreq)
       localStorage.setItem('login', true)
       setLogin(true)
     }
     RQ_Login(localStorage.getItem('login'))
-    const strUser = localStorage.getItem('user')
+    const strUser = GetUserCookies()
     const strBot = localStorage.getItem('bot')
     if (strUser) {
-      setUser(JSON.parse(strUser))
+      setUser(strUser)
     }
     if (strBot) {
       if (strBot === "none") return;

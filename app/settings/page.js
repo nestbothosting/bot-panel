@@ -25,7 +25,6 @@ async function handleonSave(bot_id, bot_name, bot_token, st_message) {
 }
 
 async function handleStart(bot_token, bot_id, setStatus) {
-    console.log('Helo')
     const response = await StartBot(bot_token, bot_id)
     if (response.status) {
         setStatus(true)

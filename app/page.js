@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AdminPanelData } from "@/apis/status";
+import { GetUserCookies } from "@/utilise/cookies";
 
 export default function Home() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function Home() {
   }, [])
 
   const Dashboard = () => {
-    const user = localStorage.getItem('user')
+    const user = GetUserCookies()
     if (!user) {
       const url = `https://account.nestbot.xyz/auth/login?ip=${ip}&redirect=nocodedcpanel`
       window.location.href = url

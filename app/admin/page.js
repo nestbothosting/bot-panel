@@ -7,6 +7,7 @@ import { RQ_Login, isAdmin } from '@/utilise/index'
 import { useRouter } from 'next/navigation';
 import { AdminPanelData } from '@/apis/status'
 import { toast } from 'react-toastify';
+import { GetUserCookies } from '@/utilise/cookies';
 
 export default function page() {
   const router = useRouter();
@@ -20,7 +21,8 @@ export default function page() {
       console.log(response)
     })();
     RQ_Login(localStorage.getItem('login'))
-    isAdmin(localStorage.getItem('user'), router)
+    const user = GetUserCookies()
+    isAdmin(user, router)
   }, [])
 
   return (

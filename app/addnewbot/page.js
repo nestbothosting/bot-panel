@@ -8,6 +8,7 @@ import { SaveBot } from '@/apis/index'
 import { RQ_Login } from '@/utilise/index'
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { GetUserCookies } from '@/utilise/cookies';
 
 function Addnewbot(token, name, ownid, router) {
   if (!token || !name || !ownid) {
@@ -35,7 +36,7 @@ export default function page() {
 
   useEffect(() => {
     RQ_Login(localStorage.getItem('login'))
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = GetUserCookies()
     if(!user) toast.error('Login to continue')
     setOwnid(user?.id)
   }, [])

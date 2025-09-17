@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import { isAdmin, RQ_Login } from '@/utilise'
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function page() {
     const params = useParams()
@@ -19,8 +20,9 @@ export default function page() {
     const router = useRouter();
 
     useEffect(() => {
+        const user = GetUserCookies()
         RQ_Login(localStorage.getItem('login'))
-        isAdmin(localStorage.getItem('user'), router);
+        isAdmin(user, router);
         
         const GetData = async () => {
             setLoading(true)

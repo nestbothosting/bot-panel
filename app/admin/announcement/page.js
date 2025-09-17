@@ -8,6 +8,7 @@ import { isAdmin } from '@/utilise'
 import { DeleteAnnouncement, GetAnnouncement } from '@/utilise/apis'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation';
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function page() {
     const [messages, setMessages] = useState([])
@@ -17,7 +18,8 @@ export default function page() {
 
     useEffect(() => {
         (async () => {
-            isAdmin(localStorage.getItem('user'),router)
+            const user = GetUserCookies()
+            isAdmin(user,router)
             const response = await GetAnnouncement()
             if (!response.status) return toast.error(response.message)
             setMessages(response.messages)

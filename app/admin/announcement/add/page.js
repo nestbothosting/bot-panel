@@ -8,6 +8,7 @@ import { SaveAnnouncement } from '@/utilise/apis'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation';
 import { isAdmin } from '@/utilise'
+import { GetUserCookies } from '@/utilise/cookies'
 
 
 export default function page() {
@@ -15,7 +16,8 @@ export default function page() {
     const router = useRouter();
 
     useEffect(() => {
-        isAdmin(localStorage.getItem('user'),router)
+        const user = GetUserCookies()
+        isAdmin(user,router)
     },[])
 
     const Save = async () => {

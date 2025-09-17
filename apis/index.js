@@ -42,12 +42,11 @@ export async function SaveBot(token, name, ownid) {
     }
 }
 
-export async function Mybots(userstring) {
+export async function Mybots(user) {
     try {
         mongo()
         let MyBots = []
-        if (!userstring) return []
-        const user = JSON.parse(userstring)
+        if (!user) return []
         const mybotsdata = await MyBotsModel.find({ owner_id: user.id })
 
         for (let x in mybotsdata) {

@@ -9,16 +9,24 @@ import Image from 'next/image'
 import Button from '@/components/Button/Button'
 import { GetOnlineBots } from '@/utilise/apis'
 import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation';
 import { StartBot } from '@/apis'
+import { GetUserCookies } from '@/utilise/cookies'
+import { isAdmin } from '@/utilise'
 
 export default function page() {
     const params = useParams()
     const [loading, setLoading] = useState(true)
     const [bots, setBots] = useState([])
     const [page, setPage] = useState(1)
+    const router = useRouter();
+
 
     useEffect(() => {
+
         (async () => {
+            const user = GetUserCookies()
+            isAdmin(user, router)
             const response = await GetOnlineBots(1, params.node_id)
             if (!response.status) return toast.error(response.message)
             setLoading(false)

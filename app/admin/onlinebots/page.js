@@ -9,6 +9,7 @@ import { isAdmin } from '@/utilise';
 import { useRouter } from 'next/navigation';
 import { NodeStatus } from '@/apis/status'
 import Nodes from '@/components/Nodes/Nodes'
+import { GetUserCookies } from '@/utilise/cookies'
 
 export default function page() {
     const [loading, setLoading] = useState(true)
@@ -16,7 +17,8 @@ export default function page() {
     const router = useRouter();
 
     useEffect(() => {
-        isAdmin(localStorage.getItem('user'), router)
+        const user = GetUserCookies()
+        isAdmin(user, router)
 
         const GetNodes = async () => {
             const response = await NodeStatus()
