@@ -33,7 +33,7 @@ export default function Dropdown() {
             try {
                 const user = GetUserCookies()
                 const response = await Mybots(user)
-                if(response.length === 0){
+                if(response.length === 0 && user){
                     setTimeout(async() => {
                         const recall = await Mybots(user)
                         setBots(recall)

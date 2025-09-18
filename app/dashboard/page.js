@@ -11,6 +11,7 @@ import { TbBrandMinecraft } from "react-icons/tb";
 import Link from "next/link"
 import AddBotMessage from '@/components/AddBotMessage/AddBotMessage'
 import { GetUserCookies, SetUserCookies } from '@/utilise/cookies';
+import BotMenuCotext from "@/context/botmenu";
 
 
 
@@ -33,6 +34,8 @@ export default function Page() {
   const [bot, setBot] = useState()
 
   const { islogin, setLogin } = useContext(UserContext)
+  const { inbot, setInbot } = useContext(BotMenuCotext)
+
 
   useEffect(() => {
     if (username && uid && avatar && id) {
@@ -53,6 +56,7 @@ export default function Page() {
       setBot(JSON.parse(strBot))
     }
     RQ_Login(localStorage.getItem('login'))
+    setInbot({ bot:true })
   }, [username, uid, avatar, id]);
 
   return (
