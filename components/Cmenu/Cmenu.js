@@ -10,7 +10,6 @@ import { GrYoutube } from "react-icons/gr";
 import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
-import { showcmenu } from '@/utilise/index'
 import { RiUserSettingsLine, RiRobot2Line } from "react-icons/ri";
 
 import Link from 'next/link';
@@ -23,8 +22,23 @@ export default function Cmenu() {
   const [botstatus, setStatus] = useState(false)
   const { inbot, setInbot } = useContext(BotMenuCotext)
 
+  function showcmenu() {
+    const Cmenu = document.getElementById("cmenu");
+    Cmenu.style.display = "block";
+  }
+
+  function switchBot() {
+    if (window.innerWidth <= 800) {
+      setTimeout(() => {
+        const Cmenu = document.getElementById("cmenu");
+        Cmenu.style.display = "none";
+      }, 1500);
+    }
+  }
+
   useEffect(() => {
     (async () => {
+      switchBot()
       const strBot = localStorage.getItem('bot')
       const response = await GetBotStatus(strBot)
       if (response.bot_status) {

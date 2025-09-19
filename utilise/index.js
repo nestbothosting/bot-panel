@@ -21,11 +21,6 @@ export function RQ_Login(islogin) {
   }
 }
 
-export function showcmenu() {
-  const Cmenu = document.getElementById("cmenu");
-  Cmenu.style.display = "block";
-}
-
 export function showcadmin() {
   const cadmin = document.getElementById("cadmin");
   cadmin.style.display = "block";
