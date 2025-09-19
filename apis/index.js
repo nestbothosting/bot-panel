@@ -5,21 +5,21 @@ import { CheckNodeCap } from "./status";
 import mongo from '@/utilise/mongoose'
 import MyBotsModel from '@/utilise/mybotmd'
 
-export async function SaveBot(token, name, ownid) {
+export async function SaveBot(token, name, ownid, node_cid) {
+    if(!node_cid || node_cid === 'none') return { status:false, message:"Select a Location" }
     try {
-        const base = await CheckNodeCap();
-        if (!base) {
-            return { status: false, message: "No available node found to create the bot." }
+        const base = await CheckNodeCap(node_cid);
+        if (!base.status) {
+            return { status: false, message: "No slots available to create a new bot. Please select another location." }
         }
-        const { api_key, node_url } = base;
-
-        const response = await axios.post(`${node_url}/bot/add_bot`,
+        const { apikey, url } = base
+        const response = await axios.post(`${url}/bot/add_bot`,
             {
                 bot_token: token, bot_name: name, owner_id: ownid
             },
             {
                 headers: {
-                    "x-api-key": api_key,
+                    "x-api-key": apikey,
                     'Content-Type': 'application/json'
                 },
             })
@@ -27,11 +27,11 @@ export async function SaveBot(token, name, ownid) {
         if (response.data.status) {
             mongo()
             const newbot = new MyBotsModel({
-                node_url: node_url,
+                node_url: url,
                 bot_id: response.data.id,
                 node_id: response.data.node_id,
                 owner_id: ownid,
-                api_key: api_key
+                api_key: apikey
             })
             await newbot.save()
         }

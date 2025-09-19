@@ -48,6 +48,7 @@ export default function page() {
                     <div className={style.node}>
                         <p>Node ID: {botdata.node_id ? botdata.node_id : '0000000000000x'}</p>
                         <p>Node Status: Online <RiRadioButtonLine color='green' /></p>
+                        <p>Location: {botdata.location ? botdata.location : "WORLD" }</p>
                         <Link href='/settings'>Settings <TbExternalLink color='white' /></Link>
                     </div>
                 </div>

@@ -24,6 +24,7 @@ export async function NodeStatus() {
           url: RemoveHTTP(node.nodeurl),
           node_id: res.data.node_id,
           node_cid: node._id.toString(), // safer than JSON.stringify
+          location: res.data.location
         }))
         .catch((err) => {
           console.warn(`Node ${node.nodeurl} offline or errored: ${err.message}`);
@@ -31,7 +32,8 @@ export async function NodeStatus() {
             status: false,
             url: RemoveHTTP(node.nodeurl),
             node_id: 'none',
-            node_cid: node._id.toString()
+            node_cid: node._id.toString(),
+            location: "NO..."
           };
         })
     );
@@ -52,38 +54,20 @@ const RemoveHTTP = (url) => {
   return url.replace(/^https?:\/\//, "");
 };
 
-export async function CheckNodeCap() {
-  let isDone = null;
+export async function CheckNodeCap(node_cid) {
   mongo()
-
   try {
-    const nodes = await NodeModel.find();
-
-    for (const node of nodes) {
-      try {
-        const response = await axios.get(`${node.nodeurl}/max_cap`, {
-          headers: {
-            "x-api-key": node.apikey,
-          },
-        });
-
-        if (response.data.status) {
-          isDone = {
-            node_url: node.nodeurl,
-            api_key: node.apikey,
-          };
-          break; // stops loop after finding a valid node
-        }
-      } catch (err) {
-        // Optional: log or handle node-specific errors
-        console.log(`Error checking node ${node.nodeurl}:`, err.message);
-      }
-    }
+    const node = await NodeModel.findById(node_cid);
+    const response = await axios.get(`${node.nodeurl}/max_cap`, {
+      headers: {
+        "x-api-key": node.apikey,
+      },
+    });
+    return { status:response.data.status, apikey:node.apikey, url:node.nodeurl }
   } catch (error) {
     console.error("Server error:", error.message);
+    return { status:false, message:error.message }
   }
-
-  return isDone;
 }
 
 export async function BotStatus(botsri) {
@@ -149,15 +133,15 @@ export const GetBotLog = async (strBot) => {
 export const AdminPanelData = async () => {
   try {
     const nodes = await NodeModel.find()
-    const users = await axios.get(`https://account.nestbot.xyz/totalusers`,{
-      headers:{
+    const users = await axios.get(`https://account.nestbot.xyz/totalusers`, {
+      headers: {
         "x-api-key": process.env.ACAPIKEY
       }
     })
-    const results = { users:users.data.totusers ,bots: 0, onlinebots: 0, autoreplay: 0, autoroleadd: 0, tickets: 0, timedmsg: 0, yns: 0 }
+    const results = { users: users.data.totusers, bots: 0, onlinebots: 0, autoreplay: 0, autoroleadd: 0, tickets: 0, timedmsg: 0, yns: 0 }
 
-    for(let node of nodes){
-      const response = await axios.get(`${node.nodeurl}/admin/panel-data`,{
+    for (let node of nodes) {
+      const response = await axios.get(`${node.nodeurl}/admin/panel-data`, {
         headers: {
           "x-api-key": node.apikey
         }

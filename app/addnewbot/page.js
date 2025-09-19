@@ -9,23 +9,24 @@ import { RQ_Login } from '@/utilise/index'
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { GetUserCookies } from '@/utilise/cookies';
+import { NodeStatus } from '@/apis/status';
 
-function Addnewbot(token, name, ownid, router) {
+function Addnewbot(token, name, ownid, router, nodeid) {
   if (!token || !name || !ownid) {
     return toast.error("Please provide both bot token and name.");
   }
-  SaveBot(token, name, ownid)
-  .then(data => {
-    if(data.status){
-      toast.success(data.message)
-      setTimeout(() => {
-        router.push('/dashboard')
-      }, 1500);
-      return 
-    }
-    toast.error(data.message)
-  })
-  .catch(err => toast.error(err.message))
+  SaveBot(token, name, ownid, nodeid)
+    .then(data => {
+      if (data.status) {
+        toast.success(data.message)
+        setTimeout(() => {
+          router.push('/dashboard')
+        }, 1500);
+        return
+      }
+      toast.error(data.message)
+    })
+    .catch(err => toast.error(err.message))
 }
 
 export default function page() {
@@ -33,11 +34,17 @@ export default function page() {
   const [token, setToken] = useState()
   const [name, setName] = useState()
   const [ownid, setOwnid] = useState()
+  const [nodeid,setNodeid] = useState('none')
+  const [node,setNodes] = useState([]) 
 
   useEffect(() => {
+    (async () => {
+      const response = await NodeStatus()
+      setNodes(response)
+    })();
     RQ_Login(localStorage.getItem('login'))
     const user = GetUserCookies()
-    if(!user) toast.error('Login to continue')
+    if (!user) toast.error('Login to continue')
     setOwnid(user?.id)
   }, [])
 
@@ -61,7 +68,18 @@ export default function page() {
           <input type="text" placeholder='Bot Token' onChange={(e) => setToken(e.target.value)} />
         </div>
 
-        <div className={style.btn} onClick={() => Addnewbot(token, name, ownid, router)} >
+        <div className={style.item}>
+          <span>Location</span>
+          <p>Server Location</p>
+          <select onChange={(e) => setNodeid(e.target.value)}>
+            <option value="none">Location.!</option>
+            {node.map((node,index) => (
+              <option value={node.node_cid} key={index}>{node.location}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className={style.btn} onClick={() => Addnewbot(token, name, ownid, router, nodeid)} >
           <Button name="Save" gbcolor="#14A44D" />
         </div>
 
