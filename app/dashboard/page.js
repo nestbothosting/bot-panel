@@ -12,6 +12,10 @@ import Link from "next/link"
 import AddBotMessage from '@/components/AddBotMessage/AddBotMessage'
 import { GetUserCookies, SetUserCookies } from '@/utilise/cookies';
 import BotMenuCotext from "@/context/botmenu";
+import dynamic from "next/dynamic";
+import Script from "next/script";
+
+import Banner from "@/components/Banner/Banner";
 
 
 
@@ -56,7 +60,7 @@ export default function Page() {
       setBot(JSON.parse(strBot))
     }
     RQ_Login(localStorage.getItem('login'))
-    setInbot({ bot:true })
+    setInbot({ bot: true })
   }, [username, uid, avatar, id]);
 
   return (
@@ -83,6 +87,8 @@ export default function Page() {
             <h3>Hello, <span>{user?.username}</span> 👋</h3>
             <p>You’re managing <strong>{bot?.bot_name}</strong>. Let's make it awesome!</p>
           </div>
+
+          <Banner />
 
         </div>
       </main>
