@@ -428,3 +428,94 @@ export const DeleteYNS = async (server_id,strBot) => {
         return { status:false, message:error.message }
     }
 }
+
+export const SetHelpCommand = async (strBot, embed, fields) => {
+    try {
+        if (!strBot) return { status: false, message: "Select Bot and Server" }
+
+        if(!embed.title) return { status:false, message:"Embed Title is Required" }
+        
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+
+        const response = await axios.post(
+            `${botdata.node_url}/bot/createhelpcommand`,
+            {
+                bot_cid: Bot.bot_id,
+                embed,
+                fields
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+
+        return response.data;
+    } catch (error) {
+        console.log("Axios error:", error.message)
+
+        return {
+            status: false,
+            message: error.response?.data?.message || error.message, // ✅ show backend message if available
+            statuscode: error.response?.status || 500
+        }
+    }
+}
+
+export const GetHelpCommand = async (strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select Bot and Server" }
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.get(
+            `${botdata.node_url}/bot/gethelpcommand/${Bot.bot_id}`,
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+
+        return response.data;
+    } catch (error) {
+        console.log("Axios error:", error.message)
+
+        return {
+            status: false,
+            message: error.response?.data?.message || error.message, // ✅ show backend message if available
+            statuscode: error.response?.status || 500
+        }
+    }
+}
+
+
+export const DeleteHelpCommand = async (strBot) => {
+    try {
+        if (!strBot) return { status: false, message: "Select Bot and Server" }        
+        const Bot = JSON.parse(strBot)
+        const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
+        const response = await axios.post(
+            `${botdata.node_url}/bot/deletehelpcommand`,
+            {
+                bot_cid: Bot.bot_id,
+            },
+            {
+                headers: {
+                    "x-api-key": botdata.api_key,
+                },
+            }
+        )
+
+        return response.data;
+    } catch (error) {
+        console.log("Axios error:", error.message)
+
+        return {
+            status: false,
+            message: error.response?.data?.message || error.message, // ✅ show backend message if available
+            statuscode: error.response?.status || 500
+        }
+    }
+}

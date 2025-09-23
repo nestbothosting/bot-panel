@@ -7,7 +7,7 @@ import { HiStatusOnline } from "react-icons/hi";
 import { ImEmbed } from "react-icons/im";
 import { TbBrandMinecraft, TbTimeDuration5, TbMessage2Cog } from "react-icons/tb";
 import { GrYoutube } from "react-icons/gr";
-import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram } from "react-icons/fa";
+import { FaUserCheck, FaUserMinus, FaDiscord, FaUsers, FaInstagram, FaBook } from "react-icons/fa";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { VscThreeBars } from "react-icons/vsc";
 import { RiUserSettingsLine, RiRobot2Line } from "react-icons/ri";
@@ -203,6 +203,15 @@ export default function Cmenu() {
           </div>
           <div className={style.link}>
             <Link href='/dashboard/autoreplay'> Auto Replay</Link>
+          </div>
+        </div>
+
+        <div className={style.items}>
+          <div className={style.icon}>
+            <FaBook size={20} />
+          </div>
+          <div className={style.link}>
+            <Link href='/dashboard/helpcommand'> /Help Command</Link>
           </div>
         </div>
 

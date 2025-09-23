@@ -1,0 +1,58 @@
+.help {
+    width: 100vw;
+    display: flex;
+    padding: 10px;
+    font-family: saira;
+}
+
+.main {
+    padding: 8px;
+    width: 80%;
+}
+
+.box {
+    width: 100%;
+    background-color: rgb(36, 37, 37);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.box select,
+.box input {
+    height: 40px;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.helpcmd {
+    width: 100%;
+    min-height: 100px;
+    background-color: rgb(36, 37, 37);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+}
+
+.helpcmd div {
+    width: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+    .help {
+        flex-direction: column;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+    .helpcmd {
+        flex-direction: column;
+    }
+
+    .helpcmd div {
+        width: 100%;
+    }
+}
