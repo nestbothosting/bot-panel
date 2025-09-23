@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { EmbedMessage } from '@/utilise/api'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner'
 
 function handleAddFields(SetFields, setFieldvalue) {
     SetFields(prevFields => {
@@ -118,6 +119,7 @@ export default function page() {
             <main className={style.main}>
                 <h1>Embed Message</h1>
                 <MessageBox />
+                <AdBanner />
                 <div className={style.dropdown}>
                     <select onChange={(e) => HandleSelectMenu(e, "server", setEmbeddata, setChannels)}>
                         <option value="none">Select a Server!</option>
@@ -240,6 +242,7 @@ export default function page() {
                         <Button name='Send' color="blacg" gbcolor="#14A44D" />
                     </span>
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

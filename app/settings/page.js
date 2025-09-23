@@ -11,6 +11,7 @@ import BotMenuCotext from '@/context/botmenu';
 import { StartBot, StopBot, DeleteBot } from '@/apis/index'
 import { BotStatus } from '@/apis/status'
 import MessageBox from '@/components/MessageBox/MessageBox';
+import AdBanner from '@/components/Banner/Banner';
 
 async function handleonSave(bot_id, bot_name, bot_token, st_message) {
     try {
@@ -106,6 +107,7 @@ export default function page() {
             </div>
             <main className={style.main}>
                 <MessageBox />
+                <AdBanner />
                 <h1>Bot Settings</h1>
                 <div className={style.botname}>
                     <span>Your bot's Name</span>
@@ -166,6 +168,7 @@ export default function page() {
                         <Button name='Delete' color='white' gbcolor="red" />
                     </div>
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

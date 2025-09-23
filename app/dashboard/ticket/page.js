@@ -12,6 +12,7 @@ import { CiCircleInfo } from "react-icons/ci";
 import MessageBox from '@/components/MessageBox/MessageBox';
 import BotMenuCotext from '@/context/botmenu';
 import { IoClose } from "react-icons/io5";
+import AdBanner from '@/components/Banner/Banner';
 
 function handleAddFields(SetFields, setFieldvalue) {
     SetFields(prevFields => {
@@ -185,6 +186,7 @@ export default function page() {
 
                 <h1>Ticket Panel</h1>
                 <MessageBox />
+                <AdBanner />
                 <div className={style.dropdown}>
                     <select onChange={(e) => handleDMenu(e, 'server', setTicketdata, setChannellist, setRolelist, setPanel)}>
                         <option value="none">Select a Server!</option>
@@ -331,6 +333,7 @@ export default function page() {
                 <div className={style.btn} onClick={() => SendPanel(ticketdata, fieldvalue, showpower)}>
                     <Button name="Send" color='white' gbcolor="#14A44D" />
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

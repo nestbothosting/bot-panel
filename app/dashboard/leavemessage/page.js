@@ -10,6 +10,7 @@ import { CreateLeaveMessage, DeleteWLMS, GetWelcomeLeaveSM } from '@/apis'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner'
 
 const SetChange = async (value, setItem, type, setItem2, setItem3) => {
     if (type === 'none') return;
@@ -75,6 +76,7 @@ export default function Page() {
             <main className={style.main}>
                 <h1>Leave Message Settings</h1>
                 <MessageBox />
+                <AdBanner />
                 <div className={style.inputbox}>
                     <label htmlFor="serverSelect">Choose a Server</label>
                     <br />
@@ -129,6 +131,7 @@ export default function Page() {
                         </div>
                     </div>
                 }
+                <AdBanner />
             </main>
         </section>
     )

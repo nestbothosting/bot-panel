@@ -10,6 +10,7 @@ import BotMenuCotext from '@/context/botmenu';
 import { RQ_Login } from '@/utilise'
 import { DeleteHelpCommand, GetHelpCommand, SetHelpCommand } from '@/utilise/api'
 import { toast } from 'react-toastify'
+import AdBanner from '@/components/Banner/Banner'
 
 export default function page() {
   const [embed, setEmbed] = useState({})
@@ -73,6 +74,7 @@ export default function page() {
       </div>
       <div className={style.main}>
         <MessageBox />
+        <AdBanner />
         <h2>Help Command</h2>
         <p><strong>Command:</strong> <code><span style={{ color: "red" }}>/help</span></code></p>
 
@@ -180,6 +182,7 @@ export default function page() {
               </span>
             </div>
           </>}
+          <AdBanner />
       </div>
     </section>
   )

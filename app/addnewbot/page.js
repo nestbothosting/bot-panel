@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { GetUserCookies } from '@/utilise/cookies';
 import { NodeStatus } from '@/apis/status';
+import AdBanner from '@/components/Banner/Banner';
 
 function Addnewbot(token, name, ownid, router, nodeid) {
   if (!token || !name || !ownid) {
@@ -82,6 +83,8 @@ export default function page() {
         <div className={style.btn} onClick={() => Addnewbot(token, name, ownid, router, nodeid)} >
           <Button name="Save" gbcolor="#14A44D" />
         </div>
+
+        <AdBanner />
 
       </main>
     </section>

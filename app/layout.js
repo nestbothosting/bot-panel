@@ -74,10 +74,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${saira.className} ${lato.className}`}>
-      <head>
-        {/* <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.ADSENSE_CLIENT_ID}`}
-          crossorigin="anonymous"></script> */}
-      </head>
+      {/* <head>
+        <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.ADSENSE_CLIENT_ID}`}
+          crossorigin="anonymous"></script>
+      </head> */}
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ClientLayout>{children}</ClientLayout>
       </body>

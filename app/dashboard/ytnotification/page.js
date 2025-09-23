@@ -11,6 +11,7 @@ import YNS_menu from '@/components/YNS_menu/YNS_menu';
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox';
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner';
 
 async function Change(e, type, setItem, setItem2, setItem3, setItem4) {
     if (e.target.value === 'none') return
@@ -71,6 +72,7 @@ export default function Page() {
             <main className={style.main}>
                 <h1 className={style.title}>YT Notification <FaYoutube color='red' size={45} /></h1>
                 <MessageBox />
+                <AdBanner />
                 {YNS.status ? <YNS_menu data={YNS} setY={setYNS} /> : ""}
 
                 <div className={style.drop}>

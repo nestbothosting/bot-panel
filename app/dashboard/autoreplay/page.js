@@ -11,6 +11,7 @@ import BotMenuCotext from '@/context/botmenu';
 import Button from '@/components/Button/Button'
 import { fechAutoRoleData, SendAutoReplaySTM } from '@/utilise/apis'
 import AutoReplayBox from '@/components/AutoReplayBox/AutoReplayBox'
+import AdBanner from '@/components/Banner/Banner'
 
 const SendAPI = async (serverdata, messagekey, messageReplay, GetAutoRData) => {
     const response = await SendAutoReplaySTM(serverdata, messagekey, messageReplay, localStorage.getItem('bot'))
@@ -60,6 +61,7 @@ export default function page() {
             </div>
             <main className={style.main}>
                 <MessageBox />
+                <AdBanner />
                 <h1>Auto Replay</h1>
                 {autoRPList.length > 0 ? <h2>4/{autoRPList.length}</h2> : ""}
                 {autoRPList.length === 0 ? "" :
@@ -92,6 +94,7 @@ export default function page() {
                         <Button name='Set' gbcolor="#14A44D" />
                     </span>
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

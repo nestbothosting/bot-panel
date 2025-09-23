@@ -13,6 +13,7 @@ import { GetBotStatus } from '@/apis/status'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox';
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner';
 
 
 export default function page() {
@@ -52,6 +53,7 @@ export default function page() {
                         <Link href='/settings'>Settings <TbExternalLink color='white' /></Link>
                     </div>
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

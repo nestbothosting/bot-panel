@@ -7,6 +7,7 @@ import PremiumMenu from '@/components/PremiumMenu/PremiumMenu'
 import { MonthlyPlan1 } from '../../PremiumPlans'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
+import AdBanner from '@/components/Banner/Banner'
 
 export default function page() {
     useEffect(() => {
@@ -20,7 +21,9 @@ export default function page() {
             <main className={ style.main }>
                 <h1>Unlock Premium Features</h1>
                 <MessageBox />
+                <AdBanner />
                 <PremiumMenu items={MonthlyPlan1} />
+                <AdBanner />
             </main>
         </section>
     )

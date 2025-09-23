@@ -1,4 +1,5 @@
 // app/support/page.js
+import AdBanner from '@/components/Banner/Banner';
 import styles from './support.module.css'
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default function Page() {
         </li>
       </ul>
       <p>We typically respond within 24 hours. Thank you for using NestBot!</p>
+      <AdBanner />
     </main>
   );
 }

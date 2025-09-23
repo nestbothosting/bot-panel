@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { AdminPanelData } from "@/apis/status";
 import { GetUserCookies } from "@/utilise/cookies";
+import AdBanner from "@/components/Banner/Banner";
 
 export default function Home() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function Home() {
           <h1>Create your own Discord bot – no <span style={{ color: "#11e909" }}>coding</span> required</h1>
           <br />
           <p>Create your own Discord bot with Nestbot’s drag-and-drop builder. Automate your server, manage your community, and launch multiple bots in minutes – all with low ping and zero coding required.</p>
-          <button style={{marginTop:"20px" }} onClick={Dashboard} className={styles.btn}>Get Started</button>
+          <button style={{ marginTop: "20px" }} onClick={Dashboard} className={styles.btn}>Get Started</button>
         </main>
       </div>
       <div className={styles.statuscontainer}>
@@ -62,7 +63,9 @@ export default function Home() {
           <span>Online Now</span>
         </div>
       </div>
-
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"center" }}>
+        <AdBanner />
+      </div>
       <div className={styles.aboutcontainer}>
         <h2>Why Choose Nestbot?</h2>
 
@@ -109,7 +112,6 @@ export default function Home() {
             <button onClick={Dashboard} className={styles.btn}>Get Started</button>
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import style from './instagram.module.css'
 import Cmenu from '@/components/Cmenu/Cmenu'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner'
 
 export default function page() {
     const { inbot, setInbot } = useContext(BotMenuCotext)
@@ -21,7 +22,7 @@ export default function page() {
             <main className={style.main}>
                 <h1>Instagram</h1>
                 <MessageBox />
-
+                <AdBanner />
                 <div className={style.item}>
                     <p>Instagram Username</p>
                     <input type="text" placeholder='username' />
@@ -57,6 +58,7 @@ export default function page() {
                     </ul>
                     <input type="text" placeholder='Message' />
                 </div>
+                <AdBanner />
             </main>
         </section>
     )

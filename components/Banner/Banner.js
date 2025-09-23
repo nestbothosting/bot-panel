@@ -1,49 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 
-export default function Banner() {
-  const banner = useRef(null);
-  const [isLocalhost, setIsLocalhost] = useState(false);
-
-  useEffect(() => {
-    // Check hostname on client only
-    setIsLocalhost(window.location.hostname === "localhost");
-
-    if (banner.current && window.location.hostname !== "localhost" && !banner.current.firstChild) {
-      const conf = document.createElement("script");
-      conf.type = "text/javascript";
-      conf.innerHTML = `
-        atOptions = {
-          key: 'f921f56f79f37dec913635d48843bd46',
-          format: 'iframe',
-          height: 90,
-          width: 728,
-          params: {}
-        };
-      `;
-
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "//www.highperformanceformat.com/f921f56f79f37dec913635d48843bd46/invoke.js";
-
-      banner.current.appendChild(conf);
-      banner.current.appendChild(script);
-    }
-  }, []);
-
+export default function AdBanner() {
   return (
-    <div
-      ref={banner}
-      style={{
-        width: "728px",
-        height: "90px",
-        margin: "20px auto",
-        textAlign: "center",
-        lineHeight: "90px",
-        backgroundColor: isLocalhost ? "#ccc" : "transparent",
-        color: "#000",
-      }}
-    >
-      {isLocalhost ? "Ad Placeholder (localhost)" : null}
-    </div>
+    <>
+      {/* Container for the ad */}
+      <div id="atContainer-f921f56f79f37dec913635d48843bd46"></div>
+
+      {/* Setup options */}
+      <Script id="ad-options" strategy="afterInteractive">
+        {`
+          if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
+          atAsyncOptions.push({
+              key: 'f921f56f79f37dec913635d48843bd46',
+              format: 'js',
+              async: true,
+              container: 'atContainer-f921f56f79f37dec913635d48843bd46',
+              params: {}
+          });
+        `}
+      </Script>
+
+      {/* Load script */}
+      <Script
+        id="ad-invoke"
+        strategy="afterInteractive"
+        src="https://www.highperformanceformat.com/f921f56f79f37dec913635d48843bd46/invoke.js"
+      />
+    </>
   );
 }

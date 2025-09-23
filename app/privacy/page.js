@@ -1,4 +1,5 @@
 // app/privacy/page.js
+import AdBanner from '@/components/Banner/Banner';
 import styles from './privacy.module.css';
 
 export const metadata = {
@@ -10,6 +11,7 @@ export const metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <main className={styles.privacyPage}>
+      <AdBanner />
       <h1>Privacy Policy</h1>
 
       <section>
@@ -75,6 +77,7 @@ export default function PrivacyPolicyPage() {
       </section>
 
       <p className={styles.updated}>Last updated: June 2025</p>
+      <AdBanner />
     </main>
   );
 }

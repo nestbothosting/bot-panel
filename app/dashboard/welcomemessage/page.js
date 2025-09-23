@@ -11,6 +11,7 @@ import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
 import InputBox from '@/components/InputBox/InputBox'
+import AdBanner from '@/components/Banner/Banner'
 
 const setChange = async (value, setItem, type, setItem2, setItem3) => {
     const strBot = localStorage.getItem('bot')
@@ -84,6 +85,7 @@ export default function page() {
             <main className={style.main}>
                 <h1>Welcome Message Settings</h1>
                 <MessageBox />
+                <AdBanner />
                 <div className={style.inputbox}>
                     <span>Choose a Server</span>
                     <br />
@@ -170,7 +172,7 @@ export default function page() {
                     </div>
                 }
 
-
+                <AdBanner />
 
             </main>
         </section>

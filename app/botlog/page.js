@@ -8,6 +8,8 @@ import { toast } from 'react-toastify'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import { Bangers } from 'next/font/google'
+import AdBanner from '@/components/Banner/Banner'
 
 export default function page() {
     const [botlog, setBotLog] = useState([])
@@ -34,6 +36,7 @@ export default function page() {
             <main className={style.main}>
                 <h1>Bot Log's</h1>
                 <MessageBox />
+                <AdBanner />
                 {botlog?.length === 0 ? "No Log" :
                     botlog.map((log, key) => (
                         <div className={style.logbox} key={key}>
@@ -52,8 +55,6 @@ export default function page() {
                         </div>
                     ))
                 }
-
-
             </main>
         </section>
     )

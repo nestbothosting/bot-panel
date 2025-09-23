@@ -14,8 +14,7 @@ import { GetUserCookies, SetUserCookies } from '@/utilise/cookies';
 import BotMenuCotext from "@/context/botmenu";
 import dynamic from "next/dynamic";
 import Script from "next/script";
-
-import Banner from "@/components/Banner/Banner";
+import Banner from "@/components/Banner/Banner"
 
 
 
@@ -88,7 +87,7 @@ export default function Page() {
             <p>You’re managing <strong>{bot?.bot_name}</strong>. Let's make it awesome!</p>
           </div>
 
-          <Banner />
+            <Banner />
 
         </div>
       </main>

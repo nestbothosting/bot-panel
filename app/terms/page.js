@@ -1,3 +1,4 @@
+import AdBanner from '@/components/Banner/Banner';
 import styles from './terms.module.css';
 
 export const metadata = {
@@ -9,6 +10,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <main className={styles.termsPage}>
+      <AdBanner />
       <h1>Terms & Conditions</h1>
 
       <section>
@@ -66,6 +68,7 @@ export default function TermsPage() {
       </section>
 
       <p className={styles.updated}>Last updated: June 2025</p>
+      <AdBanner />
     </main>
   );
 }

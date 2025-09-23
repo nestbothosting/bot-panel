@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { SetAutoRole } from '@/apis'
 import BotMenuCotext from '@/context/botmenu';
 import MessageBox from '@/components/MessageBox/MessageBox'
+import AdBanner from '@/components/Banner/Banner'
 
 const SetRole = async (server_id, role_id) => {
     const response = await SetAutoRole(localStorage.getItem('bot'), server_id, role_id)
@@ -47,6 +48,7 @@ export default function page() {
             </div>
             <main className={style.main}>
                 <MessageBox />
+                <AdBanner />
                 <h1>Auto Role Dashboard</h1>
                 <span>Set a default role once—our system takes care of the rest. Perfect for welcomes, ranks, and smooth server management</span>
 
@@ -83,6 +85,8 @@ export default function page() {
                     <br />3. You are not trying to assign the <strong>@everyone</strong> role.
                     <br />4. If you’ve already set an auto-role, you can remove it by using the command <code>/remautorole</code>.
                 </span>
+
+                <AdBanner />
 
             </main>
         </section>

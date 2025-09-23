@@ -12,6 +12,7 @@ import BotMenuCotext from '@/context/botmenu';
 import TMS_Menu from '@/components/TMS_Menu/TMS_Menu';
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox';
+import AdBanner from '@/components/Banner/Banner';
 
 const SetChange = async (value, setValue, type, setItem, setItem2) => {
     const strBot = localStorage.getItem('bot')
@@ -83,6 +84,7 @@ export default function page() {
             <main className={style.main} >
                 <h1 className={style.title}>Timed Message  <IoMdTime size={35} color='aqua' /></h1>
                 <MessageBox />
+                <AdBanner />
                 {TMS?.isTMS ?
                     <div>
                         <h3>Available {TMS.TMS.length}/2</h3>
@@ -158,7 +160,7 @@ export default function page() {
                         <Button name='Create' gbcolor='#14A44D' color='white' />
                     </span>
                 </div>
-
+                <AdBanner />
             </main>
         </section>
     )

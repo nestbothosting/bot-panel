@@ -10,6 +10,7 @@ import { SendStatusPanel } from '@/utilise/api'
 import { RQ_Login } from '@/utilise/index'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
+import AdBanner from '@/components/Banner/Banner'
 
 
 async function HandleChange(e, setValue, type, setPaneldata) {
@@ -60,6 +61,7 @@ export default function page() {
       <main className={style.main}>
         <h1>Minecraft Server Status</h1>
         <MessageBox />
+        <AdBanner />
         <div className={style.select} >
           <select onChange={(e) => HandleChange(e, setChannelslist, "server",setPaneldata)}>
             <option value="none">Server...</option>
@@ -120,6 +122,7 @@ export default function page() {
             <Button name='Send' color="blacg" gbcolor="#14A44D" />
           </span>
         </div>
+        <AdBanner />
       </main>
     </section>
   )
