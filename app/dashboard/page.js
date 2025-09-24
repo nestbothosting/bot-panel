@@ -87,7 +87,14 @@ export default function Page() {
             <p>You’re managing <strong>{bot?.bot_name}</strong>. Let's make it awesome!</p>
           </div>
 
-            <Banner />
+          <Script
+            src="//pl27706671.revenuecpmgate.com/3e0e04403a745660901311365b4cfb1f/invoke.js"
+            strategy="afterInteractive"
+            async
+            data-cfasync="false"
+          />
+
+          <div id="container-3e0e04403a745660901311365b4cfb1f"></div>
 
         </div>
       </main>

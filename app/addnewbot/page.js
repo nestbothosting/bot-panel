@@ -35,8 +35,8 @@ export default function page() {
   const [token, setToken] = useState()
   const [name, setName] = useState()
   const [ownid, setOwnid] = useState()
-  const [nodeid,setNodeid] = useState('none')
-  const [node,setNodes] = useState([]) 
+  const [nodeid, setNodeid] = useState('none')
+  const [node, setNodes] = useState([])
 
   useEffect(() => {
     (async () => {
@@ -74,7 +74,7 @@ export default function page() {
           <p>Server Location</p>
           <select onChange={(e) => setNodeid(e.target.value)}>
             <option value="none">Location.!</option>
-            {node.map((node,index) => (
+            {node.map((node, index) => (
               <option value={node.node_cid} key={index}>{node.location}</option>
             ))}
           </select>

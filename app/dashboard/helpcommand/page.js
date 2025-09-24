@@ -81,7 +81,6 @@ export default function page() {
       RQ_Login(localStorage.getItem('login'))
       const response = await GetSettingsData(localStorage.getItem('bot'))
       if (!response.status) {
-        setR(!r)
         return toast.error(response.message)
       }
       setServerList(response.servers)

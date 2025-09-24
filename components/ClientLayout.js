@@ -14,13 +14,13 @@ export default function ClientLayout({ children }) {
 
   return (
     <UserContext.Provider value={{ islogin, setLogin }}>
-      <BotMenuContext.Provider value={{ inbot, setInbot }}>
-        <AnnouncementBar />
-        <Header />
-        {children}
-        <Footer />
-        <ToastContainer position="top-right" theme="dark" />
-      </BotMenuContext.Provider>
+        <BotMenuContext.Provider value={{ inbot, setInbot }}>
+          <AnnouncementBar />
+          <Header />
+          {children}
+          <Footer />
+          <ToastContainer position="top-right" theme="dark" />
+        </BotMenuContext.Provider>
     </UserContext.Provider>
   )
 }
