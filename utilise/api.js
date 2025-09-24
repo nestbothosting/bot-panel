@@ -429,9 +429,10 @@ export const DeleteYNS = async (server_id,strBot) => {
     }
 }
 
-export const SetHelpCommand = async (strBot, embed, fields) => {
+export const SetHelpCommand = async (strBot, embed, fields, server_id) => {
     try {
         if (!strBot) return { status: false, message: "Select Bot and Server" }
+        if(!server_id) return { status:false, message:"Select a Server" }
 
         if(!embed.title) return { status:false, message:"Embed Title is Required" }
         
@@ -443,7 +444,8 @@ export const SetHelpCommand = async (strBot, embed, fields) => {
             {
                 bot_cid: Bot.bot_id,
                 embed,
-                fields
+                fields,
+                server_id
             },
             {
                 headers: {
@@ -464,13 +466,13 @@ export const SetHelpCommand = async (strBot, embed, fields) => {
     }
 }
 
-export const GetHelpCommand = async (strBot) => {
+export const GetHelpCommand = async (strBot,server_id) => {
     try {
         if (!strBot) return { status: false, message: "Select Bot and Server" }
         const Bot = JSON.parse(strBot)
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.get(
-            `${botdata.node_url}/bot/gethelpcommand/${Bot.bot_id}`,
+            `${botdata.node_url}/bot/gethelpcommand/${server_id}`,
             {
                 headers: {
                     "x-api-key": botdata.api_key,
@@ -491,15 +493,15 @@ export const GetHelpCommand = async (strBot) => {
 }
 
 
-export const DeleteHelpCommand = async (strBot) => {
+export const DeleteHelpCommand = async (strBot,server_id) => {
     try {
-        if (!strBot) return { status: false, message: "Select Bot and Server" }        
+        if (!strBot || !server_id) return { status: false, message: "Select Bot and Server" }        
         const Bot = JSON.parse(strBot)
         const botdata = await MyBotsModel.findOne({ bot_id: Bot.bot_id })
         const response = await axios.post(
             `${botdata.node_url}/bot/deletehelpcommand`,
             {
-                bot_cid: Bot.bot_id,
+                server_id
             },
             {
                 headers: {

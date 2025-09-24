@@ -8,7 +8,7 @@ import Button from '@/components/Button/Button'
 import MessageBox from '@/components/MessageBox/MessageBox'
 import BotMenuCotext from '@/context/botmenu';
 import { RQ_Login } from '@/utilise'
-import { DeleteHelpCommand, GetHelpCommand, SetHelpCommand } from '@/utilise/api'
+import { DeleteHelpCommand, GetHelpCommand, GetSettingsData, SetHelpCommand } from '@/utilise/api'
 import { toast } from 'react-toastify'
 import AdBanner from '@/components/Banner/Banner'
 
@@ -18,15 +18,18 @@ export default function page() {
   const [listfilelds, setListF] = useState([])
   const { inbot, setInbot } = useContext(BotMenuCotext)
   const [helpcmd, setHelpCmd] = useState(null)
-  const [r,setR] = useState(false)
+  const [r, setR] = useState(false)
+  const [serverlist, setServerList] = useState([])
+  const [serverid, setServerID] = useState()
 
   const Delete = async () => {
-    const response = await DeleteHelpCommand(localStorage.getItem('bot'));
-    if(!response.status){
+    const response = await DeleteHelpCommand(localStorage.getItem('bot'), serverid);
+    if (!response.status) {
       setR(!r)
       return toast.error(response.message)
     }
     setR(!r)
+    setHelpCmd(null)
     toast.success(response.message)
   }
 
@@ -48,24 +51,42 @@ export default function page() {
   };
 
   const sendData = async () => {
-    const response = await SetHelpCommand(localStorage.getItem('bot'), embed, fields)
+    const response = await SetHelpCommand(localStorage.getItem('bot'), embed, fields, serverid)
     if (!response.status) {
       setR(!r)
       return toast.error(response.message)
     }
-    setR(!r)
     toast.success(response.message)
+    const cmddata = await GetHelpCommand(localStorage.getItem('bot'), serverid)
+    if (!cmddata.status) {
+      setHelpCmd(null)
+    }
+    setHelpCmd(cmddata.data)
+    setR(!r)
+  }
+
+  const HandleServerID = async (serverid) => {
+    if (serverid === 'none') return setServerID(null)
+    setServerID(serverid)
+    const response = await GetHelpCommand(localStorage.getItem('bot'), serverid)
+    if (!response.status) {
+      setHelpCmd(null)
+    }
+    setHelpCmd(response.data)
+    setR(!r)
   }
 
   useEffect(() => {
     (async () => {
       RQ_Login(localStorage.getItem('login'))
-      const response = await GetHelpCommand(localStorage.getItem('bot'))
-      console.log(response)
-      if (!response.status) return setHelpCmd(null)
-      setHelpCmd(response.data)
+      const response = await GetSettingsData(localStorage.getItem('bot'))
+      if (!response.status) {
+        setR(!r)
+        return toast.error(response.message)
+      }
+      setServerList(response.servers)
     })()
-  }, [inbot,r])
+  }, [inbot, r])
 
   return (
     <section className={style.help}>
@@ -78,13 +99,23 @@ export default function page() {
         <h2>Help Command</h2>
         <p><strong>Command:</strong> <code><span style={{ color: "red" }}>/help</span></code></p>
 
+        <div className={style.box}>
+          <p>Server</p>
+          <select onChange={(e) => HandleServerID(e.target.value)}>
+            <option value="none">Server...</option>
+            {serverlist.map((server, index) => (
+              <option value={server.id} key={index}>{server.name}</option>
+            ))}
+          </select>
+        </div>
+
         {helpcmd ?
           <div className={style.helpcmd}>
             <div>
               <h5>already exists</h5>
               <p>Title: {helpcmd.embed.title}</p>
               <p>Description: {helpcmd.embed.description}</p>
-              <p>Color: <span style={{ color:helpcmd.embed.color }}>{helpcmd.embed.color}</span></p>
+              <p>Color: <span style={{ color: helpcmd.embed.color }}>{helpcmd.embed.color}</span></p>
             </div>
             <div>
               <p>Bot CID: {helpcmd.bot_cid}</p>
@@ -182,7 +213,7 @@ export default function page() {
               </span>
             </div>
           </>}
-          <AdBanner />
+        <AdBanner />
       </div>
     </section>
   )
