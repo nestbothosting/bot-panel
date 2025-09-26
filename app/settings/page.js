@@ -116,7 +116,7 @@ export default function page() {
 
                 <div className={style.stmessage}>
                     <span>Bot Status Message</span>
-                    <p>Change the Made with bothoster.com to your own custom status message</p>
+                    <p>Change the Made with nestbot.xyz to your own custom status message</p>
                     <input type="text" placeholder='Bot Status Message' value={st_message} onChange={(e) => setStmessage(e.target.value)} />
                 </div>
 
