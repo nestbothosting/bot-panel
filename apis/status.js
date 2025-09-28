@@ -63,10 +63,10 @@ export async function CheckNodeCap(node_cid) {
         "x-api-key": node.apikey,
       },
     });
-    return { status:response.data.status, apikey:node.apikey, url:node.nodeurl }
+    return { status: response.data.status, apikey: node.apikey, url: node.nodeurl }
   } catch (error) {
     console.error("Server error:", error.message);
-    return { status:false, message:error.message }
+    return { status: false, message: error.message }
   }
 }
 
@@ -160,3 +160,31 @@ export const AdminPanelData = async () => {
     return { status: false, message: error.message }
   }
 }
+
+export const CheckVCode = async (code, id) => {
+  if (!code) return { status: false, message: "Code is Required" };
+
+  try {
+    const response = await axios.post(
+      "https://account.nestbot.xyz/auth/verify",
+      { code, cid: id },
+      {
+        headers: {
+          "x-api-key": process.env.ACAPIKEY,
+        },
+      }
+    );
+
+    // Ensure only { status, message } is returned
+    return {
+      status: response.data.status,
+      message: response.data.message,
+    };
+  } catch (error) {
+    console.error(error.message);
+    return {
+      status: false,
+      message: error.response?.data?.message || error.message,
+    };
+  }
+};

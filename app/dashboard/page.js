@@ -12,10 +12,9 @@ import Link from "next/link"
 import AddBotMessage from '@/components/AddBotMessage/AddBotMessage'
 import { GetUserCookies, SetUserCookies } from '@/utilise/cookies';
 import BotMenuCotext from "@/context/botmenu";
-import dynamic from "next/dynamic";
 import Script from "next/script";
-import Banner from "@/components/Banner/Banner"
-
+import { CheckVCode } from '@/apis/status';
+import { toast } from 'react-toastify';
 
 
 const features = [
@@ -33,6 +32,7 @@ export default function Page() {
   const uid = searchParams.get("uid");
   const avatar = searchParams.get("avatar");
   const id = searchParams.get("id");
+  const code = searchParams.get("code");
   const [user, setUser] = useState()
   const [bot, setBot] = useState()
 
@@ -41,25 +41,29 @@ export default function Page() {
 
 
   useEffect(() => {
-    if (username && uid && avatar && id) {
-      const userreq = { username, uid, avatar, id };
-      SetUserCookies(userreq)
-      setUser(userreq)
-      localStorage.setItem('login', true)
-      setLogin(true)
-    }
-    RQ_Login(localStorage.getItem('login'))
-    const strUser = GetUserCookies()
-    const strBot = localStorage.getItem('bot')
-    if (strUser) {
-      setUser(strUser)
-    }
-    if (strBot) {
-      if (strBot === "none") return;
-      setBot(JSON.parse(strBot))
-    }
-    RQ_Login(localStorage.getItem('login'))
-    setInbot({ bot: true })
+    (async () => {
+      if (username && uid && avatar && id && code) {
+        const userreq = { username, uid, avatar, id };
+        const response = await CheckVCode(code,id)
+        if(!response.status) return toast.error(response.message)
+        SetUserCookies(userreq)
+        setUser(userreq)
+        localStorage.setItem('login', true)
+        setLogin(true)
+      }
+      RQ_Login(localStorage.getItem('login'))
+      const strUser = GetUserCookies()
+      const strBot = localStorage.getItem('bot')
+      if (strUser) {
+        setUser(strUser)
+      }
+      if (strBot) {
+        if (strBot === "none") return;
+        setBot(JSON.parse(strBot))
+      }
+      RQ_Login(localStorage.getItem('login'))
+      setInbot({ bot: true })
+    })();
   }, [username, uid, avatar, id]);
 
   return (
