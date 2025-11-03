@@ -28,11 +28,7 @@ const features = [
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const username = searchParams.get("username");
-  const uid = searchParams.get("uid");
-  const avatar = searchParams.get("avatar");
-  const id = searchParams.get("id");
-  const code = searchParams.get("code");
+  const code = searchParams.get("token");
   const [user, setUser] = useState()
   const [bot, setBot] = useState()
 
@@ -42,12 +38,11 @@ export default function Page() {
 
   useEffect(() => {
     (async () => {
-      if (username && uid && avatar && id && code) {
-        const userreq = { username, uid, avatar, id };
-        const response = await CheckVCode(code,id)
+      if (code) {
+        const response = await CheckVCode(code)
         if(!response.status) return toast.error(response.message)
-        SetUserCookies(userreq)
-        setUser(userreq)
+        SetUserCookies(response.user)
+        setUser(response.user)
         localStorage.setItem('login', true)
         setLogin(true)
       }
@@ -64,7 +59,7 @@ export default function Page() {
       RQ_Login(localStorage.getItem('login'))
       setInbot({ bot: true })
     })();
-  }, [username, uid, avatar, id]);
+  }, [code]);
 
   return (
     <section className={style.dashboard}>

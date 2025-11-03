@@ -161,13 +161,13 @@ export const AdminPanelData = async () => {
   }
 }
 
-export const CheckVCode = async (code, id) => {
+export const CheckVCode = async (code) => {
   if (!code) return { status: false, message: "Code is Required" };
 
   try {
     const response = await axios.post(
       "https://account.nestbot.xyz/auth/verify",
-      { code, cid: id },
+      { token: code },
       {
         headers: {
           "x-api-key": process.env.ACAPIKEY,
@@ -176,10 +176,7 @@ export const CheckVCode = async (code, id) => {
     );
 
     // Ensure only { status, message } is returned
-    return {
-      status: response.data.status,
-      message: response.data.message,
-    };
+    return response.data;
   } catch (error) {
     console.error(error.message);
     return {
